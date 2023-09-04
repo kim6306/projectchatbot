@@ -10,10 +10,10 @@
 <body>
 <jsp:include page="/WEB-INF/view/layouts/nav.jsp"/>
 <h1 class="textcenter">คำถามที่พบบ่อย</h1>
-<div class="textc">
-    <a class="flex">การสมัครเรียน</a>
-    <a class="flex">กิจกรรม</a>
-</div>
+<%--<div class="textc">--%>
+<%--    <a class="flex">การสมัครเรียน</a>--%>
+<%--    <a class="flex">กิจกรรม</a>--%>
+<%--</div>--%>
 <div>
     <input type="text" id="searchInput" style="width: 50%" onkeyup="search()" placeholder="Search for names.." title="Type in a name">
 </div>
