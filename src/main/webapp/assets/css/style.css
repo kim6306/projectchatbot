@@ -121,5 +121,8 @@ footer{
 item3:hover{
 	color: rgb(253, 185, 16);
 }
+#searchInput{
+	margin-left: 420px;
+}
 
 

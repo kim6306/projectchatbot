@@ -13,6 +13,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/topic")
@@ -95,5 +96,12 @@ public class TopicController {
     public String topicRemoveQFAQ(@PathVariable("id") int topicId, @PathVariable("qfaq") int qfaqId) {
         topicService.removeQFAQFromTopic(topicId, qfaqId);
         return "redirect:/topic/" + topicId + "/view-qfaqs";
+    }
+
+    @RequestMapping("/findbycontain")
+    public String gotoHomeAndFindByContains () {
+        String test = "Test Message!";
+        System.out.println(test);
+        return "";
     }
 }

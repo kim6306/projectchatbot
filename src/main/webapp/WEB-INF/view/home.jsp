@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <link href="assets/css/style.css" rel="stylesheet" >
@@ -10,10 +11,10 @@
 <body>
 <jsp:include page="/WEB-INF/view/layouts/nav.jsp"/>
 <h1 class="textcenter">คำถามที่พบบ่อย</h1>
-<%--<div class="textc">--%>
-<%--    <a class="flex">การสมัครเรียน</a>--%>
-<%--    <a class="flex">กิจกรรม</a>--%>
-<%--</div>--%>
+<div class="textc">
+    <a class="flex">การสมัครเรียน</a>
+    <a class="flex">กิจกรรม</a>
+</div>
 <div>
     <input type="text" id="searchInput" style="width: 50%" onkeyup="search()" placeholder="Search for names.." title="Type in a name">
 </div>
@@ -27,13 +28,14 @@
         %>
         <c:forEach var="topic" items="${topics}">
             <%i++;%>
+            <div class="block_manage_news" data-name="${topic.topictext}">
             <div class="faq">
                 <button class="accordion">FAQ <%=i%>. ${topic.topictext}<i class="fa-solid fa-chevron-down"> </i></button>
                 <div class="panel">
                     <c:forEach  var="qfaqs" items="${topic.qfaqs}">
                         <%j++;%>
                         <c:forEach  var="afaqs" items="${qfaqs.afaqs}">
-                            <div class="block_manage_news" data-name="${topic.topictext} ${qfaqs.qfaqtext} ${afaqs.afaqtext}">
+                        <div class="block_manage_news" data-name="${qfaqs.qfaqtext}${afaqs.afaqtext}">
                             <div class="panel">
                                 <div class="topma">
                                     <p>Question <%=i%>.<%=j%> ${qfaqs.qfaqtext}</p>
@@ -45,6 +47,7 @@
                         </c:forEach>
                     </c:forEach>
                     <%j = 0;%>
+            </div>
                 </div>
             </div>
         </c:forEach >
