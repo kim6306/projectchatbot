@@ -85,6 +85,13 @@
                                 </ul>
                             </li>
                         </security:authorize>
+                        <security:authorize access="hasRole('ADMIN')">
+                            <li><a href="${pageContext.request.contextPath}/category/create">เพิ่มคำตอบ</a>
+                                <ul class="submenu">
+                                    <li><a href="${pageContext.request.contextPath}/category/list">เพิ่มแก้ไขคำถาม</a></li>
+                                </ul>
+                            </li>
+                        </security:authorize>
                     </ul>
                 </nav>
                 <hr>

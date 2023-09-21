@@ -17,7 +17,8 @@ public class SecurityConfig {
             configurer.antMatchers("/topic/**").hasRole("ADMIN")
                     .antMatchers("/afaq/**").hasRole("ADMIN")
                     .antMatchers("/qfaq/**").hasRole("ADMIN")
-                    .antMatchers("/update").hasRole("ADMIN");
+                    .antMatchers("/update").hasRole("ADMIN")
+                    .antMatchers("/category/**").hasRole("ADMIN");
         });
         http.exceptionHandling(configurer -> {configurer.accessDeniedPage("/access-denied");});
         http.formLogin(configurer -> {

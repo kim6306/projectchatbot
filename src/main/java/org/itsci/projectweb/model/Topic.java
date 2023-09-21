@@ -14,6 +14,10 @@ public class Topic {
             inverseJoinColumns = {@JoinColumn(name = "qfaq_id")})
     private List<QFAQ> qfaqs;
 
+//    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+//    @JoinColumn(name = "category_text")
+//    private Category category;
+
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +35,14 @@ public class Topic {
     public void setQfaqs(List<QFAQ> qfaqs) {
         this.qfaqs = qfaqs;
     }
+
+//    public Category getCategory() {
+//        return category;
+//    }
+//
+//    public void setCategory(Category category) {
+//        this.category = category;
+//    }
 
     public int getId() {
         return id;
