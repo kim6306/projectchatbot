@@ -12,9 +12,11 @@ public class QFAQ {
     @JoinTable(name = "topic_qfaq", joinColumns = {@JoinColumn(name = "qfaq_id")},
             inverseJoinColumns = {@JoinColumn(name = "topic_id")})
     private Topic topics;
-//    @ManyToOne(cascade = CascadeType.ALL, optional = false)
-//    @JoinColumn(name = "category_text")
-//    private Category category;
+
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinTable(name = "qfaq_cate", joinColumns = {@JoinColumn(name = "qfaq_id")},
+            inverseJoinColumns = {@JoinColumn(name = "category_id")})
+    private Category category;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     @JoinTable(name = "qfaq_afaq", joinColumns = {@JoinColumn(name = "qfaq_id")},
@@ -39,13 +41,13 @@ public class QFAQ {
         this.topics = topics;
     }
 
-//    public Category getCategory() {
-//        return category;
-//    }
-//
-//    public void setCategory(Category category) {
-//        this.category = category;
-//    }
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
     public int getId() {
         return id;

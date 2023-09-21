@@ -9,4 +9,5 @@ public interface TopicDao {
     void deleteTopic(int id);
     void deleteQAFQ(int id);
     List<Topic> getTopicDoesNotHaveQFAQ(int id);
+    List<Topic> getTopicByCategory(String category);
 }

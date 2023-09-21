@@ -63,4 +63,12 @@ public class TopicDaoImpl implements TopicDao  {
         return topicList2;
     }
 
+    @Override
+    public List<Topic> getTopicByCategory(String category) {
+        Session session = sessionFactory.getCurrentSession();
+        Query<Topic> query = session.createQuery("from Topic t where t.category.catetext=:category");
+        query.setParameter("category",category);
+        return query.getResultList();
+    }
+
 }

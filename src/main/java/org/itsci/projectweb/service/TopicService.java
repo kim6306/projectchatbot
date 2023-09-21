@@ -15,4 +15,6 @@ public interface TopicService {
     void removeQFAQFromTopic(int topicId, int qfaqId);
 
     List<Topic> getTopicDoesNotHaveQFAQ(int id);
+
+    List<Topic> getTopicByCategory(String category);
 }

@@ -3,7 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
-    <link href="assets/css/style.css" rel="stylesheet" >
+    <link href="assets/css/styleAct.css" rel="stylesheet" >
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
           integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -12,12 +12,12 @@
 <jsp:include page="/WEB-INF/view/layouts/nav.jsp"/>
 <h1 class="textcenter">คำถามที่พบบ่อย</h1>
 <div class="textc">
-    <a class="flex" id="AtS" href="${pageContext.request.contextPath}/AtS">การสมัครเรียน</a>
+    <a class="flex" id="AtS" href="${pageContext.request.contextPath}/AtS">สมัครเรียน</a>
     <a class="flex" id="Act" href="${pageContext.request.contextPath}/Act">กิจกรรม</a>
 </div>
-<div>
-    <input type="text" id="searchInput" style="width: 50%" onkeyup="search()" placeholder="Search for names.." title="Type in a name">
-</div>
+<%--<div>--%>
+<%--  <input type="text" id="searchInput" style="width: 50%" onkeyup="search()" placeholder="Search for names.." title="Type in a name">--%>
+<%--</div>--%>
 <div class="space">
 
 
@@ -28,28 +28,28 @@
         %>
         <c:forEach var="topic" items="${topics}">
             <%i++;%>
-            <div class="block_manage_news" data-name="${topic.topictext}">
+            <%--      <div class="block_manage_news" data-name="${topic.topictext}">--%>
             <div class="faq">
-                <button class="accordion">FAQ <%=i%>. ${topic.topictext}<i class="fa-solid fa-chevron-down"> </i></button>
+                <button class="accordion">FAQ <%=i%>. ${topic.topictext} <i class="fa-solid fa-chevron-down"> </i></button>
                 <div class="panel">
                     <c:forEach  var="qfaqs" items="${topic.qfaqs}">
                         <%j++;%>
                         <c:forEach  var="afaqs" items="${qfaqs.afaqs}">
-                        <div class="block_manage_news" data-name="${qfaqs.qfaqtext}${afaqs.afaqtext}">
-                            <div class="panel">
-                                <div class="topma">
-                                    <p>Question <%=i%>.<%=j%> ${qfaqs.qfaqtext}</p>
-                                    <p>Answer <%=i%>.<%=j%> ${afaqs.afaqtext}</p>
-                                </div>
+                            <div class="block_manage_news" data-name="${qfaqs.qfaqtext}${afaqs.afaqtext}">
+                                <div class="panel">
+                                    <div class="topma">
+                                        <p>Question <%=i%>.<%=j%> ${qfaqs.qfaqtext}</p>
+                                        <p>Answer <%=i%>.<%=j%> ${afaqs.afaqtext}</p>
+                                    </div>
 
-                            </div>
+                                </div>
                             </div>
                         </c:forEach>
                     </c:forEach>
                     <%j = 0;%>
-            </div>
                 </div>
             </div>
+            <%--      </div>--%>
         </c:forEach >
     </div>
 </div>

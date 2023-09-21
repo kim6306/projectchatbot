@@ -27,5 +27,20 @@ public class WebHomeController {
         return "update-page";
     }
 
+    @GetMapping("/AtS")
+    public String AtS(Model model) {
+        model.addAttribute("topics", topicService.getTopicByCategory("สมัครเรียน"));
+        System.out.println(topicService.getTopics().get(0).getTopictext());
+        System.out.println(topicService.getTopics().get(0).getQfaqs().size());
+        return "Apply-to-study";
+    }
+
+    @GetMapping("/Act")
+    public String Activity(Model model) {
+        model.addAttribute("topics", topicService.getTopicByCategory("กิจกรรม"));
+        System.out.println(topicService.getTopics().get(0).getTopictext());
+        System.out.println(topicService.getTopics().get(0).getQfaqs().size());
+        return "Activity";
+    }
 }
 

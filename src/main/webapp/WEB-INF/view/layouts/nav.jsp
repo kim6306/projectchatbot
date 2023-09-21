@@ -81,14 +81,14 @@
                         <security:authorize access="hasRole('ADMIN')">
                             <li><a href="${pageContext.request.contextPath}/afaq/create">เพิ่มคำตอบ</a>
                                 <ul class="submenu">
-                                    <li><a href="${pageContext.request.contextPath}/afaq/list">เพิ่มแก้ไขคำถาม</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/afaq/list">แก้ไขคำตอบ</a></li>
                                 </ul>
                             </li>
                         </security:authorize>
                         <security:authorize access="hasRole('ADMIN')">
-                            <li><a href="${pageContext.request.contextPath}/category/create">เพิ่มคำตอบ</a>
+                            <li><a href="${pageContext.request.contextPath}/category/create">เพิ่มหมวดหมู่</a>
                                 <ul class="submenu">
-                                    <li><a href="${pageContext.request.contextPath}/category/list">เพิ่มแก้ไขคำถาม</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/category/list">แก้ไขหมวดหมู่</a></li>
                                 </ul>
                             </li>
                         </security:authorize>

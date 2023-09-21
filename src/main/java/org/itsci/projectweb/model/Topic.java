@@ -14,9 +14,10 @@ public class Topic {
             inverseJoinColumns = {@JoinColumn(name = "qfaq_id")})
     private List<QFAQ> qfaqs;
 
-//    @ManyToOne(cascade = CascadeType.ALL, optional = false)
-//    @JoinColumn(name = "category_text")
-//    private Category category;
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    @JoinTable(name = "topic_cate", joinColumns = {@JoinColumn(name = "topic_id")},
+            inverseJoinColumns = {@JoinColumn(name = "category_id")})
+    private Category category;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -36,13 +37,13 @@ public class Topic {
         this.qfaqs = qfaqs;
     }
 
-//    public Category getCategory() {
-//        return category;
-//    }
-//
-//    public void setCategory(Category category) {
-//        this.category = category;
-//    }
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
     public int getId() {
         return id;

@@ -78,5 +78,11 @@ public class TopicServiceImpl implements TopicService{
         return topicDao.getTopicDoesNotHaveQFAQ(id);
     }
 
+    @Override
+    @Transactional
+    public List<Topic> getTopicByCategory(String category) {
+        return topicDao.getTopicByCategory(category);
+    }
+
 
 }
