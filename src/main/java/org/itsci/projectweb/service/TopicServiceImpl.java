@@ -1,13 +1,12 @@
 package org.itsci.projectweb.service;
 
-import org.itsci.projectweb.dao.QFAQDao;
-import org.itsci.projectweb.model.QFAQ;
-import org.itsci.projectweb.dao.TopicDao;
-import org.itsci.projectweb.model.Topic;
+import org.itsci.projectweb.dao.*;
+import org.itsci.projectweb.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.Valid;
 import java.util.List;
 @Service
 public class TopicServiceImpl implements TopicService{
@@ -31,6 +30,12 @@ public class TopicServiceImpl implements TopicService{
 
     @Override
     @Transactional
+    public void updateTopic(Topic topic ) {
+        topicDao.updateTopic(topic);
+    }
+
+    @Override
+    @Transactional
     public Topic getTopic(int topicId) {
         return topicDao.getTopic(topicId);
     }
@@ -39,19 +44,6 @@ public class TopicServiceImpl implements TopicService{
     @Transactional
     public void deleteTopic(int topicId) {
         topicDao.deleteTopic(topicId);
-    }
-
-    @Override
-    @Transactional
-    public void deleteQFAQ(int qfaqId) {
-        topicDao.deleteQAFQ(qfaqId);
-    }
-
-    @Override
-    @Transactional
-    public void updateTopic(Topic topicEntity, Topic topic) {
-        topicEntity.fill(topic);
-        topicDao.saveTopic(topicEntity);
     }
 
     @Override
@@ -82,6 +74,18 @@ public class TopicServiceImpl implements TopicService{
     @Transactional
     public List<Topic> getTopicByCategory(String category) {
         return topicDao.getTopicByCategory(category);
+    }
+
+    @Override
+    @Transactional
+    public List<Category> getCategory() {
+        return topicDao.getCategory();
+    }
+
+    @Override
+    @Transactional
+    public Category getCategoryById(String cgId) {
+        return topicDao.getCategoryById(cgId);
     }
 
 

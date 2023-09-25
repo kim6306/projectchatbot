@@ -16,16 +16,16 @@ public class Category {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @GenericGenerator(name = "increment", strategy = "increment")
-    private int id;
+    private String id;
     @NotNull
     @Column(name = "catetext", columnDefinition = "TEXT")
     private String catetext;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -39,5 +39,6 @@ public class Category {
 
     public void fill(Category category) {
         this.catetext = category.getCatetext();
+        this.id = category.getId();
     }
 }

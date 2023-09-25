@@ -1,9 +1,7 @@
 package org.itsci.projectweb.controller;
 
-import org.itsci.projectweb.model.QFAQ;
-import org.itsci.projectweb.model.Topic;
-import org.itsci.projectweb.service.QFAQService;
-import org.itsci.projectweb.service.TopicService;
+import org.itsci.projectweb.model.*;
+import org.itsci.projectweb.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
@@ -12,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -23,41 +22,53 @@ public class TopicController {
     private TopicService topicService;
     @Autowired
     private QFAQService qfaqService;
+    @Autowired
+    private CategoryService categoryService;
+
     @GetMapping("/list")
     public String listTopic(Model model) {
-        model.addAttribute("title", "รายการ" + title);
         model.addAttribute("topics", topicService.getTopics());
         return "topic/list";
     }
     @GetMapping("/create")
     public String showFormForAdd(Model model) {
-        model.addAttribute("title", "เพิ่ม" + title);
-        model.addAttribute("topic", new Topic());
+        model.addAttribute("categorys",topicService.getCategory());
         return "topic/topic-form";
     }
     @GetMapping("/{id}/update")
-    public String showFormForUpdate(@PathVariable("id") int id, Model model) {
+    public String showFormForUpdate(@PathVariable("id") int id,Model model){
         Topic topic = topicService.getTopic(id);
-        model.addAttribute("title", "แก้ไข" + title);
-        model.addAttribute("topic", topic );
+        List<Category> category = topicService.getCategory();
+        model.addAttribute("topic_detail", topic);
+        model.addAttribute("category_detail", category);
         return "topic/topic-form-update";
     }
-    @RequestMapping(path = "/save", method = RequestMethod.POST)
-    public String processForm(@Valid @ModelAttribute("topic") Topic topic, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("title", "มีข้อผิดพลาดในการบันทึก" + title);
-            return "topic/topic-form-update";
-        } else {
 
-            Topic entityTopic = topicService.getTopic(topic.getId());
-            if (entityTopic != null) {
-                topicService.updateTopic(entityTopic,topic);
-            } else {
-                System.out.println(topic.getTopictext());
-                topicService.saveTopic(topic);
+
+
+    @PostMapping(path = "/save")
+    public String processForm(@RequestParam Map<String, String> allReqParams) throws ParseException {
+            String topictext = allReqParams.get("topictext");
+            Category category = topicService.getCategoryById(allReqParams.get("category_id"));
+            Topic topic =new Topic(topictext,category);
+            topicService.saveTopic(topic);
+
+            return "redirect:/";
+    }
+    @PostMapping(path = "/{t_id}/save")
+    public String saveEditProfile(@RequestParam Map<String, String> allReqParams, @PathVariable int t_id) throws ParseException {
+        Topic topic = topicService.getTopic(t_id);
+        if (topic != null) {
+            topic.setTopictext(allReqParams.get("topictext"));
+
+            String categoryId = allReqParams.get("category_id");
+            Category cate_gory = topicService.getCategoryById(categoryId);
+            if (cate_gory != null) {
+                topic.setCategory(cate_gory);
             }
-            return "redirect:/topic/list";
+            topicService.updateTopic(topic);
         }
+        return "redirect:/";
     }
     @InitBinder
     public void initBinder(WebDataBinder dataBinder) {
@@ -67,7 +78,6 @@ public class TopicController {
     @GetMapping("/{id}/delete")
     public String deleteTopic(@PathVariable("id") int id) {
         topicService.deleteTopic(id);
-        topicService.deleteQFAQ(id);
         return "redirect:/topic/list";
     }
     @GetMapping("/{id}/view-qfaqs")
@@ -98,10 +108,4 @@ public class TopicController {
         return "redirect:/topic/" + topicId + "/view-qfaqs";
     }
 
-    @RequestMapping("/findbycontain")
-    public String gotoHomeAndFindByContains () {
-        String test = "Test Message!";
-        System.out.println(test);
-        return "";
-    }
 }

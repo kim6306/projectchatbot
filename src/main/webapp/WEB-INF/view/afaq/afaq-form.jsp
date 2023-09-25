@@ -17,11 +17,6 @@
         </div>
         <div class="btn">
         <input type="submit" value="บันทึก" class="save"/>
-        <input type="button" value="ลบ" onclick="if((confirm('คุณแน่ใจหรือว่าต้องการลบคำตอบนี้?')))
-        { window.location.href='${pageContext.request.contextPath}/afaq/${afaq.id}/delete';
-        return false; }"class="cancel-button"/>
-        </div>
-        <div class="btn">
         <input type="button" value="ยกเลิก" onclick="window.location.href='${pageContext.request.contextPath}/afaq/list';
         return false;" class="cancel-button"/>
         </div>

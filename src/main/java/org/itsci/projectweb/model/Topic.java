@@ -14,9 +14,8 @@ public class Topic {
             inverseJoinColumns = {@JoinColumn(name = "qfaq_id")})
     private List<QFAQ> qfaqs;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
-    @JoinTable(name = "topic_cate", joinColumns = {@JoinColumn(name = "topic_id")},
-            inverseJoinColumns = {@JoinColumn(name = "category_id")})
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "category_id")
     private Category category;
 
     @Id
@@ -28,6 +27,10 @@ public class Topic {
     @NotNull
     @Column(name = "topictext", columnDefinition = "TEXT")
     private String topictext;
+
+    public Topic() {
+
+    }
 
     public List<QFAQ> getQfaqs() {
         return qfaqs;
@@ -61,8 +64,9 @@ public class Topic {
         this.topictext = topictext;
     }
 
-    public void fill(Topic topic) {
 
-        this.topictext = topic.getTopictext();
+    public Topic( String topictext,Category category) {
+        this.topictext = topictext;
+        this.category = category;
     }
 }

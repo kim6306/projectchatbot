@@ -38,21 +38,21 @@ public class CategoryController {
         model.addAttribute("category", category );
         return "category/category-form";
     }
-    @RequestMapping(path = "/save", method = RequestMethod.POST)
-    public String processForm(@Valid @ModelAttribute("category")Category category, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("title", "มีข้อผิดพลาดในการบันทึก" + title);
-            return "category/category-form";
-        } else {
-            Category entityCategory = categoryService.getCategorys(category.getId());
-                if (entityCategory != null) {
-                    categoryService.updateCategory(entityCategory, category);
-                }else {
-                    categoryService.saveCategory(category);
-                }
-            return "redirect:/category/list";
-        }
-    }
+//    @RequestMapping(path = "/save", method = RequestMethod.POST)
+//    public String processForm(@Valid @ModelAttribute("category")Category category, BindingResult bindingResult, Model model) {
+//        if (bindingResult.hasErrors()) {
+//            model.addAttribute("title", "มีข้อผิดพลาดในการบันทึก" + title);
+//            return "category/category-form";
+//        } else {
+//            Category entityCategory = categoryService.getCategorys(category.getId());
+//                if (entityCategory != null) {
+//                    categoryService.updateCategory(entityCategory, category);
+//                }else {
+//                    categoryService.saveCategory(category);
+//                }
+//            return "redirect:/category/list";
+//        }
+//    }
     @InitBinder
     public void initBinder(WebDataBinder dataBinder) {
         StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);

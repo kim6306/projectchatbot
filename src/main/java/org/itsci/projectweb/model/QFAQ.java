@@ -13,9 +13,8 @@ public class QFAQ {
             inverseJoinColumns = {@JoinColumn(name = "topic_id")})
     private Topic topics;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinTable(name = "qfaq_cate", joinColumns = {@JoinColumn(name = "qfaq_id")},
-            inverseJoinColumns = {@JoinColumn(name = "category_id")})
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "category_id")
     private Category category;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})

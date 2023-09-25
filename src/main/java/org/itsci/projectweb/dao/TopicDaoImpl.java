@@ -3,8 +3,7 @@ package org.itsci.projectweb.dao;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
-import org.itsci.projectweb.model.Topic;
-import org.itsci.projectweb.model.QFAQ;
+import org.itsci.projectweb.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -35,19 +34,17 @@ public class TopicDaoImpl implements TopicDao  {
         Topic topic = session.get(Topic.class, topicid);
         return topic;
     }
+    @Override
+    public void updateTopic(Topic topic) {
+        Session session = sessionFactory.getCurrentSession();
+        session.update(topic);
+    }
 
     @Override
     public void deleteTopic(int topicid) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("delete from Topic where id=:topicid");
         query.setParameter("topicid", topicid);
-        query.executeUpdate();
-    }
-    @Override
-    public void deleteQAFQ(int qfaqid) {
-        Session session = sessionFactory.getCurrentSession();
-        Query<Topic> query = session.createQuery("delete from QFAQ q where q.id=:qfaqid");
-        query.setParameter("qfaqid", qfaqid);
         query.executeUpdate();
     }
 
@@ -70,5 +67,22 @@ public class TopicDaoImpl implements TopicDao  {
         query.setParameter("category",category);
         return query.getResultList();
     }
+
+    @Override
+    public List<Category> getCategory() {
+        Session session = sessionFactory.getCurrentSession();
+        Query<Category> query = session.createQuery("from Category ",Category.class);
+        List<Category> category = query.getResultList();
+        return category ;
+    }
+
+    @Override
+    public Category getCategoryById(String cgId) {
+        Session session = sessionFactory.getCurrentSession();
+        Category category =session.get(Category.class,cgId);
+        return category;
+    }
+
+
 
 }
