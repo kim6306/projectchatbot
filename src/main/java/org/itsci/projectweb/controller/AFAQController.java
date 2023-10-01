@@ -38,7 +38,7 @@ public class AFAQController {
         AFAQ afaq = afaqService.getAFAQ(id);
         model.addAttribute("title", "แก้ไข" + title);
         model.addAttribute("afaq", afaq );
-        return "afaq/afaq-form";
+        return "afaq/afaq-form-update";
     }
     @RequestMapping(path = "/save", method = RequestMethod.POST)
     public String processForm(@Valid @ModelAttribute("afaq") AFAQ afaq, BindingResult bindingResult, Model model) {
@@ -52,7 +52,7 @@ public class AFAQController {
             } else {
                 afaqService.saveAFAQ(afaq);
             }
-            return "redirect:/afaq/list";
+            return "redirect:/update";
         }
     }
     @InitBinder
@@ -63,7 +63,7 @@ public class AFAQController {
     @GetMapping("/{id}/delete")
     public String deleteAFAQ(@PathVariable("id") int id) {
         afaqService.deleteAFAQ(id);
-        return "redirect:/afaq/list";
+        return "redirect:/update";
     }
 
 }

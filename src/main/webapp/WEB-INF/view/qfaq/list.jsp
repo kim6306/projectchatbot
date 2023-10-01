@@ -10,21 +10,24 @@
 <jsp:include page="/WEB-INF/view/layouts/nav.jsp"/>
 <div class="container">
     <div class="body">
-        <%
-            int i = 0;
-        %>
-        <ul>
-            <h2>คำถาม<br><input type="button" value="เพิ่มหัวข้อ"
-           onclick="window.location.href='${pageContext.request.contextPath}/qfaq/create'; return false;"class="add-button"/></h2>
-    <c:forEach var="qfaq" items="${qfaqs}">
-        <%i++;%>
-            <div>
-                <ol>
-                    <li><span><%=i%></span><a href="${pageContext.request.contextPath}/qfaq/${qfaq.id}/update">${qfaq.qfaqtext}</a></li>
-                </ol>
-            </div>
-        </c:forEach></tbody>
-</ul>
+        <h2>คำถาม</h2>
+        <input type="button" value="เพิ่มคำถาม"
+               onclick="window.location.href='${pageContext.request.contextPath}/qfaq/create'; return false;"class="add-button"/>
+
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>รายการ คำถาม</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach var="qfaq" items="${qfaqs}">
+                <tr>
+                    <td class="C1"><a href="${pageContext.request.contextPath}/qfaq/${qfaq.id}/update">${qfaq.qfaqtext}</a></td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
     </div>
 </div>
 <jsp:include page="/WEB-INF/view/layouts/footer.jsp"/>

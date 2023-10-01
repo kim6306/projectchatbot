@@ -9,72 +9,68 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/view/layouts/nav.jsp"/>
-<h1 class="textcenter">แก้ไข</h1>
-<div class="space">
-    <div class="wrapper">
-        <%
-            int i = 0;
-        %>
-        <c:forEach var="topic" items="${topics}">
-            <%i++;%>
-        <table class="table table-striped table-bordered table-hover">
-            <thead>
-            <tr>
-                <th>รายการ FAQ.<%=i%></th>
-                <th>เพิ่ม</th>
-                <th>แก้ไข</th>
-                <th>เชื่อม</th>
-                <th>ลบ</th>
-            </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="C1" >Topic ${topic.topictext}</td>
-                    <td class="C1" ><a href="${pageContext.request.contextPath}/qfaq/create">
-                        <img src="${pageContext.request.contextPath}/assets/img/plus.png" width="35px"></a></td>
-                    <td class="C1" ><a href="${pageContext.request.contextPath}/topic/${topic.id}/update">
-                        <img src="${pageContext.request.contextPath}/assets/img/screwdriver.png" width="25px"></a></td>
-                    <td class="C1" ><a href="${pageContext.request.contextPath}/topic/${topic.id}/view-qfaqs">
-                        <img src="${pageContext.request.contextPath}/assets/img/link.png" width="30px"></a></td>
-                    <td class="C1" ><a class="delete-button" onclick="if((confirm('คุณแน่ใจหรือว่าต้องการลบหัวข้อนี้?')))
-                            { window.location.href='${pageContext.request.contextPath}/topic/${topic.id}/delete';
-                            return false; }"><img src="${pageContext.request.contextPath}/assets/img/delete.png" width="30px"></a></td>
-                </tr>
-            </tbody>
-            <c:forEach  var="qfaqs" items="${topic.qfaqs}">
-                <tbody>
-                <tr>
-                <td > Question ${qfaqs.qfaqtext}</td>
-                <td ><a href="${pageContext.request.contextPath}/afaq/create">
-                    <img src="${pageContext.request.contextPath}/assets/img/plus.png" width="35px"></a></td>
-                <td ><a href="${pageContext.request.contextPath}/qfaq/${qfaqs.id}/update">
-                    <img src="${pageContext.request.contextPath}/assets/img/screwdriver.png" width="25px"></a></td>
-                <td ><a href="${pageContext.request.contextPath}/qfaq/${qfaqs.id}/view-afaqs">
-                    <img src="${pageContext.request.contextPath}/assets/img/link.png" width="30px"></a></td>
-                <td > <a class="delete-button" onclick="if((confirm('คุณแน่ใจหรือว่าต้องการลบคำถามนี้?')))
-                        { window.location.href='${pageContext.request.contextPath}/qfaq/${qfaq.id}/delete';
-                        return false; }"><img src="${pageContext.request.contextPath}/assets/img/delete.png" width="30px"></a></td>
-            </tr>
-            </tbody>
+<div class="container">
+    <h1 class="textcenter">แก้ไข</h1>
+    <div class="space">
+        <div class="wrapper">
+            <%
+                int i = 0;
+            %>
+            <c:forEach var="topic" items="${topics}">
+                <%i++;%>
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>รายการ FAQ.<%=i%></th>
+                        <th>เพิ่ม</th>
+                        <th>แก้ไข</th>
+                        <th>เชื่อม</th>
+                        <th>ลบ</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="C1" >Topic ${topic.topictext}</td>
+                        <td class="C1" ><a href="${pageContext.request.contextPath}/qfaq/create">
+                            <img src="${pageContext.request.contextPath}/assets/img/plus.png" width="35px"></a></td>
+                        <td class="C1" ><a href="${pageContext.request.contextPath}/topic/${topic.id}/update">
+                            <img src="${pageContext.request.contextPath}/assets/img/screwdriver.png" width="25px"></a></td>
+                        <td class="C1" ><a href="${pageContext.request.contextPath}/topic/${topic.id}/view-qfaqs">
+                            <img src="${pageContext.request.contextPath}/assets/img/link.png" width="30px"></a></td>
+                        <td class="C1" ><a class="delete-button" onclick="if((confirm('คุณแน่ใจหรือว่าต้องการลบหัวข้อนี้?')))
+                                { window.location.href='${pageContext.request.contextPath}/topic/${topic.id}/delete';
+                                return false; }"><img src="${pageContext.request.contextPath}/assets/img/delete.png" width="30px"></a></td>
+                    </tr>
+                    </tbody>
+                    <c:forEach  var="qfaqs" items="${topic.qfaqs}">
+                        <tbody>
+                        <tr>
+                            <td > Question ${qfaqs.qfaqtext}</td>
+                            <td ></td>
+                            <td ><a href="${pageContext.request.contextPath}/qfaq/${qfaqs.id}/update">
+                                <img src="${pageContext.request.contextPath}/assets/img/screwdriver.png" width="25px"></a></td>
+                            <td ><a href="${pageContext.request.contextPath}/qfaq/${qfaqs.id}/view-afaqs">
+                                <img src="${pageContext.request.contextPath}/assets/img/link.png" width="30px"></a></td>
+                            <td ></td>
+                        </tr>
+                        </tbody>
 
-            <c:forEach  var="afaqs" items="${qfaqs.afaqs}">
-            <tbody>
-            <tr>
-                <td class="C1" > Answer ${afaqs.afaqtext}</td>
-                <td class="C1" ><a href="${pageContext.request.contextPath}/afaq/create">
-                    <img src="${pageContext.request.contextPath}/assets/img/plus.png" width="35px"></a></td>
-                <td class="C1" ><a href="${pageContext.request.contextPath}/afaq/${afaqs.id}/update">
-                    <img src="${pageContext.request.contextPath}/assets/img/screwdriver.png" width="25px"></a></td>
-                <td class="C1" ></td>
-                <td class="C1" > <a class="delete-button" onclick="if((confirm('คุณแน่ใจหรือว่าต้องการลบหัวข้อนี้?')))
-                        { window.location.href='${pageContext.request.contextPath}/topic/${topic.id}/delete';
-                        return false; }"><img src="${pageContext.request.contextPath}/assets/img/delete.png" width="30px"></a></td>
-            </tr>
-            </tbody>
-            </c:forEach>
-            </c:forEach>
-        </table>
-        </c:forEach >
+                        <c:forEach  var="afaqs" items="${qfaqs.afaqs}">
+                            <tbody>
+                            <tr>
+                                <td class="C1" > Answer ${afaqs.afaqtext}</td>
+                                <td class="C1" ></td>
+                                <td class="C1" ><a href="${pageContext.request.contextPath}/afaq/${afaqs.id}/update">
+                                    <img src="${pageContext.request.contextPath}/assets/img/screwdriver.png" width="25px"></a></td>
+                                <td class="C1" ></td>
+                                <td class="C1" ></td>
+                            </tr>
+                            </tbody>
+                        </c:forEach>
+                    </c:forEach>
+                </table>
+            </c:forEach >
+        </div>
     </div>
 </div>
 <footer>

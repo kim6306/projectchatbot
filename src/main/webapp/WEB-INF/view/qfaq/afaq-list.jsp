@@ -7,25 +7,31 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/view/layouts/nav.jsp"/>
-<div class="body">
-  <%
-    int i = 0;
-  %>
-<form action="${pageContext.request.contextPath}/qfaq/${qfaq.id}/afaq/add" method="post">
-  <div>
+<div class="container">
+  <div class="header">
     <h2>คำตอบ</h2>
   </div>
-    <tbody><c:forEach var="afaq" items="${afaq}">
-      <%i++;%>
-      <div>
-        <ol>
-          <li><span><%=i%></span><p>${afaq.afaqtext}</p></li>
-          <li>Action<span></span><button type="submit" name="afaq" value="${afaq.id}">เพิ่ม</button></li>
-        </ol>
-      </div>
-    </c:forEach></tbody>
-  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-</form>
+  <div class="table-container">
+    <form action="${pageContext.request.contextPath}/qfaq/${qfaq.id}/afaq/add" method="post">
+      <table class="table table-striped table-bordered table-hover">
+        <thead>
+        <tr>
+          <th>รายการ คำตอบ</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach var="afaq" items="${afaq}">
+          <tr>
+            <td class="C1"><p>${afaq.afaqtext}</p></td>
+            <td><button type="submit" name="afaq" value="${afaq.id}" class="add-button">เพิ่ม</button></td>
+          </tr>
+        </c:forEach>
+        </tbody>
+      </table>
+      <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+    </form>
+  </div>
 </div>
 <jsp:include page="/WEB-INF/view/layouts/footer.jsp"/>
 </body></html>

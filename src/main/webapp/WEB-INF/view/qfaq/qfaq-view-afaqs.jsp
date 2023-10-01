@@ -7,24 +7,33 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/view/layouts/nav.jsp"/>
-<div class="body">
-  <%
-    int i = 0;
-  %>
-<input type="button" value="เพิ่มคำตอบ"
-       onclick="window.location.href='${pageContext.request.contextPath}/qfaq/${qfaq.id}/afaq/add';return false;"class="add-button"/>
-  <div>
-    <h2>คำตอบ</h2>
+<div class="container">
+  <div class="body">
+    <h2>หัวข้อ</h2>
+    <input type="button" value="เพิ่มคำตอบ"
+           onclick="window.location.href='${pageContext.request.contextPath}/qfaq/${qfaq.id}/afaq/add';return false;" class="add-button"/>
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+      <tr>
+        <th>รายการ คำตอบ</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <c:forEach var="afaq" items="${afaq}">
+        <tr>
+          <td class="C1"><p>${afaq.afaqtext}</p></td>
+          <td>
+            <input type="button" value="ลบ"
+                   onclick="window.location.href='${pageContext.request.contextPath}/qfaq/${qfaq.id}/afaq/${afaq.id}/remove';
+                           return false;" class="add-button"/>
+          </td>
+        </tr>
+      </c:forEach>
+      </tbody>
+    </table>
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
   </div>
-<c:forEach var="afaq" items="${afaq}">
-  <%i++;%>
-    <div>
-      <ol>
-        <li><span><%=i%></span><a href="${pageContext.request.contextPath}/afaq/${afaq.id}/update">${afaq.afaqtext}</a></li>
-        <li>Action<span></span><a href="${pageContext.request.contextPath}/qfaq/${qfaq.id}/afaq/${afaq.id}/remove">ลบ</a></li>
-      </ol>
-    </div>
-  </c:forEach></tbody>
 </div>
 <jsp:include page="/WEB-INF/view/layouts/footer.jsp"/>
 </body></html>

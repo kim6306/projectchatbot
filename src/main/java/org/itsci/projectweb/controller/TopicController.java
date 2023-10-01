@@ -53,7 +53,7 @@ public class TopicController {
             Topic topic =new Topic(topictext,category);
             topicService.saveTopic(topic);
 
-            return "redirect:/";
+            return "redirect:/update";
     }
     @PostMapping(path = "/{t_id}/save")
     public String saveEditProfile(@RequestParam Map<String, String> allReqParams, @PathVariable int t_id) throws ParseException {
@@ -68,7 +68,7 @@ public class TopicController {
             }
             topicService.updateTopic(topic);
         }
-        return "redirect:/";
+        return "redirect:/update";
     }
     @InitBinder
     public void initBinder(WebDataBinder dataBinder) {
@@ -78,7 +78,7 @@ public class TopicController {
     @GetMapping("/{id}/delete")
     public String deleteTopic(@PathVariable("id") int id) {
         topicService.deleteTopic(id);
-        return "redirect:/topic/list";
+        return "redirect:/update";
     }
     @GetMapping("/{id}/view-qfaqs")
     public String TopicViewQFAQ(@PathVariable("id") int id, Model model) {

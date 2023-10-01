@@ -85,13 +85,6 @@
                                 </ul>
                             </li>
                         </security:authorize>
-                        <security:authorize access="hasRole('ADMIN')">
-                            <li><a href="${pageContext.request.contextPath}/category/create">เพิ่มหมวดหมู่</a>
-                                <ul class="submenu">
-                                    <li><a href="${pageContext.request.contextPath}/category/list">แก้ไขหมวดหมู่</a></li>
-                                </ul>
-                            </li>
-                        </security:authorize>
                     </ul>
                 </nav>
                 <hr>

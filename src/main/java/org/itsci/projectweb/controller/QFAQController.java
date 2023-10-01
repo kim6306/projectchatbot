@@ -51,10 +51,11 @@ public class QFAQController {
             QFAQ entityQfaq = qfaqService.getQFAQ(qfaq.getId());
             if (entityQfaq != null) {
                 qfaqService.updateQFAQ(entityQfaq,qfaq);
+                return "redirect:/update";
             } else {
                 qfaqService.saveQFAQ(qfaq);
             }
-            return "redirect:/qfaq/list";
+            return "redirect:/afaq/create";
         }
     }
     @InitBinder
@@ -65,7 +66,7 @@ public class QFAQController {
     @GetMapping("/{id}/delete")
     public String deleteQFAQ(@PathVariable("id") int id) {
         qfaqService.deleteQFAQ(id);
-        return "redirect:/qfaq/list";
+        return "redirect:/update";
     }
     @GetMapping("/{id}/view-afaqs")
     public String QFAQViewAFAQ(@PathVariable("id") int id, Model model) {

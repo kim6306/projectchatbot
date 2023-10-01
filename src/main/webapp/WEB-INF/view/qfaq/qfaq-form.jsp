@@ -13,7 +13,6 @@
     </div>
     <form:form action="${pageContext.request.contextPath}/qfaq/save" modelAttribute="qfaq" method="POST">
     <form:hidden path="id"/>
-        <c:forEach var="topic" items="${topics}">
         <div class="txt_field">
 
             <p class="ct">คำถาม:**<form:input path="qfaqtext"/>
@@ -22,7 +21,6 @@
         <input type="submit" value="บันทึก" class="save"/>
         <input type="button" value="ยกเลิก" onclick="window.location.href='${pageContext.request.contextPath}/qfaq/list';
         return false;" class="cancel-button"/>
-        </c:forEach >
 </form:form></div>
 </div>
         <jsp:include page="/WEB-INF/view/layouts/footer.jsp"/>

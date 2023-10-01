@@ -16,7 +16,7 @@
     <a class="flex" id="Act" href="${pageContext.request.contextPath}/Act">กิจกรรม</a>
 </div>
 <div>
-    <input type="text" id="searchInput" style="width: 50%" onkeyup="search()" placeholder="Search for names.." title="Type in a name">
+    <input type="text" id="searchInput" style="width: 50%" onkeyup="search()" placeholder="Search " title="Type in a name">
 </div>
 <div class="space">
 
