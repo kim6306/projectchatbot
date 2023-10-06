@@ -40,6 +40,13 @@ public class QFAQServiceImpl implements QFAQService {
     @Override
     @Transactional
     public void deleteQFAQ(int qfaqId) {
+        QFAQ qfaq = qfaqDao.getQFAQ(qfaqId);
+        for(AFAQ afaq:qfaq.getAfaqs()){
+            if (afaq.getQfaqs().size()<=1){
+                System.out.println(afaq.getId());
+                afaqDao.deleteAFAQ(afaq.getId());
+            }
+        }
         qfaqDao.deleteQFAQ(qfaqId);
     }
 

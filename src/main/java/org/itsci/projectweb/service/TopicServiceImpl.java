@@ -1,5 +1,8 @@
 package org.itsci.projectweb.service;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.itsci.projectweb.dao.*;
 import org.itsci.projectweb.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +15,19 @@ import java.util.List;
 public class TopicServiceImpl implements TopicService{
 
     @Autowired
+    private SessionFactory sessionFactory;
+
+    @Autowired
     private TopicDao topicDao;
 
     @Autowired
     private QFAQDao qfaqDao;
+
+    @Autowired
+    private AFAQDao afaqDao;
+
+    @Autowired
+    private QFAQService qfaqService;
     @Override
     @Transactional
     public List<Topic> getTopics() {
@@ -43,8 +55,20 @@ public class TopicServiceImpl implements TopicService{
     @Override
     @Transactional
     public void deleteTopic(int topicId) {
+        Topic topic = topicDao.getTopic(topicId);
+        for(QFAQ qfaq:topic.getQfaqs()){
+            for(AFAQ afaq:qfaq.getAfaqs()){
+                if (afaq.getQfaqs().size()<=1){
+                    System.out.println(afaq.getId());
+                    afaqDao.deleteAFAQ(afaq.getId());
+                }
+            }
+            qfaqDao.deleteQFAQ(qfaq.getId());
+        }
         topicDao.deleteTopic(topicId);
     }
+
+
 
     @Override
     @Transactional
@@ -86,6 +110,12 @@ public class TopicServiceImpl implements TopicService{
     @Transactional
     public Category getCategoryById(String cgId) {
         return topicDao.getCategoryById(cgId);
+    }
+
+    @Override
+    @Transactional
+    public List<Topic> getTopicsByWords(String words) {
+        return topicDao.getTopicsByWords(words);
     }
 
 

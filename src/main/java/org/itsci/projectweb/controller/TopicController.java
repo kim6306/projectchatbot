@@ -78,6 +78,7 @@ public class TopicController {
     @GetMapping("/{id}/delete")
     public String deleteTopic(@PathVariable("id") int id) {
         topicService.deleteTopic(id);
+
         return "redirect:/update";
     }
     @GetMapping("/{id}/view-qfaqs")
@@ -107,5 +108,6 @@ public class TopicController {
         topicService.removeQFAQFromTopic(topicId, qfaqId);
         return "redirect:/topic/" + topicId + "/view-qfaqs";
     }
+
 
 }

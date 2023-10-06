@@ -16,7 +16,10 @@
     <a class="flex" id="Act" href="${pageContext.request.contextPath}/Act">กิจกรรม</a>
 </div>
 <div>
-    <input type="text" id="searchInput" style="width: 50%" onkeyup="search()" placeholder="Search " title="Type in a name">
+<form:form action="${pageContext.request.contextPath}/searchtopics"  method="POST" name="formRegister">
+    <input type="text" id="searchInput" style="width: 50%;"  placeholder="Search Topic "  name="se">
+    <input type="submit" ;  class="add-button">
+</form:form>
 </div>
 <div class="space">
 
@@ -81,21 +84,21 @@
             modal.style.display = "none";
         }
     }
-    function search() {
-        var input = document.getElementById("searchInput").value.toLowerCase();
-        var blocks = document.getElementsByClassName("block_manage_news");
-
-        for (var i = 0; i < blocks.length; i++) {
-            var block = blocks[i];
-            var text = block.getAttribute("data-name").toLowerCase();
-
-            if (text.includes(input)) {
-                block.style.display = "block";
-            } else {
-                block.style.display = "none";
-            }
-        }
-    }
+    // function search() {
+    //     var input = document.getElementById("searchInput").value.toLowerCase();
+    //     var blocks = document.getElementsByClassName("block_manage_news");
+    //
+    //     for (var i = 0; i < blocks.length; i++) {
+    //         var block = blocks[i];
+    //         var text = block.getAttribute("data-name").toLowerCase();
+    //
+    //         if (text.includes(input)) {
+    //             block.style.display = "block";
+    //         } else {
+    //             block.style.display = "none";
+    //         }
+    //     }
+    // }
 </script>
 <footer>
     <jsp:include page="/WEB-INF/view/layouts/footer.jsp"/>

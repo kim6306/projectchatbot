@@ -41,11 +41,25 @@ public class TopicDaoImpl implements TopicDao  {
     }
 
     @Override
+    public List<Topic> getTopicsByWords(String words) {
+        Session session = sessionFactory.getCurrentSession();
+        Query<Topic> query = session.createQuery("FROM Topic t WHERE t.topictext LIKE :tpt", Topic.class);
+        query.setParameter("tpt", "%"+words+"%");
+        return query.getResultList();
+    }
+
+    @Override
     public void deleteTopic(int topicid) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("delete from Topic where id=:topicid");
         query.setParameter("topicid", topicid);
         query.executeUpdate();
+    }
+
+    @Override
+    public void deleteTopicObject(Topic topic) {
+        Session session = sessionFactory.getCurrentSession();
+        session.delete(topic);
     }
 
     @Override
