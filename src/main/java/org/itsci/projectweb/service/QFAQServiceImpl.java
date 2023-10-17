@@ -92,4 +92,10 @@ public class QFAQServiceImpl implements QFAQService {
         return qfaqDao.getQFAQDoesNotHaveAFAQ(id);
     }
 
+    @Override
+    @Transactional
+    public List<QFAQ> getQFAQByWords(String words) {
+        return qfaqDao.getQFAQByWords(words);
+    }
+
 }

@@ -77,4 +77,12 @@ public class QFAQDaoImpl implements QFAQDao{
         return qfaqList2;
     }
 
+    @Override
+    public List<QFAQ> getQFAQByWords(String words) {
+        Session session = sessionFactory.getCurrentSession();
+        Query<QFAQ> query = session.createQuery("FROM QFAQ q WHERE q.qfaqtext LIKE :qqt", QFAQ.class);
+        query.setParameter("qqt", "%"+words+"%");
+        return query.getResultList();
+    }
+
 }

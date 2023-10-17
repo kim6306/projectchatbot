@@ -1,4 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,100&display=swap');
+.add-button {
+	background-color: #dc3545;
+	color: #fff;
+	padding: 10px 20px;
+	border: none;
+	cursor: pointer;
+}
 html{
 	height: 100%;
 }

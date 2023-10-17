@@ -14,4 +14,5 @@ public interface QFAQDao {
     List<QFAQ> getQFAQDoesNotHaveTopic(int id);
 
     List<QFAQ> getQFAQDoesNotHaveAFAQ(int id);
+    List<QFAQ> getQFAQByWords(String words);
 }

@@ -1,6 +1,8 @@
 package org.itsci.projectweb.service;
 
 import org.itsci.projectweb.model.QFAQ;
+import org.itsci.projectweb.model.Topic;
+
 import java.util.List;
 
 public interface QFAQService {
@@ -17,4 +19,6 @@ public interface QFAQService {
     List<QFAQ> getQFAQByTopicId (int id);
     List<QFAQ> getQFAQDoesNotHaveTopic(int id);
     List<QFAQ> getQFAQDoesNotHaveAFAQ(int id);
+
+    List<QFAQ> getQFAQByWords(String words);
 }

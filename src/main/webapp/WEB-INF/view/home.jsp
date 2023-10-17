@@ -3,7 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
-    <link href="assets/css/style.css" rel="stylesheet" >
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
           integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -16,7 +16,7 @@
     <a class="flex" id="Act" href="${pageContext.request.contextPath}/Act">กิจกรรม</a>
 </div>
 <div>
-<form:form action="${pageContext.request.contextPath}/searchtopics"  method="POST" name="formRegister">
+<form:form action="${pageContext.request.contextPath}/searchFAQ"  method="POST" name="search">
     <input type="text" id="searchInput" style="width: 50%;"  placeholder="Search Topic "  name="se">
     <input type="submit" ;  class="add-button">
 </form:form>
@@ -31,14 +31,13 @@
         %>
         <c:forEach var="topic" items="${topics}">
             <%i++;%>
-            <div class="block_manage_news" data-name="${topic.topictext}">
+
             <div class="faq">
                 <button class="accordion">FAQ <%=i%>. ${topic.topictext}<i class="fa-solid fa-chevron-down"> </i></button>
                 <div class="panel">
                     <c:forEach  var="qfaqs" items="${topic.qfaqs}">
                         <%j++;%>
                         <c:forEach  var="afaqs" items="${qfaqs.afaqs}">
-                        <div class="block_manage_news" data-name="${qfaqs.qfaqtext}${afaqs.afaqtext}">
                             <div class="panel">
                                 <div class="topma">
                                     <p>Question <%=i%>.<%=j%> ${qfaqs.qfaqtext}</p>
@@ -46,12 +45,10 @@
                                 </div>
 
                             </div>
-                            </div>
                         </c:forEach>
                     </c:forEach>
                     <%j = 0;%>
             </div>
-                </div>
             </div>
         </c:forEach >
     </div>
@@ -84,21 +81,21 @@
             modal.style.display = "none";
         }
     }
-    // function search() {
-    //     var input = document.getElementById("searchInput").value.toLowerCase();
-    //     var blocks = document.getElementsByClassName("block_manage_news");
-    //
-    //     for (var i = 0; i < blocks.length; i++) {
-    //         var block = blocks[i];
-    //         var text = block.getAttribute("data-name").toLowerCase();
-    //
-    //         if (text.includes(input)) {
-    //             block.style.display = "block";
-    //         } else {
-    //             block.style.display = "none";
-    //         }
-    //     }
-    // }
+    function search() {
+        var input = document.getElementById("searchInput").value.toLowerCase();
+        var blocks = document.getElementsByClassName("block_manage_news");
+
+        for (var i = 0; i < blocks.length; i++) {
+            var block = blocks[i];
+            var text = block.getAttribute("data-name").toLowerCase();
+
+            if (text.includes(input)) {
+                block.style.display = "block";
+            } else {
+                block.style.display = "none";
+            }
+        }
+    }
 </script>
 <footer>
     <jsp:include page="/WEB-INF/view/layouts/footer.jsp"/>

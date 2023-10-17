@@ -8,7 +8,7 @@ import java.util.List;
 @Entity
 @Table(name = "qfaqs")
 public class QFAQ {
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable(name = "topic_qfaq", joinColumns = {@JoinColumn(name = "qfaq_id")},
             inverseJoinColumns = {@JoinColumn(name = "topic_id")})
     private Topic topics;
