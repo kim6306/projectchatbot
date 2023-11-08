@@ -48,7 +48,7 @@ public class QFAQDaoImpl implements QFAQDao{
     @Override
     public List<QFAQ> getQFAQByTopicId(int id) {
         Session session = sessionFactory.getCurrentSession();
-        Query<QFAQ> query = session.createQuery("FROM QFAQ q WHERE q.topics.id =: topicid", QFAQ.class);
+        Query<QFAQ> query = session.createQuery("FROM QFAQ q WHERE q.topic.topic_id =: topicid", QFAQ.class);
         query.setParameter("topicid", id);
         return query.getResultList();
     }
@@ -80,8 +80,22 @@ public class QFAQDaoImpl implements QFAQDao{
     @Override
     public List<QFAQ> getQFAQByWords(String words) {
         Session session = sessionFactory.getCurrentSession();
-        Query<QFAQ> query = session.createQuery("FROM QFAQ q WHERE q.qfaqtext LIKE :qqt", QFAQ.class);
+        Query<QFAQ> query = session.createQuery("FROM QFAQ q WHERE q.qfaq_name LIKE :qqt", QFAQ.class);
         query.setParameter("qqt", "%"+words+"%");
+        return query.getResultList();
+    }
+
+    @Override
+    public int saveqfaqint(QFAQ qfaq) {
+        Session session = sessionFactory.getCurrentSession();
+        return (int)session.save(qfaq);
+    }
+
+    @Override
+    public List<QFAQ> CheckWords(String words) {
+        Session session = sessionFactory.getCurrentSession();
+        Query<QFAQ> query = session.createQuery("FROM QFAQ q WHERE q.qfaq_name = :qqt", QFAQ.class);
+        query.setParameter("qqt", words);
         return query.getResultList();
     }
 

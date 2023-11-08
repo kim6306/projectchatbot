@@ -26,4 +26,6 @@ public interface TopicService {
     Category getCategoryById(String cgId);
 
     List<Topic> getTopicsByWords(String words);
+
+    List<Topic> getTopicsByCheckWords(String words);
 }

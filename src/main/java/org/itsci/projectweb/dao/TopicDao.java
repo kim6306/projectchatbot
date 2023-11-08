@@ -1,6 +1,7 @@
 package org.itsci.projectweb.dao;
 
 import org.itsci.projectweb.model.Category;
+import org.itsci.projectweb.model.QFAQ;
 import org.itsci.projectweb.model.Topic;
 import java.util.List;
 public interface TopicDao {
@@ -15,4 +16,6 @@ public interface TopicDao {
     Category getCategoryById(String cgId);
     public void updateTopic(Topic topic);
     List<Topic> getTopicsByWords (String words);
+
+    List<Topic> CheckWords (String words);
 }

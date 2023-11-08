@@ -2,8 +2,10 @@ package org.itsci.projectweb.service;
 
 import org.itsci.projectweb.dao.AFAQDao;
 import org.itsci.projectweb.dao.QFAQDao;
+import org.itsci.projectweb.dao.TopicDao;
 import org.itsci.projectweb.model.AFAQ;
 import org.itsci.projectweb.model.QFAQ;
+import org.itsci.projectweb.model.Topic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +15,8 @@ import java.util.List;
 @Service
 public class QFAQServiceImpl implements QFAQService {
 
+    @Autowired
+    private TopicDao topicDao;
     @Autowired
     private AFAQDao afaqDao;
 
@@ -31,6 +35,8 @@ public class QFAQServiceImpl implements QFAQService {
         qfaqDao.saveQFAQ(qfaq);
     }
 
+
+
     @Override
     @Transactional
     public QFAQ getQFAQ(int qfaqId) {
@@ -43,8 +49,7 @@ public class QFAQServiceImpl implements QFAQService {
         QFAQ qfaq = qfaqDao.getQFAQ(qfaqId);
         for(AFAQ afaq:qfaq.getAfaqs()){
             if (afaq.getQfaqs().size()<=1){
-                System.out.println(afaq.getId());
-                afaqDao.deleteAFAQ(afaq.getId());
+                afaqDao.deleteAFAQ(afaq.getAfaq_id());
             }
         }
         qfaqDao.deleteQFAQ(qfaqId);
@@ -96,6 +101,34 @@ public class QFAQServiceImpl implements QFAQService {
     @Transactional
     public List<QFAQ> getQFAQByWords(String words) {
         return qfaqDao.getQFAQByWords(words);
+    }
+
+    @Override
+    @Transactional
+    public void saveqfaqwithafaq(String qfaqtext, String afaqtext, int topicid) {
+        Topic topic = topicDao.getTopic(topicid);
+        QFAQ qfaq = new QFAQ();
+        int newqfaqid = 0;
+        AFAQ afaq = new AFAQ();
+        qfaq.setQfaq_name(qfaqtext);
+        qfaq.setTopic(topic);
+        afaq.setAfaq_name(afaqtext);
+        newqfaqid = qfaqDao.saveqfaqint(qfaq);
+        QFAQ newqfaq = qfaqDao.getQFAQ(newqfaqid);
+        afaq.getQfaqs().add(newqfaq);
+        int newafaqid = 0;
+        newafaqid = afaqDao.saveafaqint(afaq);
+        AFAQ newafaq = afaqDao.getAFAQ(newafaqid);
+        newqfaq.getAfaqs().add(newafaq);
+        qfaqDao.saveQFAQ(newqfaq);
+        topic.getQfaqs().add(newqfaq);
+        topicDao.saveTopic(topic);
+    }
+
+    @Override
+    @Transactional
+    public List<QFAQ> getQFAQsByCheckWords(String words) {
+        return qfaqDao.CheckWords(words);
     }
 
 }

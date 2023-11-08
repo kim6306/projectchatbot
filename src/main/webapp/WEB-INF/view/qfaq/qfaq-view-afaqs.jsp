@@ -6,12 +6,14 @@
   <link href="${pageContext.request.contextPath}/assets/css/csslist.css" rel="stylesheet">
 </head>
 <body>
-<jsp:include page="/WEB-INF/view/layouts/nav.jsp"/>
+<nav>
+  <jsp:include page="/WEB-INF/view/layouts/nav.jsp"/>
+</nav>
 <div class="container">
   <div class="body">
     <h2>หัวข้อ</h2>
     <input type="button" value="เพิ่มคำตอบ"
-           onclick="window.location.href='${pageContext.request.contextPath}/qfaq/${qfaq.id}/afaq/add';return false;" class="add-button"/>
+           onclick="window.location.href='${pageContext.request.contextPath}/qfaq/${qfaq.qfaq_id}/afaq/add';return false;" class="add-button"/>
     <table class="table table-striped table-bordered table-hover">
       <thead>
       <tr>
@@ -20,12 +22,12 @@
       </tr>
       </thead>
       <tbody>
-      <c:forEach var="afaq" items="${afaq}">
+      <c:forEach var="afaqs" items="${afaq}">
         <tr>
-          <td class="C1"><p>${afaq.afaqtext}</p></td>
+          <td class="C1"><p>${afaqs.afaq_name}</p></td>
           <td>
             <input type="button" value="ลบ"
-                   onclick="window.location.href='${pageContext.request.contextPath}/qfaq/${qfaq.id}/afaq/${afaq.id}/remove';
+                   onclick="window.location.href='${pageContext.request.contextPath}/qfaq/${qfaq.qfaq_id}/afaq/${afaqs.afaq_id}/remove';
                            return false;" class="add-button"/>
           </td>
         </tr>

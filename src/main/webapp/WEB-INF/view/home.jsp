@@ -9,61 +9,55 @@
           crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-<jsp:include page="/WEB-INF/view/layouts/nav.jsp"/>
+<nav>
+    <jsp:include page="/WEB-INF/view/layouts/nav.jsp"/>
+</nav>
 <h1 class="textcenter">คำถามที่พบบ่อย</h1>
 <div class="textc">
     <a class="flex" id="AtS" href="${pageContext.request.contextPath}/AtS">การสมัครเรียน</a>
     <a class="flex" id="Act" href="${pageContext.request.contextPath}/Act">กิจกรรม</a>
 </div>
 <div>
-<form:form action="${pageContext.request.contextPath}/searchFAQ"  method="POST" name="search">
-    <input type="text" id="searchInput" style="width: 50%;"  placeholder="Search Topic "  name="se">
-    <input type="submit" ;  class="add-button">
-</form:form>
+    <form:form action="${pageContext.request.contextPath}/searchFAQ" method="POST" name="search">
+        <input type="text" id="searchInput" style="width: 43%;" placeholder="Search Topic" name="se">
+        <input type="submit" class="add-button">
+    </form:form>
 </div>
-<div class="space">
-
-
-    <div class="wrapper">
-        <%
-            int i = 0;
-            int j = 0;
-        %>
-        <c:forEach var="topic" items="${topics}">
-            <%i++;%>
-
-            <div class="faq">
-                <button class="accordion">FAQ <%=i%>. ${topic.topictext}<i class="fa-solid fa-chevron-down"> </i></button>
-                <div class="panel">
-                    <c:forEach  var="qfaqs" items="${topic.qfaqs}">
-                        <%j++;%>
-                        <c:forEach  var="afaqs" items="${qfaqs.afaqs}">
-                            <div class="panel">
-                                <div class="topma">
-                                    <p>Question <%=i%>.<%=j%> ${qfaqs.qfaqtext}</p>
-                                    <p>Answer <%=i%>.<%=j%> ${afaqs.afaqtext}</p>
+<div class="container">
+    <div class="space">
+        <div class="wrapper">
+            <c:set var="i" value="0" />
+            <c:set var="j" value="0" />
+            <c:forEach var="topic" items="${topics}">
+                <c:set var="i" value="${i+1}" />
+                <div class="faq">
+                    <button class="accordion">FAQ ${i}. ${topic.topic_name} <i class="fa-solid fa-chevron-down"></i></button>
+                    <div class="panel">
+                        <c:forEach var="qfaq" items="${topic.qfaqs}">
+                            <c:set var="j" value="${j+1}" />
+                            <c:forEach var="afaq" items="${qfaq.afaqs}">
+                                <div class="panel">
+                                    <div class="topma">
+                                        <p>Q ${i}.${j} : ${qfaq.qfaq_name}</p>
+                                        <p>A ${i}.${j} : ${afaq.afaq_name}</p>
+                                    </div>
                                 </div>
-
-                            </div>
+                            </c:forEach>
                         </c:forEach>
-                    </c:forEach>
-                    <%j = 0;%>
-            </div>
-            </div>
-        </c:forEach >
+                        <c:set var="j" value="0" />
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
     </div>
 </div>
-
-
 <script>
     var acc = document.getElementsByClassName("accordion");
     var i;
-
     for (i = 0; i < acc.length; i++) {
         acc[i].addEventListener("click", function() {
             this.classList.toggle("active");
             this.parentElement.classList.toggle("active");
-
             var panel = this.nextElementSibling;
             if (panel.style.display === "block") {
                 panel.style.display = "none";
@@ -72,10 +66,7 @@
             }
         });
     }
-
     var modal = document.getElementById('id01');
-
-    // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
         if (event.target == modal) {
             modal.style.display = "none";
@@ -84,11 +75,9 @@
     function search() {
         var input = document.getElementById("searchInput").value.toLowerCase();
         var blocks = document.getElementsByClassName("block_manage_news");
-
         for (var i = 0; i < blocks.length; i++) {
             var block = blocks[i];
             var text = block.getAttribute("data-name").toLowerCase();
-
             if (text.includes(input)) {
                 block.style.display = "block";
             } else {
@@ -100,6 +89,5 @@
 <footer>
     <jsp:include page="/WEB-INF/view/layouts/footer.jsp"/>
 </footer>
-
 </body>
 </html>

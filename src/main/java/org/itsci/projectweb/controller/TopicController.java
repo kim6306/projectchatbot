@@ -43,30 +43,47 @@ public class TopicController {
         model.addAttribute("category_detail", category);
         return "topic/topic-form-update";
     }
-
-
-
     @PostMapping(path = "/save")
-    public String processForm(@RequestParam Map<String, String> allReqParams) throws ParseException {
+    public String processForm(@RequestParam Map<String, String>  allReqParams,Model model ) throws ParseException {
             String topictext = allReqParams.get("topictext");
             Category category = topicService.getCategoryById(allReqParams.get("category_id"));
-            Topic topic =new Topic(topictext,category);
-            topicService.saveTopic(topic);
-
+            if (topicService.getTopicsByCheckWords(topictext).size()<=0){
+                Topic topic = new Topic(topictext,category);
+                topicService.saveTopic(topic);
+            }else{
+                model.addAttribute("ShowAlert",true);
+                model.addAttribute("categorys",topicService.getCategory());
+                return "topic/topic-form";
+            }
             return "redirect:/update";
     }
     @PostMapping(path = "/{t_id}/save")
-    public String saveEditProfile(@RequestParam Map<String, String> allReqParams, @PathVariable int t_id) throws ParseException {
+    public String saveEditProfile(@RequestParam Map<String, String> allReqParams, @PathVariable int t_id,Model model) throws ParseException {
         Topic topic = topicService.getTopic(t_id);
+        String topsics = topic.getTopic_name();
         if (topic != null) {
-            topic.setTopictext(allReqParams.get("topictext"));
 
+            topic.setTopic_name(allReqParams.get("topictext"));
+            System.out.println("TOPICCCC : " + allReqParams.get("topictext"));
             String categoryId = allReqParams.get("category_id");
             Category cate_gory = topicService.getCategoryById(categoryId);
             if (cate_gory != null) {
+                System.out.println("FLAG 2");
                 topic.setCategory(cate_gory);
+                if (topicService.getTopicsByCheckWords(allReqParams.get("topictext")).size()<=0){
+                    System.out.println("FLAG 1");
+                    topicService.updateTopic(topic);
+                }else{
+
+                    model.addAttribute("ShowAlert",true);
+                    model.addAttribute("topic_detail", topicService.getTopic(t_id));
+                    Topic topics = topicService.getTopic(t_id);
+                    model.addAttribute("category_detail",topicService.getCategory());
+//                model.addAttribute("categorys",topicService.getCategory());
+                    return "topic/topic-form-update";
+                }
             }
-            topicService.updateTopic(topic);
+//            topicService.updateTopic(topic);
         }
         return "redirect:/update";
     }
@@ -108,6 +125,5 @@ public class TopicController {
         topicService.removeQFAQFromTopic(topicId, qfaqId);
         return "redirect:/topic/" + topicId + "/view-qfaqs";
     }
-
 
 }

@@ -55,5 +55,18 @@ public class AFAQDaoImpl implements AFAQDao{
         return afaqList2;
     }
 
+    @Override
+    public int saveafaqint(AFAQ afaq) {
+        Session session = sessionFactory.getCurrentSession();
+        return (int)session.save(afaq);
+    }
+
+    @Override
+    public List<AFAQ> CheckWords(String words) {
+        Session session = sessionFactory.getCurrentSession();
+        Query<AFAQ> query = session.createQuery("FROM AFAQ a WHERE a.afaq_name = :aqt", AFAQ.class);
+        query.setParameter("aqt", words);
+        return query.getResultList();
+    }
 
 }

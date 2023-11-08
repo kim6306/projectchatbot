@@ -12,6 +12,7 @@ html{
 body{
 	min-height: 100vh;
 	font-family: 'Kanit', sans-serif;
+	background-color: whitesmoke;
 }
 *{
 	padding: 0;
@@ -129,9 +130,22 @@ item3:hover{
 	color: rgb(253, 185, 16);
 }
 #searchInput{
-	margin-left: 420px;
+	margin-left: 460px;
 	height: 40px;
 }
-
+.container {
+	width: 80%;
+	margin: 0 auto;
+	background-color: #fff;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+	padding: 20px;
+	border-radius: 5px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	background: transparent;
+}
+nav{
+	padding-bottom: 20px;
+}
 
 

@@ -26,14 +26,14 @@ public class WebHomeController {
     @RequestMapping("/")
     public String showHome(Model model) {
         model.addAttribute("topics", topicService.getTopics());
-        System.out.println(topicService.getTopics().get(0).getTopictext());
+        System.out.println(topicService.getTopics().get(0).getTopic_name());
         System.out.println(topicService.getTopics().get(0).getQfaqs().size());
         return "home";
     }
     @GetMapping("/update")
     public String update(Model model) {
         model.addAttribute("topics", topicService.getTopics());
-        System.out.println(topicService.getTopics().get(0).getTopictext());
+        System.out.println(topicService.getTopics().get(0).getTopic_name());
         System.out.println(topicService.getTopics().get(0).getQfaqs().size());
         return "update-page";
     }
@@ -41,7 +41,7 @@ public class WebHomeController {
     @GetMapping("/AtS")
     public String AtS(Model model) {
         model.addAttribute("topics", topicService.getTopicByCategory("การเข้าสมัครเรียน"));
-        System.out.println(topicService.getTopics().get(0).getTopictext());
+        System.out.println(topicService.getTopics().get(0).getTopic_name());
         System.out.println(topicService.getTopics().get(0).getQfaqs().size());
         return "Apply-to-study";
     }
@@ -49,7 +49,7 @@ public class WebHomeController {
     @GetMapping("/Act")
     public String Activity(Model model) {
         model.addAttribute("topics", topicService.getTopicByCategory("กิจกรรมและหลักสูตร"));
-        System.out.println(topicService.getTopics().get(0).getTopictext());
+        System.out.println(topicService.getTopics().get(0).getTopic_name());
         System.out.println(topicService.getTopics().get(0).getQfaqs().size());
         return "Activity";
     }
@@ -66,7 +66,7 @@ public class WebHomeController {
             qfaqs = qfaqService.getQFAQByWords(words);
 //            System.out.println("sizeQAFQ"+qfaqs.size());
             for (QFAQ qfaq:qfaqs){
-                topics.add(qfaq.getTopics());
+                topics.add(qfaq.getTopic());
             }
 //            System.out.println("Topicsize"+topics.size());
         }

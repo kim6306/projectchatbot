@@ -9,36 +9,51 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
-@Table(name = "categorys")
+@Table(name = "categories")
 public class Category {
 
     @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @GenericGenerator(name = "increment", strategy = "increment")
-    private String id;
-    @NotNull
-    @Column(name = "catetext", columnDefinition = "TEXT")
-    private String catetext;
+    private String category_id;
 
-    public String getId() {
-        return id;
+    @Column(columnDefinition = "TEXT", nullable = false)
+    private String category_name;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy="category", cascade = CascadeType.ALL)
+    private List<Topic> topics;
+
+    public String getCategory_id() {
+        return category_id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setCategory_id(String category_id) {
+        this.category_id = category_id;
     }
 
-    public String getCatetext() {
-        return catetext;
+    public String getCategory_name() {
+        return category_name;
     }
 
-    public void setCatetext(String catetext) {
-        this.catetext = catetext;
+    public void setCategory_name(String category_name) {
+        this.category_name = category_name;
+    }
+
+    public List<Topic> getTopics() {
+        return topics;
+    }
+
+    public void setTopics(List<Topic> topics) {
+        this.topics = topics;
     }
 
     public void fill(Category category) {
-        this.catetext = category.getCatetext();
-        this.id = category.getId();
+        this.category_name = category.getCategory_name();
+        this.category_id = category.getCategory_id();
+    }
+
+    public Category () {}
+
+    public Category(String category_id, String category_name) {
+        this.category_id = category_id;
+        this.category_name = category_name;
     }
 }

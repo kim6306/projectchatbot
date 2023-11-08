@@ -4,44 +4,59 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 @Entity
 @Table(name = "qfaqs")
 public class QFAQ {
-    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    @JoinTable(name = "topic_qfaq", joinColumns = {@JoinColumn(name = "qfaq_id")},
-            inverseJoinColumns = {@JoinColumn(name = "topic_id")})
-    private Topic topics;
-
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
-    @JoinTable(name = "qfaq_afaq", joinColumns = {@JoinColumn(name = "qfaq_id")},
-            inverseJoinColumns = {@JoinColumn(name = "afaq_id")})
-    private List<AFAQ> afaqs;
 
     @Id
-    @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @GenericGenerator(name = "increment", strategy = "increment")
-    int id;
+    private int qfaq_id;
 
-    @NotNull
-    @Column(name = "qfaqtext", columnDefinition = "TEXT")
-    private String qfaqtext;
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String qfaq_name;
 
-    public Topic getTopics() {
-        return topics;
+    @ManyToOne(cascade=CascadeType.ALL)
+    private Topic topic;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    @JoinTable(name = "qfaqs_afaqs", joinColumns = {@JoinColumn(name = "qfaq_id")},
+            inverseJoinColumns = {@JoinColumn(name = "afaq_id")})
+    private List<AFAQ> afaqs = new ArrayList<>();
+
+    public QFAQ () {}
+
+    public QFAQ(int qfaq_id, String qfaq_name, Topic topic, List<AFAQ> afaqs) {
+        this.qfaq_id = qfaq_id;
+        this.qfaq_name = qfaq_name;
+        this.topic = topic;
+        this.afaqs = afaqs;
     }
 
-    public void setTopics(Topic topics) {
-        this.topics = topics;
+    public int getQfaq_id() {
+        return qfaq_id;
     }
 
-    public int getId() {
-        return id;
+    public void setQfaq_id(int qfaq_id) {
+        this.qfaq_id = qfaq_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public String getQfaq_name() {
+        return qfaq_name;
+    }
+
+    public void setQfaq_name(String qfaq_name) {
+        this.qfaq_name = qfaq_name;
+    }
+
+    public Topic getTopic() {
+        return topic;
+    }
+
+    public void setTopic(Topic topic) {
+        this.topic = topic;
     }
 
     public List<AFAQ> getAfaqs() {
@@ -52,15 +67,7 @@ public class QFAQ {
         this.afaqs = afaqs;
     }
 
-    public String getQfaqtext() {
-        return qfaqtext;
-    }
-
-    public void setQfaqtext(String qfaqtext) {
-        this.qfaqtext = qfaqtext;
-    }
-
-    public void fill(QFAQ qfaq) {
-        this.qfaqtext = qfaq.getQfaqtext();
+    public void fill (QFAQ qfaq) {
+        this.qfaq_name = qfaq.getQfaq_name();
     }
 }

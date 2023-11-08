@@ -59,11 +59,11 @@ public class TopicServiceImpl implements TopicService{
         for(QFAQ qfaq:topic.getQfaqs()){
             for(AFAQ afaq:qfaq.getAfaqs()){
                 if (afaq.getQfaqs().size()<=1){
-                    System.out.println(afaq.getId());
-                    afaqDao.deleteAFAQ(afaq.getId());
+                    System.out.println(afaq.getAfaq_id());
+                    afaqDao.deleteAFAQ(afaq.getAfaq_id());
                 }
             }
-            qfaqDao.deleteQFAQ(qfaq.getId());
+            qfaqDao.deleteQFAQ(qfaq.getQfaq_id());
         }
         topicDao.deleteTopic(topicId);
     }
@@ -116,6 +116,12 @@ public class TopicServiceImpl implements TopicService{
     @Transactional
     public List<Topic> getTopicsByWords(String words) {
         return topicDao.getTopicsByWords(words);
+    }
+
+    @Override
+    @Transactional
+    public List<Topic> getTopicsByCheckWords(String words) {
+        return topicDao.CheckWords(words);
     }
 
 

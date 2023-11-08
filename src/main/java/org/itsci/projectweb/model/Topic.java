@@ -4,32 +4,45 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "topics")
 public class Topic {
-    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
-    @JoinTable(name = "topic_qfaq", joinColumns = {@JoinColumn(name = "topic_id")},
-            inverseJoinColumns = {@JoinColumn(name = "qfaq_id")})
-    private List<QFAQ> qfaqs;
-
-    @ManyToOne(cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "category_id")
-    private Category category;
 
     @Id
-    @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @GenericGenerator(name = "increment", strategy = "increment")
-    private int id;
+    private int topic_id;
 
-    @NotNull
-    @Column(name = "topictext", columnDefinition = "TEXT")
-    private String topictext;
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String topic_name;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy="topic", cascade = CascadeType.ALL)
+    private List<QFAQ> qfaqs = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="category_id")
+    private Category category;
 
     public Topic() {
 
+    }
+
+    public Topic(int topic_id, String topic_name, List<QFAQ> qfaqs, Category category) {
+        this.topic_id = topic_id;
+        this.topic_name = topic_name;
+        this.qfaqs = qfaqs;
+        this.category = category;
+    }
+
+    public int getTopic_id() {
+        return topic_id;
+    }
+
+    public void setTopic_id(int topic_id) {
+        this.topic_id = topic_id;
     }
 
     public List<QFAQ> getQfaqs() {
@@ -48,25 +61,16 @@ public class Topic {
         this.category = category;
     }
 
-    public int getId() {
-        return id;
+    public String getTopic_name() {
+        return topic_name;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setTopic_name(String topic_name) {
+        this.topic_name = topic_name;
     }
 
-    public String getTopictext() {
-        return topictext;
-    }
-
-    public void setTopictext(String topictext) {
-        this.topictext = topictext;
-    }
-
-
-    public Topic( String topictext,Category category) {
-        this.topictext = topictext;
+    public Topic(String topictext, Category category) {
+        this.topic_name = topictext;
         this.category = category;
     }
 }

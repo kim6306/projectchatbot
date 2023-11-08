@@ -20,6 +20,7 @@ public class WebConfig implements WebMvcConfigurer {
         return viewResolver;
     }
 
+    @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/assets/**").addResourceLocations("/assets/");
         registry.addResourceHandler("/js/**").addResourceLocations("/assets/js/");

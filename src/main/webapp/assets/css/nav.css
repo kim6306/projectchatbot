@@ -1,69 +1,69 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,100&display=swap');
-nav.main-nav{
-    background: rgb(51, 51, 51);
-    background-image: linear-gradient(top,#2f2f2f,#4f4f4f);
-    width: 100%;
-}
 
-.top-nav{
-    height: 30px;
-    list-style: none;
+*{
+    box-sizing: border-box;
     margin: 0;
-    width: 100%;
-    padding: 5px;
-}
-
-
-
-.top-nav li a:hover{
-    color: rgb(245, 178, 33);
-
-}
-nav .submenu {
-    margin-top: 28.5px;
-    display: none;
-    font-family: Kanit;
-}
-
-nav ul li:hover .submenu {
-    display: block;
-    width: 150px;
-}
-
-nav .submenu li {
-    display: block;
-    background-color: #a41212;
-    width: 150px;
-    font-family: Kanit;
-}
-
-nav .submenu li a {
-    padding: 2px;
-    color: #fff;
-    width: 150px;
-    margin-top: 5px;
-    font-size: 12px;
-}
-.p{
-    float: right;
-    font-family: "Kanit";
-    font-size: 16px;
-
-    margin-right: 35px;
-    margin-top: 30px;
-    list-style: none;
-
-}
-.p li{
-    position: relative;
-
-}
-.p li a{
-    color: black;
+    padding: 0;
+    font-family: 'Kanit', sans-serif;
+    text-transform: capitalize;
     text-decoration: none;
 }
-.p li a:hover{
-    color: rgb(245, 178, 33);
-
+body{
+   min-height: 100vh;
 }
-
+.bgc{
+    background-color: rgba(62, 69, 122, 100);
+}
+header{
+    /*position: fixed;*/
+    /*top: 0;*/
+    /*left: 0;*/
+    /*right: 0;*/
+    box-shadow: #f0f0f0;
+    box-shadow: 0 5px 10px black;
+    padding: 0px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /*z-index: 1000;*/
+}
+.navber{
+}
+header .navber ul{
+    list-style: none;
+}
+header .navber ul li{
+    position: relative;
+    float: left;
+}
+header .navber ul li a{
+    font-size: 20px;
+    padding: 20px;
+    color: black;
+    display: block;
+    cursor: pointer;
+}
+header .navber ul li a:hover{
+    background: #4d5154;
+    color: #ffc107;
+}
+header .navber ul li ul{
+    position: absolute;
+    left: 0;
+    width: 145px;
+    background: white;
+    display: none;
+}
+header .navber ul li ul li{
+    width: 100%;
+    border-top: 1px solid black;
+}
+header .navber ul li:focus-within > ul,
+header .navber ul li:hover > ul{
+    display: initial;
+}
+@media (max-width: 991px) {
+    header{
+        padding: 20px;
+    }
+}

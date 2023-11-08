@@ -43,8 +43,16 @@ public class TopicDaoImpl implements TopicDao  {
     @Override
     public List<Topic> getTopicsByWords(String words) {
         Session session = sessionFactory.getCurrentSession();
-        Query<Topic> query = session.createQuery("FROM Topic t WHERE t.topictext LIKE :tpt", Topic.class);
+        Query<Topic> query = session.createQuery("FROM Topic t WHERE t.topic_name LIKE :tpt", Topic.class);
         query.setParameter("tpt", "%"+words+"%");
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Topic> CheckWords(String words) {
+        Session session = sessionFactory.getCurrentSession();
+        Query<Topic> query = session.createQuery("FROM Topic t WHERE t.topic_name = :tpt", Topic.class );
+        query.setParameter("tpt", words);
         return query.getResultList();
     }
 
@@ -65,7 +73,7 @@ public class TopicDaoImpl implements TopicDao  {
     @Override
     public List<Topic> getTopicDoesNotHaveQFAQ(int id) {
         Session session = sessionFactory.getCurrentSession();
-        Query<Topic> query = session.createQuery("select q.topics from QFAQ q where q.id=:id");
+        Query<Topic> query = session.createQuery("select q.topic from QFAQ q where q.id=:id");
         query.setParameter("id", id);
         List<Topic> topicList1 = query.getResultList();
         query = session.createQuery("from Topic ");
@@ -77,7 +85,7 @@ public class TopicDaoImpl implements TopicDao  {
     @Override
     public List<Topic> getTopicByCategory(String category) {
         Session session = sessionFactory.getCurrentSession();
-        Query<Topic> query = session.createQuery("from Topic t where t.category.catetext=:category");
+        Query<Topic> query = session.createQuery("from Topic t where t.category.category_name =:category");
         query.setParameter("category",category);
         return query.getResultList();
     }

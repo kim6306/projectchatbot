@@ -7,12 +7,15 @@
     <link href="${pageContext.request.contextPath}/assets/css/csslist.css" rel="stylesheet">
 </head>
 <body>
-<jsp:include page="/WEB-INF/view/layouts/nav.jsp"/>
+<nav>
+    <jsp:include page="/WEB-INF/view/layouts/nav.jsp"/>
+</nav>
 <div class="container">
     <div class="body">
-        <h2>หัวข้อ</h2>
-        <input type="button" value="เพิ่มหัวข้อ" onclick="window.location.href='${pageContext.request.contextPath}/topic/create'; return false;" class="add-button"/>
-
+        <%
+            int i = 0;
+            int j = 0;
+        %>
         <table class="table table-striped table-bordered table-hover">
             <thead>
             <tr>
@@ -20,9 +23,11 @@
             </tr>
             </thead>
             <tbody>
+
             <c:forEach var="topic" items="${topics}">
+                <%i++;%>
                 <tr>
-                    <td class="C1"><a href="${pageContext.request.contextPath}/topic/${topic.id}/update">${topic.topictext}</a></td>
+                    <td class="C1"><a href="${pageContext.request.contextPath}/topic/${topic.topic_id}/update">FAQ.<%=i%>: ${topic.topic_name}</a></td>
                 </tr>
             </c:forEach>
             </tbody>

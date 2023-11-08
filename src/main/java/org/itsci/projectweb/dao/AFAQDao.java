@@ -15,4 +15,7 @@ public interface AFAQDao {
     void deleteAFAQ(int id);
 
     List<AFAQ> getAFAQDoesNotHaveQFAQ(int id);
+
+    int saveafaqint (AFAQ afaq);
+    List<AFAQ> CheckWords(String words);
 }

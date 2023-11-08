@@ -7,13 +7,11 @@
     <link href="${pageContext.request.contextPath}/assets/css/csslist.css" rel="stylesheet">
 </head>
 <body>
-<jsp:include page="/WEB-INF/view/layouts/nav.jsp"/>
+<nav>
+    <jsp:include page="/WEB-INF/view/layouts/nav.jsp"/>
+</nav>
 <div class="container">
     <div class="body">
-        <h2>คำถาม</h2>
-        <input type="button" value="เพิ่มคำถาม"
-               onclick="window.location.href='${pageContext.request.contextPath}/qfaq/create'; return false;"class="add-button"/>
-
         <table class="table table-striped table-bordered table-hover">
             <thead>
             <tr>
@@ -22,10 +20,11 @@
             </thead>
             <tbody>
             <c:forEach var="qfaq" items="${qfaqs}">
-                <tr>
-                    <td class="C1"><a href="${pageContext.request.contextPath}/qfaq/${qfaq.id}/update">${qfaq.qfaqtext}</a></td>
+
+                    <td class="C1"><a href="${pageContext.request.contextPath}/qfaq/${qfaq.qfaq_id}/update">Q ${i}.${j} : ${qfaq.qfaq_name}</a></td>
                 </tr>
             </c:forEach>
+
             </tbody>
         </table>
     </div>

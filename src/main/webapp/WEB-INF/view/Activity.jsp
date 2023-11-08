@@ -9,7 +9,9 @@
           crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-<jsp:include page="/WEB-INF/view/layouts/nav.jsp"/>
+<nav>
+    <jsp:include page="/WEB-INF/view/layouts/nav.jsp"/>
+</nav>
 <h1 class="textcenter">คำถามที่พบบ่อย</h1>
 <div class="textc">
     <a class="flex" id="AtS" href="${pageContext.request.contextPath}/AtS">สมัครเรียน</a>
@@ -30,16 +32,16 @@
             <%i++;%>
             <%--      <div class="block_manage_news" data-name="${topic.topictext}">--%>
             <div class="faq">
-                <button class="accordion">FAQ <%=i%>. ${topic.topictext} <i class="fa-solid fa-chevron-down"> </i></button>
+                <button class="accordion">FAQ <%=i%>. ${topic.topic_name} <i class="fa-solid fa-chevron-down"> </i></button>
                 <div class="panel">
                     <c:forEach  var="qfaqs" items="${topic.qfaqs}">
                         <%j++;%>
                         <c:forEach  var="afaqs" items="${qfaqs.afaqs}">
-                            <div class="block_manage_news" data-name="${qfaqs.qfaqtext}${afaqs.afaqtext}">
+                            <div class="block_manage_news" data-name="${qfaqs.qfaq_name}${afaqs.afaq_name}">
                                 <div class="panel">
                                     <div class="topma">
-                                        <p>Question <%=i%>.<%=j%> ${qfaqs.qfaqtext}</p>
-                                        <p>Answer <%=i%>.<%=j%> ${afaqs.afaqtext}</p>
+                                        <p>Question <%=i%>.<%=j%> ${qfaqs.qfaq_name}</p>
+                                        <p>Answer <%=i%>.<%=j%> ${afaqs.afaq_name}</p>
                                     </div>
 
                                 </div>

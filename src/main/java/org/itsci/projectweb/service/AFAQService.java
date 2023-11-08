@@ -12,4 +12,7 @@ public interface AFAQService {
     void updateAFAQ(AFAQ afaqEntity, AFAQ afaq);
 
     List<AFAQ> getAFAQDoesNotHaveQFAQ(int id);
+
+    void saveafaqwithqfaq(String afaqtext,int qfaqid);
+    List<AFAQ> getAFAQsByCheckWords(String words);
 }

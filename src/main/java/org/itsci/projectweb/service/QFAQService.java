@@ -21,4 +21,7 @@ public interface QFAQService {
     List<QFAQ> getQFAQDoesNotHaveAFAQ(int id);
 
     List<QFAQ> getQFAQByWords(String words);
+
+    void saveqfaqwithafaq(String qfaqtext,String afaqtext,int topicid);
+    List<QFAQ> getQFAQsByCheckWords(String words);
 }

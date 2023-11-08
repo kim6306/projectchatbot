@@ -6,13 +6,15 @@
   <link href="${pageContext.request.contextPath}/assets/css/csslist.css" rel="stylesheet">
 </head>
 <body>
-<jsp:include page="/WEB-INF/view/layouts/nav.jsp"/>
+<nav>
+  <jsp:include page="/WEB-INF/view/layouts/nav.jsp"/>
+</nav>
 <div class="container">
   <div class="header">
     <h2>คำตอบ</h2>
   </div>
   <div class="table-container">
-    <form action="${pageContext.request.contextPath}/qfaq/${qfaq.id}/afaq/add" method="post">
+    <form action="${pageContext.request.contextPath}/qfaq/${qfaq.qfaq_id}/afaq/add" method="post">
       <table class="table table-striped table-bordered table-hover">
         <thead>
         <tr>
@@ -21,10 +23,10 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="afaq" items="${afaq}">
+        <c:forEach var="afaqs" items="${afaq}">
           <tr>
-            <td class="C1"><p>${afaq.afaqtext}</p></td>
-            <td><button type="submit" name="afaq" value="${afaq.id}" class="add-button">เพิ่ม</button></td>
+            <td class="C1"><p>${afaqs.afaq_name}</p></td>
+            <td><button type="submit" name="afaq" value="${afaqs.afaq_id}" class="add-button">เพิ่ม</button></td>
           </tr>
         </c:forEach>
         </tbody>

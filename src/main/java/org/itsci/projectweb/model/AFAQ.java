@@ -5,34 +5,37 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 @Entity
 @Table(name = "afaqs")
 public class AFAQ {
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
-    @JoinTable(name = "qfaq_afaq", joinColumns = {@JoinColumn(name = "afaq_id")},
-            inverseJoinColumns = {@JoinColumn(name = "qfaq_id")})
-    private List<QFAQ> qfaqs;
 
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @GenericGenerator(name = "increment", strategy = "increment")
-    private int id;
-    @NotNull
-    @Column(name = "afaqtext", columnDefinition = "TEXT")
-    private String afaqtext;
+    private int afaq_id;
 
-    public int getId() {
-        return id;
+    @ManyToMany(mappedBy="afaqs")
+    private List<QFAQ> qfaqs = new ArrayList<>();
+
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String afaq_name;
+
+    public AFAQ () {}
+
+    public AFAQ(int afaq_id, List<QFAQ> qfaqs, String afaq_name) {
+        this.afaq_id = afaq_id;
+        this.qfaqs = qfaqs;
+        this.afaq_name = afaq_name;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getAfaq_id() {
+        return afaq_id;
     }
 
-    public String getAfaqtext() {
-        return afaqtext;
+    public void setAfaq_id(int afaq_id) {
+        this.afaq_id = afaq_id;
     }
 
     public List<QFAQ> getQfaqs() {
@@ -43,12 +46,15 @@ public class AFAQ {
         this.qfaqs = qfaqs;
     }
 
-    public void setAfaqtext(String afaqtext) {
-        this.afaqtext = afaqtext;
+    public String getAfaq_name() {
+        return afaq_name;
     }
 
-    public void fill(AFAQ afaq) {
+    public void setAfaq_name(String afaq_name) {
+        this.afaq_name = afaq_name;
+    }
 
-        this.afaqtext = afaq.getAfaqtext();
+    public void fill (AFAQ afaq) {
+        this.afaq_id = afaq.getAfaq_id();
     }
 }

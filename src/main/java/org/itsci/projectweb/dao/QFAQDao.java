@@ -15,4 +15,8 @@ public interface QFAQDao {
 
     List<QFAQ> getQFAQDoesNotHaveAFAQ(int id);
     List<QFAQ> getQFAQByWords(String words);
+
+    int saveqfaqint (QFAQ qfaq);
+
+    List<QFAQ> CheckWords(String words);
 }
