@@ -31,8 +31,7 @@ public class TopicDaoImpl implements TopicDao  {
     @Override
     public Topic getTopic(int topicid) {
         Session session = sessionFactory.getCurrentSession();
-        Topic topic = session.get(Topic.class, topicid);
-        return topic;
+        return session.get(Topic.class, topicid);
     }
     @Override
     public void updateTopic(Topic topic) {

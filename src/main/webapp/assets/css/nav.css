@@ -12,7 +12,7 @@ body{
    min-height: 100vh;
 }
 .bgc{
-    background-color: rgba(62, 69, 122, 100);
+    background-color: #aa1818;
 }
 header{
     /*position: fixed;*/

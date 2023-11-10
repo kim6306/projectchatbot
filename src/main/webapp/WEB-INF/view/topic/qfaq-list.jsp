@@ -24,7 +24,7 @@
         <tbody>
         <c:forEach var="qfaqs" items="${qfaq}">
           <tr>
-            <td class="C1"><p>${qfaq.qfaqtext}</p></td>
+            <td class="C1"><p>${qfaqs.qfaq_name}</p></td>
             <td><button type="submit" name="qfaq" value="${qfaqs.qfaq_id}" class="add-button">เพิ่ม</button></td>
           </tr>
         </c:forEach>
