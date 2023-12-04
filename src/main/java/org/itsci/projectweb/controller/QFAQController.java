@@ -1,9 +1,6 @@
 package org.itsci.projectweb.controller;
 
-import org.itsci.projectweb.model.AFAQ;
-import org.itsci.projectweb.model.QFAQ;
-import org.itsci.projectweb.model.QfaqAfaqDTO;
-import org.itsci.projectweb.model.Topic;
+import org.itsci.projectweb.model.*;
 import org.itsci.projectweb.service.AFAQService;
 import org.itsci.projectweb.service.QFAQService;
 import org.itsci.projectweb.service.TopicService;
@@ -19,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/qfaq")
@@ -44,12 +42,24 @@ public class QFAQController {
         model.addAttribute("topics",topicService.getTopics());
         return "qfaq/qfaq-form";
     }
+
+    @GetMapping("/create/{topicName}")
+    public String showFormForAddWithTopic(Model model, @PathVariable("topicName") String topicName) {
+        model.addAttribute("title", "เพิ่ม" + title);
+        model.addAttribute("qfaqafaq" ,new QfaqAfaqDTO());
+        model.addAttribute("topics",topicService.getTopics());
+        System.out.println(topicName);
+        return "qfaq/qfaq-form";
+    }
+
     @GetMapping("/{id}/update")
     public String showFormForUpdate(@PathVariable("id") int id, Model model) {
         QFAQ qfaq = qfaqService.getQFAQ(id);
+        List<Topic> topics = topicService.getTopics();
         model.addAttribute("title", "แก้ไข" + title);
         model.addAttribute("qfaq", qfaq );
-        model.addAttribute("alertDuplicate", null);
+        model.addAttribute("topics",topics);
+//        model.addAttribute("ShowAlert1", null);
         return "qfaq/qfaq-form-update";
     }
     @GetMapping(path = "/save")
@@ -114,33 +124,38 @@ public class QFAQController {
         qfaqService.removeQFAQFromAFAQ(qfaqId,afaqId);
         return "redirect:/qfaq/" + qfaqId + "/view-afaqs";
     }
-    @RequestMapping(path = "/saveupdate", method = RequestMethod.POST)
-    public String processForm(@Valid @ModelAttribute("qfaq") QFAQ qfaq, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("title", "มีข้อผิดพลาดในการบันทึก" + title);
-            return "qfaq/qfaq-form";
-        } else {
+    @RequestMapping(path = "/{q_id}/saveupdate")
+    public String processForm(@RequestParam Map<String, String> allReqParams, @PathVariable int q_id, Model model) {
 
-            QFAQ entityQfaq = qfaqService.getQFAQ(qfaq.getQfaq_id());
+        QFAQ qfaq = qfaqService.getQFAQ(q_id);
+        if (qfaq != null){
 
-            //Check new afaq is left on old db
-            List<QFAQ> remainQFAQ = qfaqService.getQFAQsByCheckWords(qfaq.getQfaq_name());
-            if (remainQFAQ.size() > 0) {
-                remainQFAQ.removeIf(qfaq1 -> qfaq1.getQfaq_id() == qfaq.getQfaq_id());
+            qfaq.setQfaq_name(allReqParams.get("qfaqtext"));
+            System.out.println("QFAQ : " + allReqParams.get("qfaqtext"));
+            String topic_id = allReqParams.get("topic_id");
+            Topic topic = topicService.getTopic(Integer.parseInt(topic_id));
+            if (topic != null){
+                qfaq.setTopic(topic);
+                List<QFAQ> remainQFAQ = qfaqService.getQFAQsByCheckWords(qfaq.getQfaq_name());
+                if (remainQFAQ.size() > 0) {
+                    remainQFAQ.removeIf(qfaq1 -> qfaq1.getQfaq_id() == qfaq.getQfaq_id());
+                }
+
+                System.out.println("REM SIZE : " + remainQFAQ.size());
+                if (remainQFAQ.size() == 0) {
+                    model.addAttribute("ShowAlert3",true);
+                    qfaqService.updateQFAQ2(qfaq);
+                    return "redirect:/update";
+                }
+                else {
+                    model.addAttribute("ShowAlert3",true);
+                    model.addAttribute("ShowAlert2",true);
+                    model.addAttribute("qfaq", qfaq );
+                    System.out.println("OLD QFAQ : " + qfaq.getQfaq_name());
+                    return "redirect:/qfaq/" + qfaq.getQfaq_id() + "/update";
+                }
             }
-
-            System.out.println("REM SIZE : " + remainQFAQ.size());
-
-            if (remainQFAQ.size() == 0) {
-                qfaqService.updateQFAQ(entityQfaq, qfaq);
-                return "redirect:/qfaq/list";
-            } else {
-                model.addAttribute("ShowAlert", true);
-                model.addAttribute("qfaq", qfaq );
-                System.out.println("OLD QFAQ : " + qfaq.getQfaq_name());
-                return "redirect:/qfaq/" + qfaq.getQfaq_id() + "/update";
-            }
-
         }
+        return "redirect:/update";
     }
 }

@@ -29,6 +29,12 @@ public class AFAQDaoImpl implements AFAQDao{
     }
 
     @Override
+    public void updateAFAQ(AFAQ afaq) {
+        Session session = sessionFactory.getCurrentSession();
+        session.update(afaq);
+    }
+
+    @Override
     public AFAQ getAFAQ(int afaqid) {
         Session session = sessionFactory.getCurrentSession();
         AFAQ afaq = session.get(AFAQ.class, afaqid);

@@ -9,6 +9,7 @@ public interface AFAQDao {
     List<AFAQ> getAFAQs();
 
     void saveAFAQ(AFAQ afaq);
+    void updateAFAQ(AFAQ afaq);
 
     AFAQ getAFAQ(int id);
 

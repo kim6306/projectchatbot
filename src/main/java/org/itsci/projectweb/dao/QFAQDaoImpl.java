@@ -31,6 +31,12 @@ public class QFAQDaoImpl implements QFAQDao{
     }
 
     @Override
+    public void updateQFAQ(QFAQ qfaq) {
+        Session session = sessionFactory.getCurrentSession();
+        session.update(qfaq);
+    }
+
+    @Override
     public QFAQ getQFAQ(int qfaqid) {
         Session session = sessionFactory.getCurrentSession();
         QFAQ qfaq = session.get(QFAQ.class, qfaqid);

@@ -24,4 +24,6 @@ public interface QFAQService {
 
     void saveqfaqwithafaq(String qfaqtext,String afaqtext,int topicid);
     List<QFAQ> getQFAQsByCheckWords(String words);
+    void updateQFAQ2( QFAQ qfaq);
+
 }

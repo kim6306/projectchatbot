@@ -131,4 +131,10 @@ public class QFAQServiceImpl implements QFAQService {
         return qfaqDao.CheckWords(words);
     }
 
+    @Override
+    @Transactional
+    public void updateQFAQ2(QFAQ qfaq) {
+        qfaqDao.updateQFAQ(qfaq);
+    }
+
 }

@@ -18,7 +18,7 @@ public class QFAQ {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String qfaq_name;
 
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne(cascade=CascadeType.MERGE)
     private Topic topic;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
@@ -68,6 +68,7 @@ public class QFAQ {
     }
 
     public void fill (QFAQ qfaq) {
+        this.topic = qfaq.getTopic();
         this.qfaq_name = qfaq.getQfaq_name();
     }
 }

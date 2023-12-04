@@ -8,6 +8,8 @@ import java.util.List;
 public interface QFAQDao {
     List<QFAQ> getQFAQs();
     void saveQFAQ(QFAQ qfaq);
+
+    void updateQFAQ(QFAQ qfaq);
     QFAQ getQFAQ(int id);
     void deleteQFAQ(int id);
     List<QFAQ> getQFAQByTopicId (int id);

@@ -40,6 +40,14 @@ public class TopicDaoImpl implements TopicDao  {
     }
 
     @Override
+    public Topic getTopicByTopicName(String topicName) {
+        Session session = sessionFactory.getCurrentSession();
+        Query<Topic> query = session.createQuery("FROM Topic t WHERE t.topic_name =: tN", Topic.class);
+        query.setParameter("tN", topicName);
+        return query.getSingleResult();
+    }
+
+    @Override
     public List<Topic> getTopicsByWords(String words) {
         Session session = sessionFactory.getCurrentSession();
         Query<Topic> query = session.createQuery("FROM Topic t WHERE t.topic_name LIKE :tpt", Topic.class);

@@ -24,6 +24,7 @@
         <i>กรอกข้อมูลในฟอร์ม. เครื่องหมายดอกจัน(*) หมายถึงห้ามว่าง</i><br><br>
         <form:form action="${pageContext.request.contextPath}/topic/${topic_detail.topic_id}/save" name="formRegister" method="POST" onsubmit="return validateForm()">
             <div class="txt_field">
+                เลือกหมวดหมู่:
                 <select name="category_id" id="category_id">
                     <c:forEach items="${category_detail}" var="category">
                         <option value="${category.category_id}">${category.category_name}</option>
@@ -31,7 +32,7 @@
                 </select>
             </div>
             <div class="txt_field">
-                หัวข้อ:**<input type="text" id="topictext" name="topictext" value="${topic_detail.topic_name}">
+                ระบุหมวดหมู่หัวข้อคำถาม(FAQ):**<input type="text" id="topictext" name="topictext" value="${topic_detail.topic_name}">
                 <c:if test="${ShowAlert==true}">
                     <p>มีหัวข้อนี้อยู่ในระบบแล้ว</p>
                 </c:if>
@@ -42,7 +43,6 @@
             </div>
             <div class="btn">
                 <input type="button" value="ยกเลิก" onclick="window.location.href='${pageContext.request.contextPath}/topic/list'; return false;" class="cancel-button"/>
-                <input type="button" value="เชื่อมคำถาม" onclick="window.location.href='${pageContext.request.contextPath}/topic/${topic_detail.topic_id}/view-qfaqs'; return false;"/>
             </div>
         </form:form>
     </div>

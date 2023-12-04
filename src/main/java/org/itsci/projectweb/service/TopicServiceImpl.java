@@ -81,6 +81,12 @@ public class TopicServiceImpl implements TopicService{
 
     @Override
     @Transactional
+    public Topic getTopicByTopicName(String topicName) {
+        return topicDao.getTopicByTopicName(topicName);
+    }
+
+    @Override
+    @Transactional
     public void removeQFAQFromTopic(int topicId, int qfaqId) {
         QFAQ qfaq = qfaqDao.getQFAQ(qfaqId);
         Topic topic = topicDao.getTopic(topicId);

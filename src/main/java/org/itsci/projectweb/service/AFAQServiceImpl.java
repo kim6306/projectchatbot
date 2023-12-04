@@ -77,4 +77,9 @@ public class AFAQServiceImpl implements AFAQService {
         return afaqDao.CheckWords(words);
     }
 
+    @Override
+    public void updateAFAQ2(AFAQ afaq) {
+        afaqDao.updateAFAQ(afaq);
+    }
+
 }

@@ -15,6 +15,7 @@ public interface TopicDao {
     List<Category> getCategory();
     Category getCategoryById(String cgId);
     public void updateTopic(Topic topic);
+    Topic getTopicByTopicName (String topicName);
     List<Topic> getTopicsByWords (String words);
 
     List<Topic> CheckWords (String words);

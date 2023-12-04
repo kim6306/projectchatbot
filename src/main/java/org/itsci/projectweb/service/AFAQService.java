@@ -1,6 +1,7 @@
 package org.itsci.projectweb.service;
 
 import org.itsci.projectweb.model.AFAQ;
+import org.itsci.projectweb.model.QFAQ;
 
 import java.util.List;
 
@@ -15,4 +16,5 @@ public interface AFAQService {
 
     void saveafaqwithqfaq(String afaqtext,int qfaqid);
     List<AFAQ> getAFAQsByCheckWords(String words);
+    void updateAFAQ2( AFAQ afaq);
 }

@@ -23,6 +23,20 @@
                 return false;
             }
         }
+
+        function sayhello () {
+            let dropdown = document.getElementById("topic_id");
+            let value = dropdown.value;
+            let text = dropdown.options[dropdown.selectedIndex].text;
+            console.log('VALUE IS ' + text);
+            fetch('http://localhost:8080/project_war_exploded/rest/test/' + text).then(response => (response.text().then(
+                text => {
+                    console.log(text);
+                    document.getElementById("questionId").textContent=text;
+                    document.getElementById("answerId").textContent=text;
+                }
+            )));
+        }
     </script>
 </head>
     <body>
@@ -36,7 +50,7 @@
     </div>
         <div class="txt_field">
             <form:form action="${pageContext.request.contextPath}/qfaq/save" modelAttribute="qfaqafaq"  method="GET" name="formRegister" onsubmit="return validateForm()">
-            เลือกหมวดหมู่หัวข้อคำถาม(FAQ):<form:select name="topic_id" id="topic_id" path="topicid">
+            เลือกหมวดหมู่หัวข้อคำถาม(FAQ):<form:select name="topic_id" id="topic_id" path="topicid" onchange="sayhello()">
                 <c:forEach items="${topics}" var="topic">
                     <option value="${topic.topic_id}">${topic.topic_name}</option>
                 </c:forEach>
@@ -44,14 +58,14 @@
         </div>
 
         <div class="txt_field">
-            ระบุคำถาม(Question)** : <form:input path="qfaqtext" name="qfaqtext"/>
+            ระบุคำถาม(Question)** : <p id="questionId"></p><form:input path="qfaqtext" name="qfaqtext"/>
             <c:if test="${ShowAlert1==true}">
                 <p>มีคำถามนี้อยู่ในระบบแล้ว</p>
             </c:if>
         </div>
 
         <div class="txt_field">
-            ระบุคำตอบ(Answer)** : <form:input path="afaqtext" name="afaqtext"/>
+            ระบุคำตอบ(Answer)** : <p id="answerId"></p><form:input path="afaqtext" name="afaqtext"/>
             <c:if test="${ShowAlert2==true}">
                 <p>มีคำตอบนี้อยู่ในระบบแล้ว</p>
             </c:if>

@@ -51,6 +51,13 @@
         </div>
     </div>
 </div>
+<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+<df-messenger
+        intent="WELCOME"
+        chat-title="TestChat-Bot"
+        agent-id="a659532c-c980-4617-b53a-4f0b8642bafb"
+        language-code="th"
+></df-messenger>
 <script>
     var acc = document.getElementsByClassName("accordion");
     var i;

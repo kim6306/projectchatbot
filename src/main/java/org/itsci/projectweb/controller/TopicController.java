@@ -60,9 +60,7 @@ public class TopicController {
     @PostMapping(path = "/{t_id}/save")
     public String saveEditProfile(@RequestParam Map<String, String> allReqParams, @PathVariable int t_id,Model model) throws ParseException {
         Topic topic = topicService.getTopic(t_id);
-        String topsics = topic.getTopic_name();
         if (topic != null) {
-
             topic.setTopic_name(allReqParams.get("topictext"));
             System.out.println("TOPICCCC : " + allReqParams.get("topictext"));
             String categoryId = allReqParams.get("category_id");

@@ -110,5 +110,18 @@ select{
     width: 200px;
     font-size: 16px;
 }
+.addq-button {
+    background-color: #0328ef;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 500px;
+}
+
+.addq-button:hover {
+    background-color: #3c56e3;
+}
 
 
