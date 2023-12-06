@@ -39,19 +39,19 @@ header .navber ul li{
 header .navber ul li a{
     font-size: 20px;
     padding: 20px;
-    color: black;
+    color: white;
     display: block;
     cursor: pointer;
 }
 header .navber ul li a:hover{
-    background: #4d5154;
+
     color: #ffc107;
 }
 header .navber ul li ul{
     position: absolute;
     left: 0;
     width: 145px;
-    background: white;
+    background: #aa1818;
     display: none;
 }
 header .navber ul li ul li{

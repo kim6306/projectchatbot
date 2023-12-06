@@ -58,14 +58,14 @@
         </div>
 
         <div class="txt_field">
-            ระบุคำถาม(Question)** : <p id="questionId"></p><form:input path="qfaqtext" name="qfaqtext"/>
+            ระบุคำถาม(Question)** : <h5 id="questionId"></h5><form:input path="qfaqtext" name="qfaqtext"/>
             <c:if test="${ShowAlert1==true}">
                 <p>มีคำถามนี้อยู่ในระบบแล้ว</p>
             </c:if>
         </div>
 
         <div class="txt_field">
-            ระบุคำตอบ(Answer)** : <p id="answerId"></p><form:input path="afaqtext" name="afaqtext"/>
+            ระบุคำตอบ(Answer)** : <h5 id="answerId"></h5><form:input path="afaqtext" name="afaqtext"/>
             <c:if test="${ShowAlert2==true}">
                 <p>มีคำตอบนี้อยู่ในระบบแล้ว</p>
             </c:if>

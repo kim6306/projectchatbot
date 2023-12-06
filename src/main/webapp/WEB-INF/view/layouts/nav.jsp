@@ -13,7 +13,7 @@
     <body>
     <header>
         <a href="${pageContext.request.contextPath}">
-            <img src="${pageContext.request.contextPath}/assets/img/logo.png" class="logo" width="250px"></a>
+            <img src="${pageContext.request.contextPath}/assets/img/LogoITSCI.png" class="logo" width="250px"></a>
         <div class="navber">
             <ul>
                 <li><a href="${pageContext.request.contextPath}">หน้าแรก</a></li>

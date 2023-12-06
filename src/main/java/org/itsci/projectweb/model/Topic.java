@@ -22,8 +22,7 @@ public class Topic {
     @OneToMany(fetch = FetchType.EAGER, mappedBy="topic", cascade = CascadeType.ALL)
     private List<QFAQ> qfaqs = new ArrayList<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="category_id")
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Category category;
 
     public Topic() {

@@ -68,7 +68,12 @@ public class TopicController {
             if (cate_gory != null) {
                 System.out.println("FLAG 2");
                 topic.setCategory(cate_gory);
-                if (topicService.getTopicsByCheckWords(allReqParams.get("topictext")).size()<=0){
+                List<Topic> remainTopic =topicService.getTopicsByCheckWords(topic.getTopic_name());
+                if( remainTopic.size() > 0){
+                    remainTopic.removeIf(topic1 -> topic1.getTopic_id() == topic.getTopic_id());
+                }
+                System.out.println("REM SIZE : " + remainTopic.size());
+                if (remainTopic.size() ==0){
                     System.out.println("FLAG 1");
                     topicService.updateTopic(topic);
                 }else{

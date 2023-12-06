@@ -19,7 +19,7 @@
 
             <a href="https://www.facebook.com/IT.Major.MJU"> <img src="${pageContext.request.contextPath}/assets/img/facebook.png" width="30px"></a>
             <a href="https://www.youtube.com/c/itsciMaejoUniversity"> <img src="${pageContext.request.contextPath}/assets/img/youtube.png" width="30px"></a>
-            <a> <img src="${pageContext.request.contextPath}/assets/img/IG.png" width="30px"></a>
+            <a> <img src="${pageContext.request.contextPath}/assets/img/instagram.png" width="30px"></a>
 
     <p >Information Technology Division, Faculty of Science, Maejo University ©</p>
 </footer>

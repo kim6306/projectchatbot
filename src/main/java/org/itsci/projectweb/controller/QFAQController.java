@@ -143,7 +143,7 @@ public class QFAQController {
 
                 System.out.println("REM SIZE : " + remainQFAQ.size());
                 if (remainQFAQ.size() == 0) {
-                    model.addAttribute("ShowAlert3",true);
+
                     qfaqService.updateQFAQ2(qfaq);
                     return "redirect:/update";
                 }
