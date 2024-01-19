@@ -96,6 +96,7 @@ input[type="button"]:hover{
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
+    margin-top: 100px;
 }
 .width h1{
     text-align: center;

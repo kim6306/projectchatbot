@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="${pageContext.request.contextPath}/assets/css/style2.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/css/style4.css" rel="stylesheet" />
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <script>
         function validateForm() {
@@ -23,12 +23,9 @@
 </nav>
 <div class="width">
     <div id="container">
-        <div class="cta-form">
-            <i>กรอกข้อมูลในฟอร์ม. เครื่องหมายดอกจัน(*) หมายถึงห้ามว่าง</i>
-        </div>
         <form:form action="${pageContext.request.contextPath}/topic/save" method="POST" name="formRegister" onsubmit="return validateForm()">
             <div class="txt_field">
-                เลือกหมวดหมู่:
+                เลือกหมวดหมู่:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <select name="category_id" id="category_id">
                     <c:forEach items="${categorys}" var="category">
                         <option value="${category.category_id}">${category.category_name}</option>
@@ -36,14 +33,14 @@
                 </select>
             </div>
             <div class="txt_field">
-                ระบุหมวดหมู่หัวข้อคำถาม(FAQ):**<input type="text" id="topictext" name="topictext">
+                ระบุหมวดหมู่หัวข้อคำถาม(FAQ):<input type="text" id="topictext" name="topictext">
                 <c:if test="${ShowAlert==true}">
                     <p>มีหัวข้อนี้อยู่ในระบบแล้ว</p>
                 </c:if>
             </div>
             <div class="btn">
                 <input type="submit" value="บันทึก" class="save" />
-                <input type="button" value="ยกเลิก" onclick="window.location.href='${pageContext.request.contextPath}/topic/list'; return false;" class="cancel-button" />
+                <input type="button" value="ยกเลิก" onclick="window.location.href='${pageContext.request.contextPath}/update'; return false;" class="cancel-button" />
             </div>
         </form:form>
     </div>

@@ -4,7 +4,7 @@
 <!DOCTYPE>
 <html>
     <head>
-        <link href="${pageContext.request.contextPath}/assets/css/style2.css" rel="stylesheet"></link>
+        <link href="${pageContext.request.contextPath}/assets/css/style4.css" rel="stylesheet"></link>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
         <script>
             function validateForm() {
@@ -42,7 +42,7 @@
                             </c:if>
                         </div>
                         <input type="submit" value="บันทึก" class="save"/>
-                        <input type="button" value="ยกเลิก" onclick="window.location.href='${pageContext.request.contextPath}/afaq/list'; return false;" class="cancel-button"/>
+                        <input type="button" value="ยกเลิก" onclick="window.location.href='${pageContext.request.contextPath}/update'; return false;" class="cancel-button"/>
                     </form:form>
             </div>
         </div>

@@ -22,26 +22,26 @@
                     </li>
                 </security:authorize>
                 <security:authorize access="hasRole('ADMIN')">
-                    <li><a href="${pageContext.request.contextPath}/topic/create">เพิ่มหัวข้อ<i class="fas fa-caret-down"></i></a>
+                    <li><a href="${pageContext.request.contextPath}/topic/create">เพิ่มกลุ่มคำถามFAQ<i class="fas fa-caret-down"></i></a>
                         <ul>
                             <li><a href="${pageContext.request.contextPath}/topic/list">แก้ไขหัวข้อ</a></li>
                         </ul>
                     </li>
                 </security:authorize>
-                <security:authorize access="hasRole('ADMIN')">
-                    <li><a href="${pageContext.request.contextPath}/qfaq/create">เพิ่มคำถาม<i class="fas fa-caret-down"></i></a>
-                        <ul class="submenu">
-                            <li><a href="${pageContext.request.contextPath}/qfaq/list">แก้ไขคำถาม</a></li>
-                        </ul>
-                    </li>
-                </security:authorize>
-                <security:authorize access="hasRole('ADMIN')">
-                    <li><a href="${pageContext.request.contextPath}/afaq/create">เพิ่มคำตอบ<i class="fas fa-caret-down"></i></a>
-                        <ul class="submenu">
-                            <li><a href="${pageContext.request.contextPath}/afaq/list">แก้ไขคำตอบ</a></li>
-                        </ul>
-                    </li>
-                </security:authorize>
+<%--                <security:authorize access="hasRole('ADMIN')">--%>
+<%--                    <li><a href="${pageContext.request.contextPath}/qfaq/create">เพิ่มคำถาม<i class="fas fa-caret-down"></i></a>--%>
+<%--                        <ul class="submenu">--%>
+<%--                            <li><a href="${pageContext.request.contextPath}/qfaq/list">แก้ไขคำถาม</a></li>--%>
+<%--                        </ul>--%>
+<%--                    </li>--%>
+<%--                </security:authorize>--%>
+<%--                <security:authorize access="hasRole('ADMIN')">--%>
+<%--                    <li><a href="${pageContext.request.contextPath}/afaq/create">เพิ่มคำตอบ<i class="fas fa-caret-down"></i></a>--%>
+<%--                        <ul class="submenu">--%>
+<%--                            <li><a href="${pageContext.request.contextPath}/afaq/list">แก้ไขคำตอบ</a></li>--%>
+<%--                        </ul>--%>
+<%--                    </li>--%>
+<%--                </security:authorize>--%>
                 <security:authorize access="!isAuthenticated()">
                     <li><a href="${pageContext.request.contextPath}/login">เข้าสู่ระบบ
                         <img src="${pageContext.request.contextPath}/assets/img/login.png" width="20px"></a></li>

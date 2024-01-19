@@ -19,7 +19,7 @@
 </div>
 <div>
     <form:form action="${pageContext.request.contextPath}/searchFAQ" method="POST" name="search">
-        <input type="text" id="searchInput" style="width: 43%;" placeholder="Search Topic" name="se">
+        <input type="text" id="searchInput" style="width: 43%;" placeholder="ค้นหาหัวข้อ" name="se">
         <input type="submit" class="add-button">
     </form:form>
 </div>
@@ -38,8 +38,8 @@
                             <c:forEach var="afaq" items="${qfaq.afaqs}">
                                 <div class="panel">
                                     <div class="topma">
-                                        <p>Q ${i}.${j} : ${qfaq.qfaq_name}</p>
-                                        <p>A ${i}.${j} : ${afaq.afaq_name}</p>
+                                        <p>Q ${i}.${j}: ${qfaq.qfaq_name}</p>
+                                        <p>A ${i}.${j}: ${afaq.afaq_name}</p>
                                     </div>
                                 </div>
                             </c:forEach>
@@ -54,7 +54,7 @@
 <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
 <df-messenger
         intent="WELCOME"
-        chat-title="TestChat-Bot"
+        chat-title="Chat-Bot_IT-MJU"
         agent-id="a659532c-c980-4617-b53a-4f0b8642bafb"
         language-code="th"
 ></df-messenger>

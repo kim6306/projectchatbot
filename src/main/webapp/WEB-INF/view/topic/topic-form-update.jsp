@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="${pageContext.request.contextPath}/assets/css/style2.css" rel="stylesheet"></link>
+    <link href="${pageContext.request.contextPath}/assets/css/style4.css" rel="stylesheet"></link>
     <script>
         function validateForm() {
             var x = document.forms["formRegister"]["topictext"].value;
@@ -21,10 +21,9 @@
 </nav>
 <div class="width">
     <div id="container">
-        <i>กรอกข้อมูลในฟอร์ม. เครื่องหมายดอกจัน(*) หมายถึงห้ามว่าง</i><br><br>
         <form:form action="${pageContext.request.contextPath}/topic/${topic_detail.topic_id}/save" name="formRegister" method="POST" onsubmit="return validateForm()">
             <div class="txt_field">
-                เลือกหมวดหมู่:
+                เลือกหมวดหมู่:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <select name="category_id" id="category_id">
                     <c:forEach items="${category_detail}" var="category">
                         <option value="${category.category_id}">${category.category_name}</option>
@@ -32,7 +31,7 @@
                 </select>
             </div>
             <div class="txt_field">
-                ระบุหมวดหมู่หัวข้อคำถาม(FAQ):**<input type="text" id="topictext" name="topictext" value="${topic_detail.topic_name}">
+                ระบุหมวดหมู่หัวข้อคำถาม(FAQ):<input type="text" id="topictext" name="topictext" value="${topic_detail.topic_name}">
                 <c:if test="${ShowAlert==true}">
                     <p>มีหัวข้อนี้อยู่ในระบบแล้ว</p>
                 </c:if>
@@ -42,7 +41,7 @@
                 <input type="button" value="ลบ" onclick="if((confirm('คุณแน่ใจหรือว่าต้องการลบหัวข้อนี้?'))) { window.location.href='${pageContext.request.contextPath}/topic/${topic_detail.topic_id}/delete'; return false; }" class="cancel-button"/>
             </div>
             <div class="btn">
-                <input type="button" value="ยกเลิก" onclick="window.location.href='${pageContext.request.contextPath}/topic/list'; return false;" class="cancel-button"/>
+                <input type="button" value="ยกเลิก" onclick="window.location.href='${pageContext.request.contextPath}/update'; return false;" class="cancel-button"/>
             </div>
         </form:form>
     </div>

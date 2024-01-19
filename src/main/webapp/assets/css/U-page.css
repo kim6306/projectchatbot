@@ -41,7 +41,6 @@ th {
 /* ??????????? */
 table.table {
     border: 1px solid #ccc;
-    margin-top: 50px;
     font-family: 'Kanit', sans-serif;
 }
 tr:nth-child(even) {
@@ -83,17 +82,18 @@ img {
     vertical-align: middle;
 }
 .add-button {
-    background-color: #c50e0e;
+    background-color: #0328ef;
     color: #fff;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
     margin-left: 1000px;
+    margin-top: 20px;
 }
 
 .add-button:hover {
-    background-color: #ff0000;
+    background-color: #3c56e3;
 }
 th a{
     text-decoration: none;
@@ -123,5 +123,22 @@ select{
 .addq-button:hover {
     background-color: #3c56e3;
 }
+.odd-row{
+    background-color: wheat; /* Light gray */
+}
 
+.even-row {
+    background-color: #ffffff; /* White */
+}
+/*.table-striped tbody tr:nth-child(odd) {*/
+/*    background-color: wheat; !* Light gray color for odd rows *!*/
+/*}*/
+/*.table-striped tbody tr:nth-child(even) {*/
+/*    background-color: #ffffff; !* White color for even rows *!*/
+/*}*/
+.underline{
+    border-bottom: 2px solid black;
+
+    bottom: 0;
+}
 

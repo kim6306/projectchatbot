@@ -19,13 +19,13 @@
                 int i = 0;
                 int j = 0;
             %>
-            <input type="button" value="เพิ่มหัวข้อ" onclick="window.location.href='${pageContext.request.contextPath}/topic/create'; return false;" class="add-button"/>
             <c:forEach var="topic" items="${topics}">
+                <input type="button" value="เพิ่มคำถามและคำตอบ" onclick="window.location.href='${pageContext.request.contextPath}/qfaq/create'; return false;" class="add-button"/>
                 <%i++;%>
                 <table class="table table-striped table-bordered table-hover">
                     <thead>
                     <tr>
-                        <th>กลุ่มคำถามที่ <%=i%> <a href="${pageContext.request.contextPath}/topic/${topic.topic_id}/update">${topic.topic_name}</a> </th>
+                        <th>กลุ่มคำถาม FAQ ที่ <%=i%> ${topic.topic_name}</th>
                         <th>แก้ไข</th>
                         <th>ลบ <a class="delete-button" onclick="if((confirm('คุณแน่ใจหรือว่าต้องการลบหัวข้อนี้?')))
                                 { window.location.href='${pageContext.request.contextPath}/topic/${topic.topic_id}/delete';
@@ -34,8 +34,8 @@
                     </thead>
                     <c:forEach  var="qfaq" items="${topic.qfaqs}">
                         <%j++;%>
-                        <tbody>
-                        <tr>
+                        <tbody >
+                        <tr >
                             <td class="C1"> Q<%=i%>.<%=j%> ${qfaq.qfaq_name}</td>
                             <td class="C1"><a href="${pageContext.request.contextPath}/qfaq/${qfaq.qfaq_id}/update">
                                 <img src="${pageContext.request.contextPath}/assets/img/pencil.png" width="30px"></a></td>
@@ -47,9 +47,10 @@
 
                         <c:forEach  var="afaq" items="${qfaq.afaqs}">
                             <tbody>
-                            <tr>
+                            <tr class="underline">
                                 <td class="C1" > A<%=i%>.<%=j%> ${afaq.afaq_name}</td>
-                                <td class="C1" ></td>
+                                <td class="C1" ><a href="${pageContext.request.contextPath}/afaq/${afaq.afaq_id}/update">
+                                    <img src="${pageContext.request.contextPath}/assets/img/pencil.png" width="30px"></a></td>
                                 <td class="C1" ></td>
                             </tr>
                             </tbody>
@@ -57,13 +58,6 @@
                         </c:forEach>
                     </c:forEach>
                     <%j = 0;%>
-                    <tbody>
-                    <tr>
-                        <td class="C1" ><input type="button" value="เพิ่มคำถามและคำตอบ" onclick="window.location.href='${pageContext.request.contextPath}/qfaq/create'; return false;" class="addq-button"/></td>
-                        <td class="C1" ></td>
-                        <td class="C1" ></td>
-                    </tr>
-                    </tbody>
                 </table>
             </c:forEach >
         </div>

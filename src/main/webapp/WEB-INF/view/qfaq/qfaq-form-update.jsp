@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="${pageContext.request.contextPath}/assets/css/style2.css" rel="stylesheet"></link>
+    <link href="${pageContext.request.contextPath}/assets/css/style4.css" rel="stylesheet"></link>
     <script>
         function validateForm() {
             var x = document.forms["formRegister"]["qfaqtext"].value;
@@ -22,11 +22,9 @@
 
 <div class="width">
     <div id="container">
-        <i>กรอกข้อมูลในฟอร์ม. เครื่องหมายดอกจัน(*) หมายถึงห้ามว่าง</i><br/><br>
-
         <form:form action="${pageContext.request.contextPath}/qfaq/${qfaq.qfaq_id}/saveupdate" name="formRegister" method="POST" onsubmit="return validateForm()">
             <div class="txt_field">
-                เลือกหมวดหมู่หัวข้อคำถาม(FAQ):
+                เลือกหมวดหมู่หัวข้อคำถาม(FAQ):&nbsp;&nbsp;&nbsp;
                 <select name="topic_id" id="topic_id">
                     <c:forEach items="${topics}" var="topic">
                         <option value="${topic.topic_id}">${topic.topic_name}</option>
@@ -35,7 +33,7 @@
             </div>
 
             <div class="txt_field">
-                <p class="ct">คำถาม:**<input type="text" id="qfaqtext" name="qfaqtext" value="${qfaq.qfaq_name}"></p>
+                ระบุคำถาม(Question): <input type="text" id="qfaqtext" name="qfaqtext" value="${qfaq.qfaq_name}">
                 <c:if test="${ShowAlert3==true}">
                     <p>มีคำถามนี้อยู่ในระบบแล้ว</p>
                 </c:if>
@@ -49,7 +47,7 @@
             </div>
 
             <div class="btn">
-                <input type="button" value="ยกเลิก" onclick="window.location.href='${pageContext.request.contextPath}/qfaq/list';
+                <input type="button" value="ยกเลิก" onclick="window.location.href='${pageContext.request.contextPath}/update';
                         return false;" class="cancel-button"/>
                 <input type="button" value="เชื่อมคำตอบ" onclick="window.location.href='${pageContext.request.contextPath}/qfaq/${qfaq.qfaq_id}/view-afaqs';
                         return false;"/>
@@ -57,5 +55,6 @@
         </form:form>
     </div>
 </div>
+<jsp:include page="/WEB-INF/view/layouts/footer.jsp" />
 </body>
 </html>

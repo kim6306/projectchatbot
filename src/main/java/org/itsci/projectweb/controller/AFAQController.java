@@ -69,7 +69,7 @@ public class AFAQController {
 
             if (remainAFAQ.size() == 0) {
                 afaqService.updateAFAQ(entityAfaq,afaq);
-                return "redirect:/afaq/list";
+                return "redirect:/update";
             } else {
                 model.addAttribute("ShowAlert", true);
                 model.addAttribute("afaq", afaq );

@@ -4,7 +4,7 @@
 <!DOCTYPE>
 <html>
 <head>
-    <link href="${pageContext.request.contextPath}/assets/css/style2.css" rel="stylesheet"></link>
+    <link href="${pageContext.request.contextPath}/assets/css/style4.css" rel="stylesheet"></link>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <script>
         function validateForm() {
@@ -45,12 +45,9 @@
         </nav>
         <div class="width">
 <div id="container">
-    <div class="cta-form">
-    <i>กรอกข้อมูลในฟอร์ม. เครื่องหมายดอกจัน(*) หมายถึงห้ามว่าง</i>
-    </div>
         <div class="txt_field">
             <form:form action="${pageContext.request.contextPath}/qfaq/save" modelAttribute="qfaqafaq"  method="GET" name="formRegister" onsubmit="return validateForm()">
-            เลือกหมวดหมู่หัวข้อคำถาม(FAQ):<form:select name="topic_id" id="topic_id" path="topicid" onchange="sayhello()">
+            เลือกหมวดหมู่หัวข้อคำถาม(FAQ):&nbsp;&nbsp;&nbsp;&nbsp;<form:select name="topic_id" id="topic_id" path="topicid" onchange="sayhello()">
                 <c:forEach items="${topics}" var="topic">
                     <option value="${topic.topic_id}">${topic.topic_name}</option>
                 </c:forEach>
@@ -58,20 +55,20 @@
         </div>
 
         <div class="txt_field">
-            ระบุคำถาม(Question)** : <h5 id="questionId"></h5><form:input path="qfaqtext" name="qfaqtext"/>
+            ระบุคำถาม(Question): <h4 id="questionId"></h4><form:input path="qfaqtext" name="qfaqtext"/>
             <c:if test="${ShowAlert1==true}">
                 <p>มีคำถามนี้อยู่ในระบบแล้ว</p>
             </c:if>
         </div>
 
         <div class="txt_field">
-            ระบุคำตอบ(Answer)** : <h5 id="answerId"></h5><form:input path="afaqtext" name="afaqtext"/>
+            ระบุคำตอบ(Answer): <h4 id="answerId"></h4><form:input path="afaqtext" name="afaqtext"/>
             <c:if test="${ShowAlert2==true}">
                 <p>มีคำตอบนี้อยู่ในระบบแล้ว</p>
             </c:if>
         </div>
         <input type="submit" value="บันทึก" class="save"/>
-        <input type="button" value="ยกเลิก" onclick="window.location.href='${pageContext.request.contextPath}/qfaq/list';
+        <input type="button" value="ยกเลิก" onclick="window.location.href='${pageContext.request.contextPath}/update';
         return false;" class="cancel-button"/>
 </form:form>
 </div>

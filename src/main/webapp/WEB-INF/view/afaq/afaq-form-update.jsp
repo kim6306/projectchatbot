@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="${pageContext.request.contextPath}/assets/css/style2.css" rel="stylesheet"></link>
+    <link href="${pageContext.request.contextPath}/assets/css/style5.css" rel="stylesheet"></link>
     <script>
         function validateForm() {
             var x = document.forms["formRegister"]["afaqtext"].value;
@@ -22,12 +22,11 @@
 
 <div class="width">
     <div id="container">
-        <i>กรอกข้อมูลในฟอร์ม. เครื่องหมายดอกจัน(*) หมายถึงห้ามว่าง</i><br/><br>
         <form:form action="${pageContext.request.contextPath}/afaq/saveupdate" modelAttribute="afaq" name="formRegister" method="POST" onsubmit="return validateForm()">
             <form:hidden path="afaq_id"/>
 
             <div class="txt_field">
-                <p class="ct">คำตอบ:**<form:input id="afaqtext" path="afaq_name"/></p>
+                ระบุคำตอบ(Answer): <form:input id="afaqtext" path="afaq_name"/>
                 <c:if test="${ShowAlert==true}">
                     <p>มีคำถามนี้อยู่ในระบบแล้ว</p>
                 </c:if>
@@ -41,7 +40,7 @@
             </div>
 
             <div>
-                <input type="button" value="ยกเลิก" onclick="window.location.href='${pageContext.request.contextPath}/afaq/list';
+                <input type="button" value="ยกเลิก" onclick="window.location.href='${pageContext.request.contextPath}/update';
                         return false;" class="cancel-button"/>
             </div>
         </form:form>
