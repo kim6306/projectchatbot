@@ -10,131 +10,71 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class QFAQServiceImpl implements QFAQService {
 
     @Autowired
-    private TopicDao topicDao;
+    private QFAQDao qfaqDao;
+
     @Autowired
     private AFAQDao afaqDao;
 
     @Autowired
-    private QFAQDao qfaqDao;
+    private TopicDao topicDao;
 
     @Override
     @Transactional
-    public List<QFAQ> getQFAQ() {
-        return qfaqDao.getQFAQs();
-    }
-
-    @Override
-    @Transactional
-    public void saveQFAQ(QFAQ qfaq) {
+    public void saveQFAQ(Map<String, String> map) {
+        int topicId = Integer.parseInt(map.get("topic_id"));
+        Topic topic = topicDao.getTopicById(topicId);
+        String qfaq_name = map.get("qfaqtext");
+        List<AFAQ> afaqs = new ArrayList<>();
+        AFAQ afaq = new AFAQ();
+        afaq.setAfaq_name(map.get("afaqtext"));
+        afaqs.add(afaq);
+        QFAQ qfaq = new QFAQ(0,qfaq_name,topic,afaqs);
+        afaq.setQfaq(qfaq);
         qfaqDao.saveQFAQ(qfaq);
-    }
-
-
-
-    @Override
-    @Transactional
-    public QFAQ getQFAQ(int qfaqId) {
-        return qfaqDao.getQFAQ(qfaqId);
     }
 
     @Override
     @Transactional
     public void deleteQFAQ(int qfaqId) {
-        QFAQ qfaq = qfaqDao.getQFAQ(qfaqId);
-        for(AFAQ afaq:qfaq.getAfaqs()){
-            if (afaq.getQfaqs().size()<=1){
-                afaqDao.deleteAFAQ(afaq.getAfaq_id());
-            }
+        QFAQ qfaq = qfaqDao.getQFAQById(qfaqId);
+        for (AFAQ afaq : qfaq.getAfaqs()) {
+            afaq.setQfaq(null);
+            afaqDao.updateAFAQ(afaq);
+            afaqDao.deleteAFAQ(afaq);
         }
-        qfaqDao.deleteQFAQ(qfaqId);
+        qfaq.setAfaqs(null);
+        Topic topic = topicDao.getTopicById(qfaq.getTopic().getTopic_id());
+        topic.getQfaqs().remove(qfaq);
+        topicDao.updateTopic(topic);
+        qfaq.setTopic(null);
+        qfaqDao.updateQFAQ(qfaq);
+        qfaqDao.deleteQFAQ(qfaq);
     }
 
     @Override
     @Transactional
-    public void updateQFAQ(QFAQ qfaqEntity, QFAQ qfaq) {
-        qfaqEntity.fill(qfaq);
-        qfaqDao.saveQFAQ(qfaqEntity);
+    public QFAQ getQFAQById(int qfaqId) {
+        return qfaqDao.getQFAQById(qfaqId);
     }
 
     @Override
     @Transactional
-    public void addQFAQToAFAQ(int qfaqId, int afaqId) {
-        QFAQ qfaq = qfaqDao.getQFAQ(qfaqId);
-        AFAQ afaq = afaqDao.getAFAQ(afaqId);
-        qfaq.getAfaqs().add(afaq);
-        qfaqDao.saveQFAQ(qfaq);
-    }
-
-    @Override
-    @Transactional
-    public void removeQFAQFromAFAQ(int qfaqId, int afaqId) {
-        QFAQ qfaq = qfaqDao.getQFAQ(qfaqId);
-        AFAQ afaq = afaqDao.getAFAQ(afaqId);
-        qfaq.getAfaqs().remove(afaq);
-        qfaqDao.saveQFAQ(qfaq);
-    }
-
-    @Override
-    public List<QFAQ> getQFAQByTopicId(int id) {
-        return null;
-    }
-
-    @Override
-    @Transactional
-    public List<QFAQ> getQFAQDoesNotHaveTopic(int id) {
-        return qfaqDao.getQFAQDoesNotHaveTopic(id);
-    }
-
-    @Override
-    @Transactional
-    public List<QFAQ> getQFAQDoesNotHaveAFAQ(int id) {
-        return qfaqDao.getQFAQDoesNotHaveAFAQ(id);
-    }
-
-    @Override
-    @Transactional
-    public List<QFAQ> getQFAQByWords(String words) {
-        return qfaqDao.getQFAQByWords(words);
-    }
-
-    @Override
-    @Transactional
-    public void saveqfaqwithafaq(String qfaqtext, String afaqtext, int topicid) {
-        Topic topic = topicDao.getTopic(topicid);
-        QFAQ qfaq = new QFAQ();
-        int newqfaqid = 0;
-        AFAQ afaq = new AFAQ();
-        qfaq.setQfaq_name(qfaqtext);
-        qfaq.setTopic(topic);
-        afaq.setAfaq_name(afaqtext);
-        newqfaqid = qfaqDao.saveqfaqint(qfaq);
-        QFAQ newqfaq = qfaqDao.getQFAQ(newqfaqid);
-        afaq.getQfaqs().add(newqfaq);
-        int newafaqid = 0;
-        newafaqid = afaqDao.saveafaqint(afaq);
-        AFAQ newafaq = afaqDao.getAFAQ(newafaqid);
-        newqfaq.getAfaqs().add(newafaq);
-        qfaqDao.saveQFAQ(newqfaq);
-        topic.getQfaqs().add(newqfaq);
-        topicDao.saveTopic(topic);
-    }
-
-    @Override
-    @Transactional
-    public List<QFAQ> getQFAQsByCheckWords(String words) {
-        return qfaqDao.CheckWords(words);
-    }
-
-    @Override
-    @Transactional
-    public void updateQFAQ2(QFAQ qfaq) {
+    public void updateQFAQ(Map<String, String> map) {
+        QFAQ qfaq = qfaqDao.getQFAQById(Integer.parseInt(map.get("qfaq_id")));
+        qfaq.setQfaq_name(map.get("qfaqtext"));
+        if (qfaq.getTopic().getTopic_id() != Integer.parseInt(map.get("topic_id"))) {
+            Topic topic = topicDao.getTopicById(Integer.parseInt(map.get("topic_id")));
+            qfaq.setTopic(topic);
+        }
         qfaqDao.updateQFAQ(qfaq);
     }
-
 }

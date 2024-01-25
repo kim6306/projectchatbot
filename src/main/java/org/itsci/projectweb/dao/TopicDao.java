@@ -5,18 +5,13 @@ import org.itsci.projectweb.model.QFAQ;
 import org.itsci.projectweb.model.Topic;
 import java.util.List;
 public interface TopicDao {
-    List<Topic> getTopic();
-    void saveTopic(Topic topic);
-    Topic getTopic(int id);
-    void deleteTopic(int id);
-    void deleteTopicObject(Topic topic);
-    List<Topic> getTopicDoesNotHaveQFAQ(int id);
-    List<Topic> getTopicByCategory(String category);
-    List<Category> getCategory();
-    Category getCategoryById(String cgId);
-    public void updateTopic(Topic topic);
-    Topic getTopicByTopicName (String topicName);
-    List<Topic> getTopicsByWords (String words);
 
-    List<Topic> CheckWords (String words);
+    List<Topic> getAllTopics ();
+    List<Topic> getTopicsByCategoryId (String categoryId);
+    Topic getTopicById (int topicId);
+
+    void updateTopic (Topic topic);
+    void deleteTopic (Topic topic);
+    void saveTopic (Topic topic);
+
 }

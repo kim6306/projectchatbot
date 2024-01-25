@@ -22,11 +22,11 @@
 
 <div class="width">
     <div id="container">
-        <form:form action="${pageContext.request.contextPath}/afaq/saveupdate" modelAttribute="afaq" name="formRegister" method="POST" onsubmit="return validateForm()">
-            <form:hidden path="afaq_id"/>
+        <form action="${pageContext.request.contextPath}/afaq/update" name="formRegister" method="POST" onsubmit="return validateForm()">
+            <input name="afaq_id" value="${afaq.afaq_id}" type="hidden">
 
             <div class="txt_field">
-                ระบุคำตอบ(Answer): <form:input id="afaqtext" path="afaq_name"/>
+                ระบุคำตอบ(Answer): <input id="afaqtext" name="afaqtext" value="${afaq.afaq_name}">
                 <c:if test="${ShowAlert==true}">
                     <p>มีคำถามนี้อยู่ในระบบแล้ว</p>
                 </c:if>
@@ -34,16 +34,13 @@
 
             <div class="btn">
                 <input type="submit" value="บันทึก" class="save"/>
-                <input type="button" value="ลบ" onclick="if((confirm('คุณแน่ใจหรือว่าต้องการลบคำตอบนี้?')))
-                        { window.location.href='${pageContext.request.contextPath}/afaq/${afaq.afaq_id}/delete';
-                        return false; }" class="cancel-button"/>
             </div>
 
             <div>
-                <input type="button" value="ยกเลิก" onclick="window.location.href='${pageContext.request.contextPath}/update';
+                <input type="button" value="ยกเลิก" onclick="window.location.href='${pageContext.request.contextPath}/update-page';
                         return false;" class="cancel-button"/>
             </div>
-        </form:form>
+        </form>
     </div>
 </div>
 

@@ -15,9 +15,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/rest")
 public class RestFormController {
-
+    /*
     @Autowired
     private TopicService topicService;
+
 
     @GetMapping("/test/{topicName}")
     public ResponseEntity testRest (@PathVariable("topicName") String topicName) {
@@ -38,5 +39,6 @@ public class RestFormController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    */
 
 }

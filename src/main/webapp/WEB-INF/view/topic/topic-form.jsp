@@ -23,15 +23,9 @@
 </nav>
 <div class="width">
     <div id="container">
-        <form:form action="${pageContext.request.contextPath}/topic/save" method="POST" name="formRegister" onsubmit="return validateForm()">
-            <div class="txt_field">
-                เลือกหมวดหมู่:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <select name="category_id" id="category_id">
-                    <c:forEach items="${categorys}" var="category">
-                        <option value="${category.category_id}">${category.category_name}</option>
-                    </c:forEach>
-                </select>
-            </div>
+        <h1>เพิ่มหัวข้อ</h1>
+        <form action="${pageContext.request.contextPath}/topic/save" method="POST" name="formRegister" onsubmit="return validateForm()">
+            <input type="hidden" value="${categoryId}" name="category_id">
             <div class="txt_field">
                 ระบุหมวดหมู่หัวข้อคำถาม(FAQ):<input type="text" id="topictext" name="topictext">
                 <c:if test="${ShowAlert==true}">
@@ -40,9 +34,9 @@
             </div>
             <div class="btn">
                 <input type="submit" value="บันทึก" class="save" />
-                <input type="button" value="ยกเลิก" onclick="window.location.href='${pageContext.request.contextPath}/update'; return false;" class="cancel-button" />
+                <input type="button" value="ยกเลิก" onclick="window.location.href='${pageContext.request.contextPath}/update-page'; return false;" class="cancel-button" />
             </div>
-        </form:form>
+        </form>
     </div>
 </div>
 <jsp:include page="/WEB-INF/view/layouts/footer.jsp" />

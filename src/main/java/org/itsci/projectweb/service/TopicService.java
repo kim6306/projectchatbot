@@ -5,29 +5,15 @@ import org.itsci.projectweb.model.Topic;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
+
 public interface TopicService {
-    List<Topic> getTopics();
-    void saveTopic(Topic topic);
-    Topic getTopic(int topicId);
-    void deleteTopic(int topicId);
-//    void deleteQFAQ(int QFAQId);
-    void updateTopic(Topic topic);
 
-    void addQFAQToTopic(int topicId, int qfaqId);
+    List<Topic> getAllTopics ();
+    List<Topic> getTopicsByCategoryId (String categoryId);
+    Topic getTopicById (int topicId);
+    void updateTopic (Map<String, String> map);
+    void deleteTopic (int topicId);
+    void saveTopic (Map<String, String> map);
 
-    Topic getTopicByTopicName (String topicName);
-
-    void removeQFAQFromTopic(int topicId, int qfaqId);
-
-    List<Topic> getTopicDoesNotHaveQFAQ(int id);
-
-    List<Topic> getTopicByCategory(String category);
-
-    List<Category> getCategory();
-
-    Category getCategoryById(String cgId);
-
-    List<Topic> getTopicsByWords(String words);
-
-    List<Topic> getTopicsByCheckWords(String words);
 }

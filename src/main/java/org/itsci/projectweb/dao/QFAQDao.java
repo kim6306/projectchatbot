@@ -6,19 +6,10 @@ import org.itsci.projectweb.model.Topic;
 
 import java.util.List;
 public interface QFAQDao {
-    List<QFAQ> getQFAQs();
-    void saveQFAQ(QFAQ qfaq);
 
-    void updateQFAQ(QFAQ qfaq);
-    QFAQ getQFAQ(int id);
-    void deleteQFAQ(int id);
-    List<QFAQ> getQFAQByTopicId (int id);
-    List<QFAQ> getQFAQDoesNotHaveTopic(int id);
+    void saveQFAQ (QFAQ qfaq);
+    void deleteQFAQ (QFAQ qfaq);
+    QFAQ getQFAQById (int qfaqId);
+    void updateQFAQ (QFAQ qfaq);
 
-    List<QFAQ> getQFAQDoesNotHaveAFAQ(int id);
-    List<QFAQ> getQFAQByWords(String words);
-
-    int saveqfaqint (QFAQ qfaq);
-
-    List<QFAQ> CheckWords(String words);
 }

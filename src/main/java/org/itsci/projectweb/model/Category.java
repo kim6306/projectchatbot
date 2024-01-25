@@ -6,6 +6,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,7 +20,7 @@ public class Category {
     private String category_name;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy="category", cascade = CascadeType.ALL)
-    private List<Topic> topics;
+    private List<Topic> topics = new ArrayList<>();
 
     public String getCategory_id() {
         return category_id;

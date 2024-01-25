@@ -26,24 +26,17 @@
                     <i>กรอกข้อมูลในฟอร์ม. เครื่องหมายดอกจัน(*) หมายถึงห้ามว่าง</i>
                 </div>
                 <div class="txt_field">
-                    <form:form action="${pageContext.request.contextPath}/afaq/save" modelAttribute="afaqqfaq"  method="GET" name="formRegister" onsubmit="return validateForm()">
+                    <form action="${pageContext.request.contextPath}/afaq/save" method="POST" name="formRegister" onsubmit="return validateForm()">
+                        <input value="${qfaqId}" name="qfaq_id" type="hidden">
                         <div class="txt_field">
-                            เลือกคำถาม(Question): <form:select name="qfaq_id" id="qfaq_id" path="qfaqid">
-                                <c:forEach items="${qfaqs}" var="qfaq">
-                                    <option value="${qfaq.qfaq_id}">${qfaq.qfaq_name}</option>
-                                </c:forEach>
-                            </form:select>
-                        </div>
-
-                        <div class="txt_field">
-                            ระบุคำตอบ(Answer)** : <form:input path="afaqtext"/>
+                            ระบุคำตอบ(Answer)** : <input name="afaqtext">
                             <c:if test="${ShowAlert2==true}">
                                 <p>มีคำตอบนี้อยู่ในระบบแล้ว</p>
                             </c:if>
                         </div>
                         <input type="submit" value="บันทึก" class="save"/>
                         <input type="button" value="ยกเลิก" onclick="window.location.href='${pageContext.request.contextPath}/update'; return false;" class="cancel-button"/>
-                    </form:form>
+                    </form>
             </div>
         </div>
         </div>

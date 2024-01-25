@@ -14,8 +14,8 @@
 </nav>
 <h1 class="textcenter">คำถามที่พบบ่อย</h1>
 <div class="textc">
-  <a class="flex" id="AtS" href="${pageContext.request.contextPath}/AtS">สมัครเรียน</a>
-  <a class="flex" id="Act" href="${pageContext.request.contextPath}/Act">กิจกรรม</a>
+  <a class="flex" id="AtS" href="${pageContext.request.contextPath}/apply-to-study-page">สมัครเรียน</a>
+  <a class="flex" id="Act" href="${pageContext.request.contextPath}/activity-page">กิจกรรม</a>
 </div>
 <%--<div>--%>
 <%--  <input type="text" id="searchInput" style="width: 50%" onkeyup="search()" placeholder="Search for names.." title="Type in a name">--%>

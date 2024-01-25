@@ -11,57 +11,30 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/category")
 public class CategoryController {
-    private String title = "หมวดหมู่";
+
     @Autowired
     private CategoryService categoryService;
 
-    @GetMapping("/list")
-    public String listCategory(Model model) {
-        model.addAttribute("title", "รายการ" + title);
-        model.addAttribute("categorys", categoryService.getCategorys());
-        return "category/list";
-    }
-    @GetMapping("/create")
-    public String showFormForAdd(Model model) {
-        model.addAttribute("title", "เพิ่ม" + title);
-        model.addAttribute("category", new Category());
+    @RequestMapping("/add-category-page")
+    public String goToAddCategoryPage () {
         return "category/category-form";
     }
-    @GetMapping("/{id}/update")
-    public String showFormForUpdate(@PathVariable("id") int id, Model model) {
-    Category category = categoryService.getCategorys(id);
-        model.addAttribute("title", "แก้ไข" + title);
-        model.addAttribute("category", category );
-        return "category/category-form";
+
+    @PostMapping("/save")
+    public String saveCategory (@RequestParam Map<String, String> map) {
+        categoryService.saveCategory(map);
+        return "redirect:/update-page";
     }
-//    @RequestMapping(path = "/save", method = RequestMethod.POST)
-//    public String processForm(@Valid @ModelAttribute("category")Category category, BindingResult bindingResult, Model model) {
-//        if (bindingResult.hasErrors()) {
-//            model.addAttribute("title", "มีข้อผิดพลาดในการบันทึก" + title);
-//            return "category/category-form";
-//        } else {
-//            Category entityCategory = categoryService.getCategorys(category.getId());
-//                if (entityCategory != null) {
-//                    categoryService.updateCategory(entityCategory, category);
-//                }else {
-//                    categoryService.saveCategory(category);
-//                }
-//            return "redirect:/category/list";
-//        }
-//    }
-    @InitBinder
-    public void initBinder(WebDataBinder dataBinder) {
-        StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
-        dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
-    }
-    @GetMapping("/{id}/delete")
-    public String deleteCategory(@PathVariable("id") int id) {
-        categoryService.deleteCategory(id);
-        return "redirect:/category/list";
+
+    @RequestMapping("/delete/{categoryId}")
+    public String deleteCategory (@PathVariable("categoryId") String categoryId) {
+        categoryService.deleteCategory(categoryId);
+        return "redirect:/update-page";
     }
 
 }

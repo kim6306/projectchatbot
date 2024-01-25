@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<form:form action="${pageContext.request.contextPath}/logout" method="POST" name="frmLogout"></form:form>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,39 +17,23 @@
         <div class="navber">
             <ul>
                 <li><a href="${pageContext.request.contextPath}">หน้าแรก</a></li>
-                <security:authorize access="hasRole('ADMIN')">
-                    <li><a href="${pageContext.request.contextPath}/update">แก้ไข</a>
-                    </li>
-                </security:authorize>
-                <security:authorize access="hasRole('ADMIN')">
-                    <li><a href="${pageContext.request.contextPath}/topic/create">เพิ่มกลุ่มคำถามFAQ<i class="fas fa-caret-down"></i></a>
-                        <ul>
-                            <li><a href="${pageContext.request.contextPath}/topic/list">แก้ไขหัวข้อ</a></li>
-                        </ul>
-                    </li>
-                </security:authorize>
-<%--                <security:authorize access="hasRole('ADMIN')">--%>
-<%--                    <li><a href="${pageContext.request.contextPath}/qfaq/create">เพิ่มคำถาม<i class="fas fa-caret-down"></i></a>--%>
-<%--                        <ul class="submenu">--%>
-<%--                            <li><a href="${pageContext.request.contextPath}/qfaq/list">แก้ไขคำถาม</a></li>--%>
-<%--                        </ul>--%>
-<%--                    </li>--%>
-<%--                </security:authorize>--%>
-<%--                <security:authorize access="hasRole('ADMIN')">--%>
-<%--                    <li><a href="${pageContext.request.contextPath}/afaq/create">เพิ่มคำตอบ<i class="fas fa-caret-down"></i></a>--%>
-<%--                        <ul class="submenu">--%>
-<%--                            <li><a href="${pageContext.request.contextPath}/afaq/list">แก้ไขคำตอบ</a></li>--%>
-<%--                        </ul>--%>
-<%--                    </li>--%>
-<%--                </security:authorize>--%>
-                <security:authorize access="!isAuthenticated()">
-                    <li><a href="${pageContext.request.contextPath}/login">เข้าสู่ระบบ
-                        <img src="${pageContext.request.contextPath}/assets/img/login.png" width="20px"></a></li>
-                </security:authorize>
-                <security:authorize access="isAuthenticated()">
-                    <li><a onclick="javascript: frmLogout.submit();">ออกจากระบบ
-                        <img src="${pageContext.request.contextPath}/assets/img/login.png" width="20px"></a></li>
-                </security:authorize>
+                    <c:if test="${administrator != null}">
+                        <li><a href="${pageContext.request.contextPath}/update-page">แก้ไข</a>
+                        </li>
+                        <li><a href="${pageContext.request.contextPath}/topic/add-topic-page">เพิ่มกลุ่มคำถามFAQ<i class="fas fa-caret-down"></i></a>
+                            <ul>
+                                <li><a href="${pageContext.request.contextPath}/topic/list-page">แก้ไขหัวข้อ</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="${pageContext.request.contextPath}/logout">ออกจากระบบ
+                            <img src="${pageContext.request.contextPath}/assets/img/login.png" width="20px"></a></li>
+                    </c:if>
+                    <c:if test="${administrator == null}">
+                        <li><a href="${pageContext.request.contextPath}/login-page">เข้าสู่ระบบ
+                            <img src="${pageContext.request.contextPath}/assets/img/login.png" width="20px"></a></li>
+                    </c:if>
+
+
             </ul>
         </div>
     </header>

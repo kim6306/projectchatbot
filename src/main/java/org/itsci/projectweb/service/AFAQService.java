@@ -4,17 +4,13 @@ import org.itsci.projectweb.model.AFAQ;
 import org.itsci.projectweb.model.QFAQ;
 
 import java.util.List;
+import java.util.Map;
 
 public interface AFAQService {
-    List<AFAQ> getAFAQ();
-    public void saveAFAQ(AFAQ afaq);
-    AFAQ getAFAQ(int afaqId);
-    void deleteAFAQ(int afaqId);
-    void updateAFAQ(AFAQ afaqEntity, AFAQ afaq);
 
-    List<AFAQ> getAFAQDoesNotHaveQFAQ(int id);
+    void saveAFAQ (Map<String, String> map);
+    AFAQ getAFAQById (String afaqId);
+    void updateAFAQ (Map<String, String> map);
+    void deleteAFAQ (String afaqId);
 
-    void saveafaqwithqfaq(String afaqtext,int qfaqid);
-    List<AFAQ> getAFAQsByCheckWords(String words);
-    void updateAFAQ2( AFAQ afaq);
 }

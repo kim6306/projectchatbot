@@ -23,6 +23,7 @@ public class Topic {
     private List<QFAQ> qfaqs = new ArrayList<>();
 
     @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "category_id")
     private Category category;
 
     public Topic() {

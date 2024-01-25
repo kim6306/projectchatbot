@@ -10,12 +10,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 @Service
 public class TopicServiceImpl implements TopicService{
-
-    @Autowired
-    private SessionFactory sessionFactory;
 
     @Autowired
     private TopicDao topicDao;
@@ -27,108 +27,72 @@ public class TopicServiceImpl implements TopicService{
     private AFAQDao afaqDao;
 
     @Autowired
-    private QFAQService qfaqService;
+    private CategoryDao categoryDao;
+
     @Override
     @Transactional
-    public List<Topic> getTopics() {
-        return topicDao.getTopic();
+    public List<Topic> getAllTopics() {
+        return topicDao.getAllTopics();
     }
 
     @Override
     @Transactional
-    public void saveTopic(Topic topic) {
-        topicDao.saveTopic(topic);
+    public List<Topic> getTopicsByCategoryId(String categoryId) {
+        return topicDao.getTopicsByCategoryId(categoryId);
     }
 
     @Override
     @Transactional
-    public void updateTopic(Topic topic ) {
+    public Topic getTopicById(int topicId) {
+        return topicDao.getTopicById(topicId);
+    }
+
+    @Override
+    @Transactional
+    public void updateTopic(Map<String, String> map) {
+        Topic topic = topicDao.getTopicById(Integer.parseInt(map.get("topic_id")));
+        topic.setTopic_name(map.get("topictext"));
+        if (!topic.getCategory().getCategory_id().equals(map.get("category_id"))) {
+            Category category = categoryDao.getCategoryById(map.get("category_id"));
+            topic.setCategory(category);
+        }
         topicDao.updateTopic(topic);
     }
 
     @Override
     @Transactional
-    public Topic getTopic(int topicId) {
-        return topicDao.getTopic(topicId);
-    }
-
-    @Override
-    @Transactional
     public void deleteTopic(int topicId) {
-        Topic topic = topicDao.getTopic(topicId);
-        for(QFAQ qfaq:topic.getQfaqs()){
-            for(AFAQ afaq:qfaq.getAfaqs()){
-                if (afaq.getQfaqs().size()<=1){
-                    System.out.println(afaq.getAfaq_id());
-                    afaqDao.deleteAFAQ(afaq.getAfaq_id());
-                }
+        Topic topic = topicDao.getTopicById(topicId);
+        for (QFAQ qfaq : topic.getQfaqs()) {
+            for (AFAQ afaq : qfaq.getAfaqs()) {
+                afaq.setQfaq(null);
+                afaqDao.updateAFAQ(afaq);
+                afaqDao.deleteAFAQ(afaq);
             }
-            qfaqDao.deleteQFAQ(qfaq.getQfaq_id());
+            qfaq.setAfaqs(null);
+            qfaq.setTopic(null);
+            qfaqDao.updateQFAQ(qfaq);
+            qfaqDao.deleteQFAQ(qfaq);
         }
-        topicDao.deleteTopic(topicId);
+        topic.setQfaqs(null);
+        Category category = categoryDao.getCategoryById(topic.getCategory().getCategory_id());
+        category.getTopics().remove(topic);
+        categoryDao.updateCategory(category);
+        topic.setCategory(null);
+        topicDao.updateTopic(topic);
+        topicDao.deleteTopic(topic);
     }
-
-
 
     @Override
     @Transactional
-    public void addQFAQToTopic(int topicId, int qfaqId) {
-        QFAQ qfaq = qfaqDao.getQFAQ(qfaqId);
-        Topic topic = topicDao.getTopic(topicId);
-        topic.getQfaqs().add(qfaq);
+    public void saveTopic(Map<String, String> map) {
+        String topic_name = map.get("topictext");
+        String category_id = map.get("category_id");
+        Category category = categoryDao.getCategoryById(category_id);
+        List<QFAQ> qfaqs = new ArrayList<>();
+        Topic topic = new Topic(0, topic_name, qfaqs, category);
+        category.getTopics().add(topic);
         topicDao.saveTopic(topic);
     }
-
-    @Override
-    @Transactional
-    public Topic getTopicByTopicName(String topicName) {
-        return topicDao.getTopicByTopicName(topicName);
-    }
-
-    @Override
-    @Transactional
-    public void removeQFAQFromTopic(int topicId, int qfaqId) {
-        QFAQ qfaq = qfaqDao.getQFAQ(qfaqId);
-        Topic topic = topicDao.getTopic(topicId);
-        topic.getQfaqs().remove(qfaq);
-        topicDao.saveTopic(topic);
-    }
-
-    @Override
-    @Transactional
-    public List<Topic> getTopicDoesNotHaveQFAQ(int id) {
-        return topicDao.getTopicDoesNotHaveQFAQ(id);
-    }
-
-    @Override
-    @Transactional
-    public List<Topic> getTopicByCategory(String category) {
-        return topicDao.getTopicByCategory(category);
-    }
-
-    @Override
-    @Transactional
-    public List<Category> getCategory() {
-        return topicDao.getCategory();
-    }
-
-    @Override
-    @Transactional
-    public Category getCategoryById(String cgId) {
-        return topicDao.getCategoryById(cgId);
-    }
-
-    @Override
-    @Transactional
-    public List<Topic> getTopicsByWords(String words) {
-        return topicDao.getTopicsByWords(words);
-    }
-
-    @Override
-    @Transactional
-    public List<Topic> getTopicsByCheckWords(String words) {
-        return topicDao.CheckWords(words);
-    }
-
 
 }

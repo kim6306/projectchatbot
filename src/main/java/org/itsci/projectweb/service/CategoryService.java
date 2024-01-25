@@ -2,15 +2,13 @@ package org.itsci.projectweb.service;
 
 import org.itsci.projectweb.model.Category;
 import java.util.List;
+import java.util.Map;
 
 public interface CategoryService {
-    List<Category> getCategorys();
 
-    public void saveCategory(Category category);
+    Category getCategoryById (String categoryId);
+    List<Category> getAllCategories ();
+    void deleteCategory (String categoryId);
+    void saveCategory (Map<String, String> map);
 
-    Category getCategorys(int categoryid);
-
-    void deleteCategory(int categoryid);
-
-    void updateCategory(Category categoryEntity, Category category);
 }

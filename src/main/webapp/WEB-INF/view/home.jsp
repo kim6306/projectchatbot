@@ -14,8 +14,8 @@
 </nav>
 <h1 class="textcenter">คำถามที่พบบ่อย</h1>
 <div class="textc">
-    <a class="flex" id="AtS" href="${pageContext.request.contextPath}/AtS">การสมัครเรียน</a>
-    <a class="flex" id="Act" href="${pageContext.request.contextPath}/Act">กิจกรรม</a>
+    <a class="flex" id="AtS" href="${pageContext.request.contextPath}/apply-to-study-page">การสมัครเรียน</a>
+    <a class="flex" id="Act" href="${pageContext.request.contextPath}/activity-page">กิจกรรม</a>
 </div>
 <div>
     <form:form action="${pageContext.request.contextPath}/searchFAQ" method="POST" name="search">

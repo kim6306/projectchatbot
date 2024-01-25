@@ -10,7 +10,7 @@
         function validateForm() {
             var x = document.forms["formRegister"]["qfaqtext"].value;
             var y = document.forms["formRegister"]["afaqtext"].value;
-            if (x == "" || x == null && y == "" || y == null) {
+            if ((x == "" || x == null) && (y == "" || y == null)) {
                 alert("กรุณากรอกข้อมูล");
                 return false;
             }
@@ -45,32 +45,26 @@
         </nav>
         <div class="width">
 <div id="container">
-        <div class="txt_field">
-            <form:form action="${pageContext.request.contextPath}/qfaq/save" modelAttribute="qfaqafaq"  method="GET" name="formRegister" onsubmit="return validateForm()">
-            เลือกหมวดหมู่หัวข้อคำถาม(FAQ):&nbsp;&nbsp;&nbsp;&nbsp;<form:select name="topic_id" id="topic_id" path="topicid" onchange="sayhello()">
-                <c:forEach items="${topics}" var="topic">
-                    <option value="${topic.topic_id}">${topic.topic_name}</option>
-                </c:forEach>
-            </form:select>
-        </div>
+            <form action="${pageContext.request.contextPath}/qfaq/save"  method="POST" name="formRegister" onsubmit="return validateForm()">
+                <input type="hidden" name="topic_id" value="${topicId}">
 
         <div class="txt_field">
-            ระบุคำถาม(Question): <h4 id="questionId"></h4><form:input path="qfaqtext" name="qfaqtext"/>
+            ระบุคำถาม(Question): <h4 id="questionId"></h4><input name="qfaqtext"/>
             <c:if test="${ShowAlert1==true}">
                 <p>มีคำถามนี้อยู่ในระบบแล้ว</p>
             </c:if>
         </div>
 
         <div class="txt_field">
-            ระบุคำตอบ(Answer): <h4 id="answerId"></h4><form:input path="afaqtext" name="afaqtext"/>
+            ระบุคำตอบ(Answer): <h4 id="answerId"></h4><input name="afaqtext"/>
             <c:if test="${ShowAlert2==true}">
                 <p>มีคำตอบนี้อยู่ในระบบแล้ว</p>
             </c:if>
         </div>
         <input type="submit" value="บันทึก" class="save"/>
-        <input type="button" value="ยกเลิก" onclick="window.location.href='${pageContext.request.contextPath}/update';
+        <input type="button" value="ยกเลิก" onclick="window.location.href='${pageContext.request.contextPath}/update-page';
         return false;" class="cancel-button"/>
-</form:form>
+</form>
 </div>
         </div>
         <jsp:include page="/WEB-INF/view/layouts/footer.jsp"/>

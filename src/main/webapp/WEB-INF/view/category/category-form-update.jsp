@@ -9,12 +9,10 @@
     <jsp:include page="/WEB-INF/view/layouts/nav.jsp"/>
       <%--        <div class="center">--%>
     <div class="width">
-      <div id="container">
-        <i>กรอกข้อมูลในฟอร์ม. เครื่องหมายดอกจัน(*) หมายถึงห้ามว่าง</i><br/>
-        <form action="${pageContext.request.contextPath}/category/save" method="POST">
+      <div id="container"><i>กรอกข้อมูลในฟอร์ม. เครื่องหมายดอกจัน(*) หมายถึงห้ามว่าง</i><br/><br>
+        <form action="${pageContext.request.contextPath}/category/update" method="POST">
           <div class="txt_field">
             <p class="ct">คำตอบ:**</p>
-            <input type="text" name="category_name"/>
           </div>
           <div class="btn">
             <input type="submit" value="บันทึก" class="save"/>
@@ -23,8 +21,7 @@
             <input type="button" value="ยกเลิก" onclick="window.location.href='${pageContext.request.contextPath}/update-page';
         return false;" class="cancel-button"/>
           </div>
-        </form>
-      </div>
+        </form></div>
     </div>
     <jsp:include page="/WEB-INF/view/layouts/footer.jsp"/>
   </body></html>

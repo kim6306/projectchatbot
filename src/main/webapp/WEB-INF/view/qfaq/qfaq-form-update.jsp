@@ -13,16 +13,29 @@
                 return false;
             }
         }
+
+        function showOptions () {
+            var spinner = document.getElementById("topic_id");
+
+            for (let i = 0; i < spinner.options.length; i++) {
+                var option = spinner.options[i];
+                if (option.text === '${qfaq.topic.topic_name}') {
+                    option.selected = true;
+                    break;
+                }
+            }
+        }
     </script>
 </head>
-<body>
+<body onload="showOptions()">
 <nav>
     <jsp:include page="/WEB-INF/view/layouts/nav.jsp"/>
 </nav>
 
 <div class="width">
     <div id="container">
-        <form:form action="${pageContext.request.contextPath}/qfaq/${qfaq.qfaq_id}/saveupdate" name="formRegister" method="POST" onsubmit="return validateForm()">
+        <form action="${pageContext.request.contextPath}/qfaq/update" name="formRegister" method="POST" onsubmit="return validateForm()">
+            <input type="hidden" value="${qfaq.qfaq_id}" name="qfaq_id">
             <div class="txt_field">
                 เลือกหมวดหมู่หัวข้อคำถาม(FAQ):&nbsp;&nbsp;&nbsp;
                 <select name="topic_id" id="topic_id">
@@ -41,18 +54,13 @@
 
             <div class="btn">
                 <input type="submit" value="บันทึก" class="save"/>
-                <input type="button" value="ลบ" onclick="if((confirm('คุณแน่ใจหรือว่าต้องการลบคำถามนี้?')))
-                        { window.location.href='${pageContext.request.contextPath}/qfaq/${qfaq.qfaq_id}/delete';
-                        return false; }" class="cancel-button"/>
             </div>
 
             <div class="btn">
-                <input type="button" value="ยกเลิก" onclick="window.location.href='${pageContext.request.contextPath}/update';
+                <input type="button" value="ยกเลิก" onclick="window.location.href='${pageContext.request.contextPath}/update-page';
                         return false;" class="cancel-button"/>
-                <input type="button" value="เชื่อมคำตอบ" onclick="window.location.href='${pageContext.request.contextPath}/qfaq/${qfaq.qfaq_id}/view-afaqs';
-                        return false;"/>
             </div>
-        </form:form>
+        </form>
     </div>
 </div>
 <jsp:include page="/WEB-INF/view/layouts/footer.jsp" />

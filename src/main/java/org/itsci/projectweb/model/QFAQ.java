@@ -19,11 +19,10 @@ public class QFAQ {
     private String qfaq_name;
 
     @ManyToOne(cascade=CascadeType.MERGE)
+    @JoinColumn(name = "topic_id")
     private Topic topic;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
-    @JoinTable(name = "qfaqs_afaqs", joinColumns = {@JoinColumn(name = "qfaq_id")},
-            inverseJoinColumns = {@JoinColumn(name = "afaq_id")})
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "qfaq")
     private List<AFAQ> afaqs = new ArrayList<>();
 
     public QFAQ () {}

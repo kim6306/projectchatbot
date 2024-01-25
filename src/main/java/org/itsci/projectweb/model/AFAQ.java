@@ -16,17 +16,18 @@ public class AFAQ {
     @GenericGenerator(name = "increment", strategy = "increment")
     private int afaq_id;
 
-    @ManyToMany(mappedBy="afaqs")
-    private List<QFAQ> qfaqs = new ArrayList<>();
-
     @Column(nullable = false, columnDefinition = "TEXT")
     private String afaq_name;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "qfaq_id")
+    private QFAQ qfaq;
+
     public AFAQ () {}
 
-    public AFAQ(int afaq_id, List<QFAQ> qfaqs, String afaq_name) {
+    public AFAQ(int afaq_id, QFAQ qfaq, String afaq_name) {
         this.afaq_id = afaq_id;
-        this.qfaqs = qfaqs;
+        this.qfaq = qfaq;
         this.afaq_name = afaq_name;
     }
 
@@ -38,12 +39,12 @@ public class AFAQ {
         this.afaq_id = afaq_id;
     }
 
-    public List<QFAQ> getQfaqs() {
-        return qfaqs;
+    public QFAQ getQfaq() {
+        return qfaq;
     }
 
-    public void setQfaqs(List<QFAQ> qfaqs) {
-        this.qfaqs = qfaqs;
+    public void setQfaq(QFAQ qfaq) {
+        this.qfaq = qfaq;
     }
 
     public String getAfaq_name() {

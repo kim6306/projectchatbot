@@ -17,116 +17,58 @@ import java.util.Map;
 @Controller
 @RequestMapping("/topic")
 public class TopicController {
-    private String title = "หัวข้อ";
+
     @Autowired
     private TopicService topicService;
-    @Autowired
-    private QFAQService qfaqService;
+
     @Autowired
     private CategoryService categoryService;
 
-    @GetMapping("/list")
-    public String listTopic(Model model) {
-        model.addAttribute("topics", topicService.getTopics());
-        return "topic/list";
+    @RequestMapping("/delete/{topicId}")
+    public String deleteTopic (@PathVariable("topicId") String topicId) {
+        topicService.deleteTopic(Integer.parseInt(topicId));
+        return "redirect:/update-page";
     }
-    @GetMapping("/create")
-    public String showFormForAdd(Model model) {
-        model.addAttribute("categorys",topicService.getCategory());
+
+    @RequestMapping("/add-topic-page")
+    public String goToAddTopicPage (Model model) {
+        model.addAttribute("categories", categoryService.getAllCategories());
         return "topic/topic-form";
     }
-    @GetMapping("/{id}/update")
-    public String showFormForUpdate(@PathVariable("id") int id,Model model){
-        Topic topic = topicService.getTopic(id);
-        List<Category> category = topicService.getCategory();
-        model.addAttribute("topic_detail", topic);
-        model.addAttribute("category_detail", category);
+
+    @RequestMapping("/add-topic-page/{categoryId}")
+    public String goToAddTopicPageWithCategoryId (Model model, @PathVariable("categoryId") String categoryId) {
+        model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute("categoryId", categoryId);
+        return "topic/topic-form";
+    }
+
+
+    @RequestMapping("/list-page")
+    public String goToTopicListPage (Model model) {
+        model.addAttribute("topics", topicService.getAllTopics());
+        return "topic/list";
+    }
+
+    @PostMapping("/save")
+    public String saveTopic (@RequestParam Map<String, String> map, Model model) {
+        topicService.saveTopic(map);
+        return "redirect:/update-page";
+    }
+
+    @RequestMapping("/update-page/{topicId}")
+    public String goToUpdateTopicPage (@PathVariable("topicId") String topicId, Model model) {
+        Topic topic = topicService.getTopicById(Integer.parseInt(topicId));
+        model.addAttribute("topic", topic);
+        model.addAttribute("categories", categoryService.getAllCategories());
+        System.out.println("TOP NAME : " + topic.getTopic_name());
         return "topic/topic-form-update";
     }
-    @PostMapping(path = "/save")
-    public String processForm(@RequestParam Map<String, String>  allReqParams,Model model ) throws ParseException {
-            String topictext = allReqParams.get("topictext");
-            Category category = topicService.getCategoryById(allReqParams.get("category_id"));
-            if (topicService.getTopicsByCheckWords(topictext).size()<=0){
-                Topic topic = new Topic(topictext,category);
-                topicService.saveTopic(topic);
-            }else{
-                model.addAttribute("ShowAlert",true);
-                model.addAttribute("categorys",topicService.getCategory());
-                return "topic/topic-form";
-            }
-            return "redirect:/update";
-    }
-    @PostMapping(path = "/{t_id}/save")
-    public String saveEditProfile(@RequestParam Map<String, String> allReqParams, @PathVariable int t_id,Model model) throws ParseException {
-        Topic topic = topicService.getTopic(t_id);
-        if (topic != null) {
-            topic.setTopic_name(allReqParams.get("topictext"));
-            System.out.println("TOPICCCC : " + allReqParams.get("topictext"));
-            String categoryId = allReqParams.get("category_id");
-            Category cate_gory = topicService.getCategoryById(categoryId);
-            if (cate_gory != null) {
-                System.out.println("FLAG 2");
-                topic.setCategory(cate_gory);
-                List<Topic> remainTopic =topicService.getTopicsByCheckWords(topic.getTopic_name());
-                if( remainTopic.size() > 0){
-                    remainTopic.removeIf(topic1 -> topic1.getTopic_id() == topic.getTopic_id());
-                }
-                System.out.println("REM SIZE : " + remainTopic.size());
-                if (remainTopic.size() ==0){
-                    System.out.println("FLAG 1");
-                    topicService.updateTopic(topic);
-                }else{
 
-                    model.addAttribute("ShowAlert",true);
-                    model.addAttribute("topic_detail", topicService.getTopic(t_id));
-                    Topic topics = topicService.getTopic(t_id);
-                    model.addAttribute("category_detail",topicService.getCategory());
-//                model.addAttribute("categorys",topicService.getCategory());
-                    return "topic/topic-form-update";
-                }
-            }
-//            topicService.updateTopic(topic);
-        }
-        return "redirect:/update";
-    }
-    @InitBinder
-    public void initBinder(WebDataBinder dataBinder) {
-        StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
-        dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
-    }
-    @GetMapping("/{id}/delete")
-    public String deleteTopic(@PathVariable("id") int id) {
-        topicService.deleteTopic(id);
-
-        return "redirect:/update";
-    }
-    @GetMapping("/{id}/view-qfaqs")
-    public String TopicViewQFAQ(@PathVariable("id") int id, Model model) {
-        Topic topic = topicService.getTopic(id);
-        model.addAttribute("title", title + " - รายการคำถาม");
-        model.addAttribute("topic", topic);
-        model.addAttribute("qfaq", topic.getQfaqs());
-        return "topic/topic-view-qfaqs";
-    }
-    @GetMapping("/{id}/qfaq/add")
-    public String showQFAQForAdd(@PathVariable("id") int id, Model model) {
-        Topic topic = topicService.getTopic(id);
-        List<QFAQ> qfaq = qfaqService.getQFAQDoesNotHaveTopic(id);
-        model.addAttribute("title", "เพิ่มคำถาม");
-        model.addAttribute("topic", topic);
-        model.addAttribute("qfaq", qfaq);
-        return "topic/qfaq-list";
-    }
-    @PostMapping("/{id}/qfaq/add")
-    public String addQFAQ(@PathVariable("id") int topicId, @RequestParam("qfaq") int qfaqId) {
-        topicService.addQFAQToTopic(topicId, qfaqId);
-        return "redirect:/topic/" + topicId + "/qfaq/add";
-    }
-    @GetMapping("/{id}/qfaq/{qfaq}/remove")
-    public String topicRemoveQFAQ(@PathVariable("id") int topicId, @PathVariable("qfaq") int qfaqId) {
-        topicService.removeQFAQFromTopic(topicId, qfaqId);
-        return "redirect:/topic/" + topicId + "/view-qfaqs";
+    @PostMapping("/update")
+    public String updateTopic (@RequestParam Map<String, String> map) {
+        topicService.updateTopic(map);
+        return "redirect:/update-page";
     }
 
 }
