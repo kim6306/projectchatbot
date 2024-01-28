@@ -11,5 +11,6 @@ public interface QFAQDao {
     void deleteQFAQ (QFAQ qfaq);
     QFAQ getQFAQById (int qfaqId);
     void updateQFAQ (QFAQ qfaq);
+    List<QFAQ> getQFAQByQFAQName (String qfaq_name);
 
 }

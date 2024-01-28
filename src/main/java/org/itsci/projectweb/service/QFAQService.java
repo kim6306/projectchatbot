@@ -13,5 +13,6 @@ public interface QFAQService {
 
     QFAQ getQFAQById (int qfaqId);
     void updateQFAQ (Map<String, String> map);
+    List<QFAQ> getQFAQByQFAQName (String qfaq_name);
 
 }

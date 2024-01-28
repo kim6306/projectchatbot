@@ -41,4 +41,12 @@ public class QFAQDaoImpl implements QFAQDao{
         Session session = sessionFactory.getCurrentSession();
         session.update(qfaq);
     }
+
+    @Override
+    public List<QFAQ> getQFAQByQFAQName(String qfaq_name) {
+        Session session = sessionFactory.getCurrentSession();
+        Query<QFAQ> query = session.createQuery("FROM QFAQ q WHERE q.qfaq_name LIKE :qName", QFAQ.class);
+        query.setParameter("qName", "%" + qfaq_name + "%");
+        return query.getResultList();
+    }
 }

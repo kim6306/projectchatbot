@@ -77,4 +77,10 @@ public class QFAQServiceImpl implements QFAQService {
         }
         qfaqDao.updateQFAQ(qfaq);
     }
+
+    @Override
+    @Transactional
+    public List<QFAQ> getQFAQByQFAQName(String qfaq_name) {
+        return qfaqDao.getQFAQByQFAQName(qfaq_name);
+    }
 }

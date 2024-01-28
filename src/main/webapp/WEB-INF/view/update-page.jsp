@@ -35,7 +35,7 @@
                 <tbody>
                 <tr>
                     <td class="C1" >Topic <%=(j+1)%> ${topic.topic_name}</td>
-                    <td class="C1" ><a href="${pageContext.request.contextPath}/topic/${topic.topic_id}/update">
+                    <td class="C1" ><a href="${pageContext.request.contextPath}/topic/update/${topic.topic_id}">
                         <img src="${pageContext.request.contextPath}/assets/img/pencil.png" width="25px"></a></td>
                     <td class="C1" ><a class="delete-button" onclick="if((confirm('คุณแน่ใจหรือว่าต้องการลบหัวข้อนี้?')))
                             { window.location.href='${pageContext.request.contextPath}/topic/${topic.topic_id}/delete';
@@ -48,7 +48,7 @@
                     <tbody>
                     <tr>
                         <td class="C1" > Question <%=(k+1)%> ${qfaq.qfaq_name}</td>
-                        <td class="C1" ><a href="${pageContext.request.contextPath}/qfaq/${qfaq.qfaq_id}/update">
+                        <td class="C1" ><a href="${pageContext.request.contextPath}/qfaq/update/${qfaq.qfaq_id}">
                             <img src="${pageContext.request.contextPath}/assets/img/pencil.png" width="25px"></a></td>
                         <td class="C1" > <a class="delete-button" onclick="if((confirm('คุณแน่ใจหรือว่าต้องการลบคำถามนี้?')))
                         { window.location.href='${pageContext.request.contextPath}/qfaq/delete/${qfaq.qfaq_id}';
@@ -61,7 +61,7 @@
                         <tbody >
                         <tr class="underline">
                             <td class="C1" > Answer <%=(k+1)%>.<%=(l+1)%> ${afaq.afaq_name}</td>
-                            <td class="C1" ><a href="${pageContext.request.contextPath}/afaq/${afaq.afaq_id}/update">
+                            <td class="C1" ><a href="${pageContext.request.contextPath}/afaq/update/${afaq.afaq_id}">
                                 <img src="${pageContext.request.contextPath}/assets/img/pencil.png" width="25px"></a></td>
                             <td class="C1" >
                                 <c:if test="${qfaq.afaqs.size() > 1}">
