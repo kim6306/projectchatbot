@@ -29,7 +29,7 @@ public class AFAQController {
         return "redirect:/update-page";
     }
 
-    @RequestMapping("/update-page/{afaqId}")
+    @RequestMapping("/update/{afaqId}")
     public String goToUpdateAFAQPage (@PathVariable("afaqId") String afaqId, Model model) {
         AFAQ afaq = afaqService.getAFAQById(afaqId);
         model.addAttribute("afaq", afaq);

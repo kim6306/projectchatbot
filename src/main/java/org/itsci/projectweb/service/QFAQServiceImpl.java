@@ -83,4 +83,10 @@ public class QFAQServiceImpl implements QFAQService {
     public List<QFAQ> getQFAQByQFAQName(String qfaq_name) {
         return qfaqDao.getQFAQByQFAQName(qfaq_name);
     }
+
+    @Override
+    @Transactional
+    public List<QFAQ> getQFAQsByCheckWords(String words) {
+        return qfaqDao.CheckWords(words);
+    }
 }

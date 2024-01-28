@@ -12,5 +12,6 @@ public interface AFAQService {
     AFAQ getAFAQById (String afaqId);
     void updateAFAQ (Map<String, String> map);
     void deleteAFAQ (String afaqId);
+    List<AFAQ> getAFAQsByCheckWords(String words);
 
 }

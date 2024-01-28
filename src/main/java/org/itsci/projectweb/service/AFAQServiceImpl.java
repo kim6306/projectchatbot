@@ -56,4 +56,10 @@ public class AFAQServiceImpl implements AFAQService {
         afaqDao.updateAFAQ(afaq);
         afaqDao.deleteAFAQ(afaq);
     }
+
+    @Override
+    @Transactional
+    public List<AFAQ> getAFAQsByCheckWords(String words) {
+        return afaqDao.CheckWords(words);
+    }
 }

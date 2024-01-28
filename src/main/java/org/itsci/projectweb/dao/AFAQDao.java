@@ -11,5 +11,6 @@ public interface AFAQDao {
     void updateAFAQ (AFAQ afaq);
     void saveAFAQ (AFAQ afaq);
     AFAQ getAFAQById (int afaqId);
+    List<AFAQ> CheckWords(String words);
 
 }

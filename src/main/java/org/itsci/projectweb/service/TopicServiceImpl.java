@@ -95,4 +95,16 @@ public class TopicServiceImpl implements TopicService{
         topicDao.saveTopic(topic);
     }
 
+    @Override
+    @Transactional
+    public List<Topic> getTopicsByCheckWords(String words) {
+        return topicDao.CheckWords(words);
+    }
+
+    @Override
+    @Transactional
+    public List<Category> getCategory() {
+        return topicDao.getCategory();
+    }
+
 }

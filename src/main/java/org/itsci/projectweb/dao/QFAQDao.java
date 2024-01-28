@@ -12,5 +12,6 @@ public interface QFAQDao {
     QFAQ getQFAQById (int qfaqId);
     void updateQFAQ (QFAQ qfaq);
     List<QFAQ> getQFAQByQFAQName (String qfaq_name);
+    List<QFAQ> CheckWords(String words);
 
 }

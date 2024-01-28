@@ -49,4 +49,12 @@ public class QFAQDaoImpl implements QFAQDao{
         query.setParameter("qName", "%" + qfaq_name + "%");
         return query.getResultList();
     }
+
+    @Override
+    public List<QFAQ> CheckWords(String words) {
+        Session session = sessionFactory.getCurrentSession();
+        Query<QFAQ> query = session.createQuery("FROM QFAQ q WHERE q.qfaq_name = :qqt", QFAQ.class);
+        query.setParameter("qqt", words);
+        return query.getResultList();
+    }
 }

@@ -26,23 +26,27 @@
 <div class="container">
     <div class="space">
         <div class="wrapper">
-            <%
-                int i = 0;
-                int j = 0;
-                int k = 0;
-            %>
+            <c:set var="i" value="0" />
+            <c:set var="j" value="0" />
             <c:forEach var="topic" items="${topics}">
-                <h1><%=(i+1)%>. ${topic.topic_name}</h1>
-                <c:forEach var="qfaq" items="${topic.qfaqs}">
-                    <h2>Q <%=(i+1)%>.<%=(j+1)%> ${qfaq.qfaq_name}</h2>
-                    <%k = 0;%>
-                    <c:forEach var="afaq" items="${qfaq.afaqs}">
-                        <h3>A <%=(i+1)%>.<%=(j+1)%>.<%=(k+1)%> ${afaq.afaq_name}</h3>
-                        <%k++;%>
-                    </c:forEach>
-                    <%j++;%>
-                </c:forEach>
-                <%i++;%>
+                <c:set var="i" value="${i+1}" />
+                <div class="faq">
+                    <button class="accordion">FAQ ${i}. ${topic.topic_name} <i class="fa-solid fa-chevron-down"></i></button>
+                    <div class="panel">
+                        <c:forEach var="qfaq" items="${topic.qfaqs}">
+                            <c:set var="j" value="${j+1}" />
+                            <c:forEach var="afaq" items="${qfaq.afaqs}">
+                                <div class="panel">
+                                    <div class="topma">
+                                        <p>Q ${i}.${j}: ${qfaq.qfaq_name}</p>
+                                        <p>A ${i}.${j}: ${afaq.afaq_name}</p>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </c:forEach>
+                        <c:set var="j" value="0" />
+                    </div>
+                </div>
             </c:forEach>
         </div>
     </div>

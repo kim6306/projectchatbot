@@ -15,5 +15,7 @@ public interface TopicService {
     void updateTopic (Map<String, String> map);
     void deleteTopic (int topicId);
     void saveTopic (Map<String, String> map);
+    List<Topic> getTopicsByCheckWords(String words);
+    List<Category> getCategory();
 
 }

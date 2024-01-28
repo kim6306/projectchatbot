@@ -29,6 +29,9 @@ public class QFAQController {
     @Autowired
     private QFAQService qfaqService;
 
+    @Autowired
+    private AFAQService afaqService;
+
     @GetMapping("/add-qfaq-page")
     public String goToAddQFAQPage (Model model) {
         model.addAttribute("topics",topicService.getAllTopics());
@@ -43,12 +46,29 @@ public class QFAQController {
     }
 
     @PostMapping("/save")
-    public String saveQFAQ (@RequestParam Map<String, String> map, Model model) {
-        qfaqService.saveQFAQ(map);
+    public String saveQFAQ (@RequestParam Map<String, String> map, Model model ) {
+        String topicid = map.get("topic_id");
+        String qfaq = map.get("qfaqtext");
+        String afaq = map.get("afaqtext");
+        if (qfaqService.getQFAQsByCheckWords(qfaq).size()<=0){
+            if (afaqService.getAFAQsByCheckWords(afaq).size()<=0){
+                qfaqService.saveQFAQ(map);
+            }
+            else {
+                model.addAttribute("ShowAlert2",true);
+                model.addAttribute("topicId", topicid);
+                return "qfaq/qfaq-form";
+            }
+        }
+        else {
+            model.addAttribute("ShowAlert1",true);
+            model.addAttribute("topicId", topicid);
+            return "qfaq/qfaq-form";
+        }
         return "redirect:/update-page";
     }
 
-    @RequestMapping("/update-page/{qfaqId}")
+    @RequestMapping("/update/{qfaqId}")
     public String goToUpdateQFAQPage (@PathVariable("qfaqId") String qfaqId, Model model) {
         QFAQ qfaq = qfaqService.getQFAQById(Integer.parseInt(qfaqId));
         model.addAttribute("qfaq", qfaq);

@@ -42,4 +42,12 @@ public class AFAQDaoImpl implements AFAQDao{
         query.setParameter("aId", afaqId);
         return query.getSingleResult();
     }
+
+    @Override
+    public List<AFAQ> CheckWords(String words) {
+        Session session = sessionFactory.getCurrentSession();
+        Query<AFAQ> query = session.createQuery("FROM AFAQ a WHERE a.afaq_name = :aqt", AFAQ.class);
+        query.setParameter("aqt", words);
+        return query.getResultList();
+    }
 }

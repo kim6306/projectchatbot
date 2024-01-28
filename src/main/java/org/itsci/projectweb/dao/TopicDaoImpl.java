@@ -38,6 +38,22 @@ public class TopicDaoImpl implements TopicDao  {
     }
 
     @Override
+    public List<Topic> CheckWords(String words) {
+        Session session = sessionFactory.getCurrentSession();
+        Query<Topic> query = session.createQuery("FROM Topic t WHERE t.topic_name = :tpN", Topic.class );
+        query.setParameter("tpN", words);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Category> getCategory() {
+        Session session = sessionFactory.getCurrentSession();
+        Query<Category> query = session.createQuery("from Category ",Category.class);
+        List<Category> category = query.getResultList();
+        return category ;
+    }
+
+    @Override
     public void updateTopic(Topic topic) {
         Session session = sessionFactory.getCurrentSession();
         session.update(topic);

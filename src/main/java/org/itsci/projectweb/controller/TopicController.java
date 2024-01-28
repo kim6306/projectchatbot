@@ -52,11 +52,19 @@ public class TopicController {
 
     @PostMapping("/save")
     public String saveTopic (@RequestParam Map<String, String> map, Model model) {
-        topicService.saveTopic(map);
+        String topic_name = map.get("topictext") ;
+        if (topicService.getTopicsByCheckWords(topic_name).size()<=0){
+            topicService.saveTopic(map);
+        }else{
+            model.addAttribute("ShowAlert",true);
+            model.addAttribute("categories",topicService.getCategory());
+            return "topic/topic-form";
+        }
+//        topicService.saveTopic(map);
         return "redirect:/update-page";
     }
 
-    @RequestMapping("/update-page/{topicId}")
+    @RequestMapping("/update/{topicId}")
     public String goToUpdateTopicPage (@PathVariable("topicId") String topicId, Model model) {
         Topic topic = topicService.getTopicById(Integer.parseInt(topicId));
         model.addAttribute("topic", topic);

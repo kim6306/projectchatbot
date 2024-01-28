@@ -27,7 +27,7 @@
             <c:forEach var="topic" items="${topics}">
                 <%i++;%>
                 <tr>
-                    <td class="C1"><a href="${pageContext.request.contextPath}/topic/update-page/${topic.topic_id}">FAQ.<%=i%>: ${topic.topic_name}</a></td>
+                    <td class="C1"><a href="${pageContext.request.contextPath}/topic/update/${topic.topic_id}">FAQ.<%=i%>: ${topic.topic_name}</a></td>
                 </tr>
             </c:forEach>
             </tbody>

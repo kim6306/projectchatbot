@@ -10,6 +10,8 @@ public interface TopicDao {
     List<Topic> getTopicsByCategoryId (String categoryId);
     Topic getTopicById (int topicId);
 
+    List<Topic> CheckWords (String words);
+    List<Category> getCategory();
     void updateTopic (Topic topic);
     void deleteTopic (Topic topic);
     void saveTopic (Topic topic);
