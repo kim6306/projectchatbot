@@ -63,13 +63,13 @@ public class WebHomeController {
 
     @RequestMapping("/apply-to-study-page")
     public String goToApplyToStudyPage (Model model) {
-        model.addAttribute("topics", topicService.getTopicsByCategoryId("2"));
+        model.addAttribute("topics", topicService.getTopicsByCategoryId("1"));
         return "home";
     }
 
     @RequestMapping("/activity-page")
     public String goToActivityPage (Model model) {
-        model.addAttribute("topics", topicService.getTopicsByCategoryId("4"));
+        model.addAttribute("topics", topicService.getTopicsByCategoryId("2"));
         return "home";
     }
 

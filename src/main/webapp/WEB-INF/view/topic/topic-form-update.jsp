@@ -55,11 +55,11 @@
             <div class="btn">
                 <input type="button" value="ยกเลิก" onclick="window.location.href='${pageContext.request.contextPath}/update-page'; return false;" class="cancel-button"/>
             </div>
-            <div class="btn">
-                <input type="button" value="ลบหัวข้อ" onclick="if((confirm('คุณแน่ใจหรือว่าต้องการลบหัวข้อนี้?')))
-                        { window.location.href='${pageContext.request.contextPath}/topic/delete/${topic.topic_id}';
-                        return false; }" class="cancel-button"/>
-            </div>
+<%--            <div class="btn">--%>
+<%--                <input type="button" value="ลบหัวข้อ" onclick="if((confirm('คุณแน่ใจหรือว่าต้องการลบหัวข้อนี้?')))--%>
+<%--                        { window.location.href='${pageContext.request.contextPath}/topic/delete/${topic.topic_id}';--%>
+<%--                        return false; }" class="cancel-button"/>--%>
+<%--            </div>--%>
         </form>
     </div>
 </div>

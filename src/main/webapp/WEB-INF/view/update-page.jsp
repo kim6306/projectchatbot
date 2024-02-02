@@ -12,7 +12,7 @@
     <jsp:include page="/WEB-INF/view/layouts/nav.jsp"/>
 </nav>
 <div class="container">
-    <h1 class="textcenter">แก้ไข</h1>
+    <h1 class="textcenter">แก้ไขคำถามคำตอบ FAQ</h1>
     <div class="space">
         <div class="wrapper">
             <%
@@ -50,7 +50,7 @@
                     <c:forEach var="qfaq" items="${topic.qfaqs}">
                         <tbody>
                         <tr>
-                            <td class="C1" > Question <%=(k+1)%> ${qfaq.qfaq_name}</td>
+                            <td class="C1" > Question <%=(k+1)%> : ${qfaq.qfaq_name}</td>
                             <td class="C1" ><a href="${pageContext.request.contextPath}/qfaq/update/${qfaq.qfaq_id}">
                                 <img src="${pageContext.request.contextPath}/assets/img/pencil.png" width="25px"></a></td>
                             <td class="C1" > <a class="delete-button" onclick="if((confirm('คุณแน่ใจหรือว่าต้องการลบคำถามนี้?')))
@@ -63,7 +63,7 @@
                         <c:forEach var="afaq" items="${qfaq.afaqs}">
                             <tbody >
                             <tr class="underline">
-                                <td class="C1" > Answer <%=(k+1)%>.<%=(l+1)%> ${afaq.afaq_name}</td>
+                                <td class="C1" > Answer <%=(k+1)%>.<%=(l+1)%> : ${afaq.afaq_name}</td>
                                 <td class="C1" ><a href="${pageContext.request.contextPath}/afaq/update/${afaq.afaq_id}">
                                     <img src="${pageContext.request.contextPath}/assets/img/pencil.png" width="25px"></a></td>
                                 <td class="C1" >
@@ -80,6 +80,7 @@
                         <%l = 0;%>
                         <%k++;%>
                     </c:forEach>
+                    <%k = 0;%>
                         <%j++;%>
 <%--                    </c:forEach>--%>
                     <%i++;%>
