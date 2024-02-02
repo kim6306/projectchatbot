@@ -18,12 +18,12 @@
             <ul>
                 <li><a href="${pageContext.request.contextPath}">หน้าแรก</a></li>
                     <c:if test="${administrator != null}">
-                        <li><a href="${pageContext.request.contextPath}/update-page">แก้ไข</a>
+                        <li><a href="${pageContext.request.contextPath}/topic/add-topic-page">สร้างกลุ่มคำถาม FAQ</a>
+                                <%--                            <i class="fas fa-caret-down"></i>--%>
                         </li>
-                        <li><a href="${pageContext.request.contextPath}/topic/add-topic-page">เพิ่มกลุ่มคำถามFAQ<i class="fas fa-caret-down"></i></a>
-                            <ul>
-                                <li><a href="${pageContext.request.contextPath}/topic/list-page">แก้ไขหัวข้อ</a></li>
-                            </ul>
+                        <li><a href="${pageContext.request.contextPath}/topic/list-page">แก้ไขกลุ่มคำถาม FAQ</a>
+                        </li>
+                        <li><a href="${pageContext.request.contextPath}/update-page">แก้ไข FAQ</a>
                         </li>
                         <li><a href="${pageContext.request.contextPath}/logout">ออกจากระบบ
                             <img src="${pageContext.request.contextPath}/assets/img/login.png" width="20px"></a></li>

@@ -1,10 +1,9 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,100&display=swap');
-
-body{
-    min-height: 100vh;
-    font-family: 'Kanit', sans-serif;
+body {
+    font-family: 'Kanit', sans-serif;;
     background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+
 }
 .container {
     width: 80%;
@@ -13,96 +12,74 @@ body{
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     padding: 20px;
     border-radius: 5px;
+    margin-top: 30px;
 }
-
-button{
-    font-family: 'Kanit', sans-serif;
-}
-h2{
-    font-family: 'Kanit', sans-serif;
-}
-
-.body{
-    top : 9%;
-    left: 23%;
-}
-/* list styles */
-span {
-    position: absolute;
-    line-height: 25px;
-}
-footer{
-    position: sticky;
-    top: 100%;
-}
-
-/* ?????????? */
-h1 {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
+.textcenter {
     text-align: center;
+    font-size: 24px;
+    color: #000000; /* Red color */
     font-family: 'Kanit', sans-serif;
+    margin-bottom: 20px;
 }
-
-/* ????????? */
-.add-button {
-    background-color: #c50e0e;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.add-button:hover {
-    background-color: #ff0000;
+.space {
+    margin-top: 20px;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 10px;
 }
-
 th, td {
     padding: 10px;
     text-align: left;
+    font-family: 'Kanit', sans-serif;
 }
 
 th {
-    background-color: #b60707;
+    background-color: #a69d9d; /* Brown color */
     color: #fff;
+    font-family: 'Kanit', sans-serif;
+}
+/* ??????????? */
+table.table {
+    border: 1px solid #ccc;
+    font-family: 'Kanit', sans-serif;
+}
+/*tr:nth-child(even) {*/
+/*    background-color: #FFD700; !* Yellow color *!*/
+/*}*/
+
+.delete-button {
+    color: #ff0000; /* Red color */
+    cursor: pointer;
 }
 
-tr:nth-child(even) {
-    background-color: #f2f2f2;
+.delete-button:hover {
+    color: #8B0000; /* Dark Red color */
 }
 
-.footer {
-    text-align: center;
-    margin-top: 20px;
-}
+/*table.table th,*/
+/*table.table td {*/
+/*    padding: 10px;*/
+/*    text-align: left;*/
+/*    font-family: 'Kanit', sans-serif;*/
+/*}*/
+
+/*table.table th {*/
+/*    background-color: #f2f2f2;*/
+/*}*/
+
 /* ????? */
 a {
     text-decoration: none;
 }
-td p{
-    color: black;
-    font-size: 16px;
-}
-td a{
-    color: black;
-    text-decoration: none;
-    padding-left: 60px;
-    font-size: 20px;
-    font-family: 'Kanit', sans-serif;
-    display: flex;
-}
-td a:hover{
-    color: firebrick;
-}
-nav{
-    padding-bottom: 20px;
+
+/* ?????? */
+.delete-button {
+    cursor: pointer;
 }
 
+/* ???????????? */
+img {
+    vertical-align: middle;
+}

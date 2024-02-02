@@ -2,10 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <link href="assets/css/U-page.css" rel="stylesheet" >
-<%--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"--%>
-<%--          integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="--%>
-<%--          crossorigin="anonymous" referrerpolicy="no-referrer" />--%>
+    <link href="${pageContext.request.contextPath}/assets/css/U-page.css" rel="stylesheet" >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+          integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
 <nav>
@@ -27,10 +27,13 @@
                 <table class="table table-striped table-bordered table-hover" >
                     <thead>
                     <tr>
-                        <th>กลุ่มคำถามที่ <%=(i+1)%>  ${topic.topic_name}</th>
+                        <th>กลุ่มคำถามที่ <%=(i+1)%> ${topic.topic_name} </th>
                         <th>แก้ไข</th>
                         <th>ลบ</th>
                         <th>เพิ่ม </th>
+<%--                        <th>ลบกลุ่มคำถามนี้ <a style="margin-right: 50px;" class="delete-button" onclick="if((confirm('คุณแน่ใจหรือว่าต้องการลบหัวข้อนี้?')))--%>
+<%--                                { window.location.href='${pageContext.request.contextPath}/topic/delete/${topic.topic_id}';--%>
+<%--                                return false; }"><img src="${pageContext.request.contextPath}/assets/img/delete.png" width="30px"></a></th>--%>
                     </tr>
                     </thead>
 <%--                    <c:forEach var="topic" items="${topics}">--%>
@@ -39,9 +42,7 @@
 <%--                        <td class="C1" >Topic <%=(j+1)%> </td>--%>
 <%--                        <td class="C1" ><a href="${pageContext.request.contextPath}/topic/update/${topic.topic_id}">--%>
 <%--                            <img src="${pageContext.request.contextPath}/assets/img/pencil.png" width="25px"></a></td>--%>
-<%--                        <td class="C1" ><a class="delete-button" onclick="if((confirm('คุณแน่ใจหรือว่าต้องการลบหัวข้อนี้?')))--%>
-<%--                                { window.location.href='${pageContext.request.contextPath}/topic/delete/${topic.topic_id}';--%>
-<%--                                return false; }"><img src="${pageContext.request.contextPath}/assets/img/delete.png" width="30px"></a></td>--%>
+
 <%--                        <td class="C1" ><a class="delete-button" onclick="window.location.href='${pageContext.request.contextPath}/qfaq/add-qfaq-page/${topic.topic_id}';">--%>
 <%--                            <img src="${pageContext.request.contextPath}/assets/img/plus.png" width="30px"></a></td>--%>
 <%--                    </tr>--%>
