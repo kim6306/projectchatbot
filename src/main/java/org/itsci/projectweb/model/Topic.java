@@ -22,19 +22,18 @@ public class Topic {
     @OneToMany(fetch = FetchType.EAGER, mappedBy="topic", cascade = CascadeType.ALL)
     private List<QFAQ> qfaqs = new ArrayList<>();
 
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "category_id")
-    private Category category;
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String category_name;
 
     public Topic() {
 
     }
 
-    public Topic(int topic_id, String topic_name, List<QFAQ> qfaqs, Category category) {
+    public Topic(int topic_id, String topic_name, List<QFAQ> qfaqs,String category_name) {
         this.topic_id = topic_id;
         this.topic_name = topic_name;
         this.qfaqs = qfaqs;
-        this.category = category;
+        this.category_name = category_name ;
     }
 
     public int getTopic_id() {
@@ -53,12 +52,12 @@ public class Topic {
         this.qfaqs = qfaqs;
     }
 
-    public Category getCategory() {
-        return category;
+    public String getCategory_name() {
+        return category_name;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategory_name(String category_name) {
+        this.category_name = category_name;
     }
 
     public String getTopic_name() {
@@ -69,8 +68,8 @@ public class Topic {
         this.topic_name = topic_name;
     }
 
-    public Topic(String topictext, Category category) {
+    public Topic(String topictext, String category_name) {
         this.topic_name = topictext;
-        this.category = category;
+        this.category_name = category_name;
     }
 }

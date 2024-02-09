@@ -1,7 +1,6 @@
 package org.itsci.projectweb.controller;
 import org.itsci.projectweb.model.QFAQ;
 import org.itsci.projectweb.model.Topic;
-import org.itsci.projectweb.service.CategoryService;
 import org.itsci.projectweb.service.QFAQService;
 import org.itsci.projectweb.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +20,7 @@ public class WebHomeController {
     @Autowired
     private TopicService topicService;
 
-    @Autowired
-    private CategoryService categoryService;
+
 
     @Autowired
     private QFAQService qfaqService;
@@ -36,40 +34,49 @@ public class WebHomeController {
     @GetMapping("/searchQFAQ")
     public String searchFAQ (@RequestParam Map<String, String> map, Model model) {
         String qfaq_name = map.get("se");
-        List<QFAQ> qfaqs = qfaqService.getQFAQByQFAQName(qfaq_name);
-        List<Topic> topics = new ArrayList<>();
-        for (QFAQ qfaq : qfaqs) {
-            if (topics.size() == 0) {
-                topics.add(qfaq.getTopic());
-            } else {
-                for (Topic topic : topics) {
-                    if (topic.getTopic_id() != qfaq.getTopic().getTopic_id()) {
-                        topics.add(qfaq.getTopic());
-                    }
+        List<Topic> allTopics = topicService.getAllTopics();
+        List<Integer> index = new ArrayList<>();
+        for (Topic topic: allTopics) {
+            for (int i = 0 ; i<topic.getQfaqs().size();i++){
+                if (!topic.getQfaqs().get(i).getQfaq_name().contains(qfaq_name)){
+                    index.add(topic.getQfaqs().get(i).getQfaq_id());
                 }
             }
+            System.out.println(topic.getQfaqs().size()+"size");
+            for (Integer integer:index){
+               for (int j = 0 ; j<topic.getQfaqs().size();j++){
+                   if (topic.getQfaqs().get(j).getQfaq_id()==integer){
+                       topic.getQfaqs().remove(j);
+                   }
+               }
+            }
+            index.clear();
         }
-        model.addAttribute("topics", topics);
-        System.out.println(topics.size());
+        for (int k = 0 ; k<allTopics.size();k++){
+            if (allTopics.get(k).getQfaqs().size()==0){
+                allTopics.remove(k);
+            }
+        }
+        model.addAttribute("topics", allTopics);
+//        System.out.println(topics.size());
         return "home";
     }
 
     @GetMapping("/update-page")
     public String update(Model model) {
         model.addAttribute("topics", topicService.getAllTopics());
-        model.addAttribute("categories", categoryService.getAllCategories());
         return "update-page";
     }
 
     @RequestMapping("/apply-to-study-page")
     public String goToApplyToStudyPage (Model model) {
-        model.addAttribute("topics", topicService.getTopicsByCategoryId("1"));
+        model.addAttribute("topics", topicService.getTopicsByCategoryName("การสมัครเรียน"));
         return "home";
     }
 
     @RequestMapping("/activity-page")
     public String goToActivityPage (Model model) {
-        model.addAttribute("topics", topicService.getTopicsByCategoryId("2"));
+        model.addAttribute("topics", topicService.getTopicsByCategoryName("กิจกรรม"));
         return "home";
     }
 

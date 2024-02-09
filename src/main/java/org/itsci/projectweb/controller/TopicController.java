@@ -21,8 +21,6 @@ public class TopicController {
     @Autowired
     private TopicService topicService;
 
-    @Autowired
-    private CategoryService categoryService;
 
     @RequestMapping("/delete/{topicId}")
     public String deleteTopic (@PathVariable("topicId") String topicId) {
@@ -32,17 +30,9 @@ public class TopicController {
 
     @RequestMapping("/add-topic-page")
     public String goToAddTopicPage (Model model) {
-        model.addAttribute("categories", categoryService.getAllCategories());
+
         return "topic/topic-form";
     }
-
-    @RequestMapping("/add-topic-page/{categoryId}")
-    public String goToAddTopicPageWithCategoryId (Model model, @PathVariable("categoryId") String categoryId) {
-        model.addAttribute("categories", categoryService.getAllCategories());
-        model.addAttribute("categoryId", categoryId);
-        return "topic/topic-form";
-    }
-
 
     @RequestMapping("/list-page")
     public String goToTopicListPage (Model model) {
@@ -57,7 +47,6 @@ public class TopicController {
             topicService.saveTopic(map);
         }else{
             model.addAttribute("ShowAlert",true);
-            model.addAttribute("categories",topicService.getCategory());
             return "topic/topic-form";
         }
 //        topicService.saveTopic(map);
@@ -68,7 +57,6 @@ public class TopicController {
     public String goToUpdateTopicPage (@PathVariable("topicId") String topicId, Model model) {
         Topic topic = topicService.getTopicById(Integer.parseInt(topicId));
         model.addAttribute("topic", topic);
-        model.addAttribute("categories", categoryService.getAllCategories());
         System.out.println("TOP NAME : " + topic.getTopic_name());
         return "topic/topic-form-update";
     }

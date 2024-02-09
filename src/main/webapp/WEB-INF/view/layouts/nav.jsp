@@ -23,7 +23,7 @@
                         </li>
                         <li><a href="${pageContext.request.contextPath}/topic/list-page">แก้ไขกลุ่มคำถาม FAQ</a>
                         </li>
-                        <li><a href="${pageContext.request.contextPath}/update-page">แก้ไข FAQ</a>
+                        <li><a href="${pageContext.request.contextPath}/update-page">แก้ไขคำถามคำตอบ FAQ</a>
                         </li>
                         <li><a href="${pageContext.request.contextPath}/logout">ออกจากระบบ
                             <img src="${pageContext.request.contextPath}/assets/img/login.png" width="20px"></a></li>

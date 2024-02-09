@@ -32,9 +32,11 @@
                     <td class="C1">${topic.topic_name}</td>
                     <td class="C1"><a href="${pageContext.request.contextPath}/topic/update/${topic.topic_id}">
                         <img src="${pageContext.request.contextPath}/assets/img/pencil.png" width="25px"></a></td>
+                    <c:if test="${topic.qfaqs.size() <= 0}">
                     <td class="C1"><a style="margin-right: 50px;" class="delete-button" onclick="if((confirm('คุณแน่ใจหรือว่าต้องการลบหัวข้อนี้?')))
                             { window.location.href='${pageContext.request.contextPath}/topic/delete/${topic.topic_id}';
                             return false; }"><img src="${pageContext.request.contextPath}/assets/img/delete.png" width="30px"></a></td>
+                    </c:if>
                 </tr>
             </c:forEach>
             </tbody>

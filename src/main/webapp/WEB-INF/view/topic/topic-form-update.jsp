@@ -19,7 +19,7 @@
 
             for (let i = 0; i < spinner.options.length; i++) {
                 var option = spinner.options[i];
-                if (option.text === '${topic.category.category_name}') {
+                if (option.text === '${topic.category_name}') {
                     option.selected = true;
                     break;
                 }
@@ -37,14 +37,13 @@
             <input type="hidden" value="${topic.topic_id}" name="topic_id">
             <div class="txt_field">
                 เลือกหมวดหมู่:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <select name="category_id" id="category_id">
-                    <c:forEach items="${categories}" var="category">
-                        <option value="${category.category_id}">${category.category_name}</option>
-                    </c:forEach>
+                <select name="category_name" id="category_name">
+                    <option>การสมัครเรียน</option>
+                    <option>กิจกรรม</option>
                 </select>
             </div>
             <div class="txt_field">
-                ระบุหมวดหมู่หัวข้อคำถาม(FAQ):<input type="text" id="topictext" name="topictext" value="${topic.topic_name}">
+                ระบุกล่มุหัวข้อคำถาม(FAQ):<input type="text" id="topictext" name="topictext" value="${topic.topic_name}">
                 <c:if test="${ShowAlert==true}">
                     <p>มีหัวข้อนี้อยู่ในระบบแล้ว</p>
                 </c:if>

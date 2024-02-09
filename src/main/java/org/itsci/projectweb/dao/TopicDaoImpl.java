@@ -21,13 +21,6 @@ public class TopicDaoImpl implements TopicDao  {
         return query.getResultList();
     }
 
-    @Override
-    public List<Topic> getTopicsByCategoryId(String categoryId) {
-        Session session = sessionFactory.getCurrentSession();
-        Query<Topic> query = session.createQuery("FROM Topic t WHERE t.category.category_id =: cId", Topic.class);
-        query.setParameter("cId", categoryId);
-        return query.getResultList();
-    }
 
     @Override
     public Topic getTopicById(int topicId) {
@@ -45,13 +38,7 @@ public class TopicDaoImpl implements TopicDao  {
         return query.getResultList();
     }
 
-    @Override
-    public List<Category> getCategory() {
-        Session session = sessionFactory.getCurrentSession();
-        Query<Category> query = session.createQuery("from Category ",Category.class);
-        List<Category> category = query.getResultList();
-        return category ;
-    }
+
 
     @Override
     public void updateTopic(Topic topic) {
@@ -70,6 +57,15 @@ public class TopicDaoImpl implements TopicDao  {
         Session session = sessionFactory.getCurrentSession();
         session.save(topic);
     }
+
+    @Override
+    public List<Topic> getTopicsByCategoryName(String category_name) {
+        Session session = sessionFactory.getCurrentSession();
+        Query<Topic> query = session.createQuery("FROM Topic t WHERE t.category_name = :tpN", Topic.class );
+        query.setParameter("tpN", category_name);
+        return query.getResultList();
+    }
+
 
 
 }

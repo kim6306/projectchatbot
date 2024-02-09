@@ -42,6 +42,8 @@ public class QFAQController {
     public String goToAddQFAQPageWithTopicId (Model model, @PathVariable("topicId") String topicId) {
         model.addAttribute("topics",topicService.getAllTopics());
         model.addAttribute("topicId", topicId);
+        Topic topic = topicService.getTopicById(Integer.parseInt(topicId));
+        model.addAttribute("topicName",topic.getTopic_name());
         return "qfaq/qfaq-form";
     }
 

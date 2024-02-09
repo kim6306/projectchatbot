@@ -4,8 +4,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.itsci.projectweb.model.AFAQ;
-import org.itsci.projectweb.model.Category;
-import org.itsci.projectweb.model.QFAQ;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

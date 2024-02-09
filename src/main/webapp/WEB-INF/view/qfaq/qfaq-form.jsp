@@ -47,7 +47,7 @@
 <div id="container">
             <form action="${pageContext.request.contextPath}/qfaq/save"  method="POST" name="formRegister" onsubmit="return validateForm()">
                 <input type="hidden" name="topic_id" value="${topicId}">
-
+ <h1>${topicName}</h1>
         <div class="txt_field">
             ระบุคำถาม(Question): <h4 id="questionId"></h4><input name="qfaqtext"/>
             <c:if test="${ShowAlert1==true}">

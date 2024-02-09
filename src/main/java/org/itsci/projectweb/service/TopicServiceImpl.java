@@ -26,8 +26,7 @@ public class TopicServiceImpl implements TopicService{
     @Autowired
     private AFAQDao afaqDao;
 
-    @Autowired
-    private CategoryDao categoryDao;
+
 
     @Override
     @Transactional
@@ -35,11 +34,6 @@ public class TopicServiceImpl implements TopicService{
         return topicDao.getAllTopics();
     }
 
-    @Override
-    @Transactional
-    public List<Topic> getTopicsByCategoryId(String categoryId) {
-        return topicDao.getTopicsByCategoryId(categoryId);
-    }
 
     @Override
     @Transactional
@@ -52,10 +46,7 @@ public class TopicServiceImpl implements TopicService{
     public void updateTopic(Map<String, String> map) {
         Topic topic = topicDao.getTopicById(Integer.parseInt(map.get("topic_id")));
         topic.setTopic_name(map.get("topictext"));
-        if (!topic.getCategory().getCategory_id().equals(map.get("category_id"))) {
-            Category category = categoryDao.getCategoryById(map.get("category_id"));
-            topic.setCategory(category);
-        }
+        topic.setCategory_name(map.get("category_name"));
         topicDao.updateTopic(topic);
     }
 
@@ -75,10 +66,6 @@ public class TopicServiceImpl implements TopicService{
             qfaqDao.deleteQFAQ(qfaq);
         }
         topic.setQfaqs(null);
-        Category category = categoryDao.getCategoryById(topic.getCategory().getCategory_id());
-        category.getTopics().remove(topic);
-        categoryDao.updateCategory(category);
-        topic.setCategory(null);
         topicDao.updateTopic(topic);
         topicDao.deleteTopic(topic);
     }
@@ -87,11 +74,9 @@ public class TopicServiceImpl implements TopicService{
     @Transactional
     public void saveTopic(Map<String, String> map) {
         String topic_name = map.get("topictext");
-        String category_id = map.get("category_id");
-        Category category = categoryDao.getCategoryById(category_id);
+        String category_name = map.get("category_name");
         List<QFAQ> qfaqs = new ArrayList<>();
-        Topic topic = new Topic(0, topic_name, qfaqs, category);
-        category.getTopics().add(topic);
+        Topic topic = new Topic(0, topic_name, qfaqs, category_name);
         topicDao.saveTopic(topic);
     }
 
@@ -103,8 +88,8 @@ public class TopicServiceImpl implements TopicService{
 
     @Override
     @Transactional
-    public List<Category> getCategory() {
-        return topicDao.getCategory();
+    public List<Topic> getTopicsByCategoryName(String category_name) {
+        return topicDao.getTopicsByCategoryName(category_name);
     }
 
 }

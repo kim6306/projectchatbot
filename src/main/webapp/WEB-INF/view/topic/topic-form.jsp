@@ -31,10 +31,9 @@
             <div class="txt_field">
                 เลือกหมวดหมู่:
                 เลือกหมวดหมู่:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <select name="category_id" id="category_id">
-                    <c:forEach items="${categories}" var="category">
-                        <option value="${category.category_id}">${category.category_name}</option>
-                    </c:forEach>
+                <select name="category_name" id="category_name">
+                        <option>การสมัครเรียน</option>
+                        <option>กิจกรรม</option>
                 </select>
             </div>
             <div class="txt_field">
