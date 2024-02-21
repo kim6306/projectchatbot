@@ -26,6 +26,11 @@
             }
         }
     </script>
+    <style>
+        .width{
+            margin-top: 50px;
+        }
+    </style>
 </head>
 <body onload="showOptions()">
 <nav>
@@ -43,7 +48,7 @@
                 </select>
             </div>
             <div class="txt_field">
-                ระบุกล่มุหัวข้อคำถาม(FAQ):<input type="text" id="topictext" name="topictext" value="${topic.topic_name}">
+                ระบุกล่มหัวข้อคำถาม(FAQ):<input type="text" id="topictext" name="topictext" value="${topic.topic_name}">
                 <c:if test="${ShowAlert==true}">
                     <p>มีหัวข้อนี้อยู่ในระบบแล้ว</p>
                 </c:if>

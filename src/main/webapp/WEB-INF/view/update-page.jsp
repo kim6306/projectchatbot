@@ -30,7 +30,7 @@
                         <th>กลุ่มคำถามที่ <%=(i+1)%> ${topic.topic_name} </th>
                         <th>แก้ไข</th>
                         <th>ลบ</th>
-                        <th>เพิ่ม </th>
+                        <th>เพิ่มคำตอบ</th>
 <%--                        <th>ลบกลุ่มคำถามนี้ <a style="margin-right: 50px;" class="delete-button" onclick="if((confirm('คุณแน่ใจหรือว่าต้องการลบหัวข้อนี้?')))--%>
 <%--                                { window.location.href='${pageContext.request.contextPath}/topic/delete/${topic.topic_id}';--%>
 <%--                                return false; }"><img src="${pageContext.request.contextPath}/assets/img/delete.png" width="30px"></a></th>--%>

@@ -14,6 +14,24 @@
             }
         }
     </script>
+    <style>
+        .width{
+            margin-top: 50px;
+        }
+        .txt_field textarea{
+            width: 100%;
+            padding: 0 5px;
+            height: 150px;
+            font-size: 16px;
+            border: none;
+            background: gainsboro;
+            outline: none;
+            border-radius: 10px;
+            resize: none;
+            margin-bottom: 20px;
+            max-height: 330px;
+        }
+    </style>
 </head>
 <body>
 <nav>
@@ -26,7 +44,7 @@
             <input name="afaq_id" value="${afaq.afaq_id}" type="hidden">
 
             <div class="txt_field">
-                ระบุคำตอบ(Answer): <input id="afaqtext" name="afaqtext" value="${afaq.afaq_name}">
+                ระบุคำตอบ(Answer): <textarea id="afaqtext" name="afaqtext" value="${afaq.afaq_name}"></textarea>
                 <c:if test="${ShowAlert==true}">
                     <p>มีคำถามนี้อยู่ในระบบแล้ว</p>
                 </c:if>

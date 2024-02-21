@@ -1,8 +1,10 @@
 package org.itsci.projectweb.controller;
 
 import org.itsci.projectweb.model.AFAQ;
+import org.itsci.projectweb.model.QFAQ;
 import org.itsci.projectweb.model.Topic;
 import org.itsci.projectweb.service.AFAQService;
+import org.itsci.projectweb.service.QFAQService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,9 +19,14 @@ public class AFAQController {
     @Autowired
     private AFAQService afaqService;
 
+    @Autowired
+    private QFAQService qfaqService;
+
     @RequestMapping("/add-afaq-page/{qfaqId}")
     public String goToAddAFAQPageWithQFAQId (@PathVariable("qfaqId") String qfaqId, Model model) {
         model.addAttribute("qfaqId", qfaqId);
+        QFAQ qfaq = qfaqService.getQFAQById(Integer.parseInt(qfaqId));
+        model.addAttribute("qfafname",qfaq.getQfaq_name());
         return "afaq/afaq-form";
     }
 

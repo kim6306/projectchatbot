@@ -26,6 +26,11 @@
             }
         }
     </script>
+    <style>
+        .width{
+            margin-top: 50px;
+        }
+    </style>
 </head>
 <body onload="showOptions()">
 <nav>
@@ -37,7 +42,7 @@
         <form action="${pageContext.request.contextPath}/qfaq/update" name="formRegister" method="POST" onsubmit="return validateForm()">
             <input type="hidden" value="${qfaq.qfaq_id}" name="qfaq_id">
             <div class="txt_field">
-                เลือกหมวดหมู่หัวข้อคำถาม(FAQ):&nbsp;&nbsp;&nbsp;
+                เลือกกลุ่มหัวข้อคำถาม(FAQ):&nbsp;&nbsp;&nbsp;
                 <select name="topic_id" id="topic_id">
                     <c:forEach items="${topics}" var="topic">
                         <option value="${topic.topic_id}">${topic.topic_name}</option>

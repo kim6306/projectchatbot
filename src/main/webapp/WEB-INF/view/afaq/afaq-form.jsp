@@ -15,6 +15,24 @@
                 }
             }
         </script>
+        <style>
+            .width{
+                margin-top: 50px;
+            }
+            .txt_field textarea{
+                width: 100%;
+                padding: 0 5px;
+                height: 150px;
+                font-size: 16px;
+                border: none;
+                background: gainsboro;
+                outline: none;
+                border-radius: 10px;
+                resize: none;
+                margin-bottom: 20px;
+                max-height: 330px;
+            }
+        </style>
     </head>
     <body>
         <nav>
@@ -28,8 +46,9 @@
                 <div class="txt_field">
                     <form action="${pageContext.request.contextPath}/afaq/save" method="POST" name="formRegister" onsubmit="return validateForm()">
                         <input value="${qfaqId}" name="qfaq_id" type="hidden">
+                        <h4>${qfafname}</h4>
                         <div class="txt_field">
-                            ระบุคำตอบ(Answer)** : <input name="afaqtext">
+                            ระบุคำตอบ(Answer)** : <textarea name="afaqtext"> </textarea>
                             <c:if test="${ShowAlert2==true}">
                                 <p>มีคำตอบนี้อยู่ในระบบแล้ว</p>
                             </c:if>

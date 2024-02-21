@@ -33,7 +33,7 @@ form .txt_field{
 .txt_field input{
     width: 100%;
     padding: 0 5px;
-    height: 40px;
+    height: 80px;
     font-size: 16px;
     border: none;
     background: gainsboro;
@@ -96,7 +96,7 @@ input[type="button"]:hover{
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
-    margin-top: 100px;
+    margin-top: -50px;
 }
 .width h1{
     text-align: center;
@@ -141,3 +141,4 @@ i{
 tr td{
     display: flex;
 }
+

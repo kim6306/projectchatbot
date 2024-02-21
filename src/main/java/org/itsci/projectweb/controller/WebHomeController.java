@@ -71,13 +71,13 @@ public class WebHomeController {
     @RequestMapping("/apply-to-study-page")
     public String goToApplyToStudyPage (Model model) {
         model.addAttribute("topics", topicService.getTopicsByCategoryName("การสมัครเรียน"));
-        return "home";
+        return "Apply-to-study";
     }
 
     @RequestMapping("/activity-page")
     public String goToActivityPage (Model model) {
         model.addAttribute("topics", topicService.getTopicsByCategoryName("กิจกรรม"));
-        return "home";
+        return "Activity";
     }
 
 }

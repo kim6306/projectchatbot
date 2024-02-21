@@ -36,8 +36,47 @@
                     document.getElementById("answerId").textContent=text;
                 }
             )));
+
         }
+        // const textarea = document.querySelector("textarea");
+        // textarea.addEventListener("keyup", e =>{
+        //     let scHeight = e.target.scrollHeight;
+        //     textarea.style.height = scHeight + 'px';
+        // })
     </script>
+    <style>
+        .width{
+            margin-top: 30px;
+            max-width: 800px;
+            /*height: 60px;*/
+        }
+        .txt_field input{
+            width: 100%;
+            padding: 0 5px;
+            height: 50px;
+            font-size: 16px;
+            border: none;
+            background: gainsboro;
+            outline: none;
+            border-radius: 10px;
+        }
+        .txt_field2 textarea{
+            width: 100%;
+            padding: 0 5px;
+            height: 100px;
+            font-size: 16px;
+            border: none;
+            background: gainsboro;
+            outline: none;
+            border-radius: 10px;
+            resize: none;
+            margin-bottom: 20px;
+            max-height: 330px;
+        }
+        h4{
+            text-align: left;
+        }
+    </style>
 </head>
     <body>
         <nav>
@@ -47,16 +86,18 @@
 <div id="container">
             <form action="${pageContext.request.contextPath}/qfaq/save"  method="POST" name="formRegister" onsubmit="return validateForm()">
                 <input type="hidden" name="topic_id" value="${topicId}">
- <h1>${topicName}</h1>
+ <h4>กลุ่มหัวข้อคำถาม : ${topicName}</h4>
         <div class="txt_field">
-            ระบุคำถาม(Question): <h4 id="questionId"></h4><input name="qfaqtext"/>
+            ระบุคำถาม(Q): <h4 id="questionId"></h4>
+            <input name="qfaqtext"/>
             <c:if test="${ShowAlert1==true}">
                 <p>มีคำถามนี้อยู่ในระบบแล้ว</p>
             </c:if>
         </div>
 
-        <div class="txt_field">
-            ระบุคำตอบ(Answer): <h4 id="answerId"></h4><input name="afaqtext"/>
+        <div class="txt_field2">
+            ระบุคำตอบ(A): <h4 id="answerId"></h4>
+            <textarea name="afaqtext"/></textarea>
             <c:if test="${ShowAlert2==true}">
                 <p>มีคำตอบนี้อยู่ในระบบแล้ว</p>
             </c:if>

@@ -16,6 +16,11 @@
             }
         }
     </script>
+    <style>
+        .width{
+            margin-top: 80px;
+        }
+    </style>
 </head>
 <body>
 <nav>
@@ -29,7 +34,6 @@
         </div>
         <form:form action="${pageContext.request.contextPath}/topic/save" method="POST" name="formRegister" onsubmit="return validateForm()">
             <div class="txt_field">
-                เลือกหมวดหมู่:
                 เลือกหมวดหมู่:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <select name="category_name" id="category_name">
                         <option>การสมัครเรียน</option>
@@ -37,7 +41,7 @@
                 </select>
             </div>
             <div class="txt_field">
-                ระบุหมวดหมู่หัวข้อคำถาม(FAQ):<input type="text" id="topictext" name="topictext">
+                ระบุกลุ่มหัวข้อคำถาม(FAQ):<input type="text" id="topictext" name="topictext">
                 <c:if test="${ShowAlert==true}">
                     <p>มีหัวข้อนี้อยู่ในระบบแล้ว</p>
                 </c:if>

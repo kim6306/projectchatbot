@@ -8,6 +8,15 @@
           integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+<style>
+    .add-button{
+        border-radius:10px ;
+    }
+    #searchInput{
+        border-radius:10px ;
+        padding: 10px;
+    }
+</style>
 <body>
 <nav>
     <jsp:include page="/WEB-INF/view/layouts/nav.jsp"/>
@@ -20,7 +29,7 @@
 <div>
     <form:form action="${pageContext.request.contextPath}/searchQFAQ" method="GET" name="search">
         <input type="text" id="searchInput" style="width: 43%;" placeholder="ค้นหาหัวข้อ" name="se">
-        <input type="submit" class="add-button">
+        <input type="submit" value="search" class="add-button">
     </form:form>
 </div>
 <div class="container">
