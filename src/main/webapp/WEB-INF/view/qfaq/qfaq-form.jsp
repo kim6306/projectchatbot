@@ -90,7 +90,7 @@
         <div class="txt_field">
             ระบุคำถาม(Q): <h4 id="questionId"></h4>
             <input name="qfaqtext"/>
-            <c:if test="${ShowAlert1==true}">
+            <c:if test="${showalert1==true}">
                 <p>มีคำถามนี้อยู่ในระบบแล้ว</p>
             </c:if>
         </div>
@@ -98,7 +98,7 @@
         <div class="txt_field2">
             ระบุคำตอบ(A): <h4 id="answerId"></h4>
             <textarea name="afaqtext"/></textarea>
-            <c:if test="${ShowAlert2==true}">
+            <c:if test="${showalert2==true}">
                 <p>มีคำตอบนี้อยู่ในระบบแล้ว</p>
             </c:if>
         </div>

@@ -45,7 +45,7 @@
 
             <div class="txt_field">
                 ระบุคำตอบ(Answer): <textarea id="afaqtext" name="afaqtext" value="${afaq.afaq_name}"></textarea>
-                <c:if test="${ShowAlert==true}">
+                <c:if test="${showalert==true}">
                     <p>มีคำถามนี้อยู่ในระบบแล้ว</p>
                 </c:if>
             </div>

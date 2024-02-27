@@ -57,13 +57,13 @@ public class QFAQController {
                 qfaqService.saveQFAQ(map);
             }
             else {
-                model.addAttribute("ShowAlert2",true);
+                model.addAttribute("showalert2",true);
                 model.addAttribute("topicId", topicid);
                 return "qfaq/qfaq-form";
             }
         }
         else {
-            model.addAttribute("ShowAlert1",true);
+            model.addAttribute("showalert1",true);
             model.addAttribute("topicId", topicid);
             return "qfaq/qfaq-form";
         }

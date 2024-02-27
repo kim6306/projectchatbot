@@ -49,7 +49,7 @@
                         <h4>${qfafname}</h4>
                         <div class="txt_field">
                             ระบุคำตอบ(Answer)** : <textarea name="afaqtext"> </textarea>
-                            <c:if test="${ShowAlert2==true}">
+                            <c:if test="${showsalert2==true}">
                                 <p>มีคำตอบนี้อยู่ในระบบแล้ว</p>
                             </c:if>
                         </div>
